@@ -1,0 +1,39 @@
+{
+  "name": "learning-platform",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "gateway",
+    "courses",
+    "learners",
+    "certifications",
+    "shared"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "npx nodemon gateway/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "inversify": "^7.8.1",
+    "module-alias": "^2.2.3",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.7",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
+  "_moduleAliases": {
+    "@l-p/courses": "courses",
+    "@l-p/learners": "learners",
+    "@l-p/certifications": "certifications",
+    "@l-p/shared": "shared"
+  }
+}
