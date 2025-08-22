@@ -5,7 +5,9 @@ import {
 import { CreateInstructorCommand } from "@l-p/courses/application/create-instructor/CreateInstructorCommand";
 import { CreateInstructorHandler } from "@l-p/courses/application/create-instructor/CreateInstructorHandler";
 import {
+  createCourseHandlerID,
   createInstructorHandlerID,
+  getCoursesHandlerID,
   getInstructorsHandlerID,
 } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { CreateCourseDTO, CreateInstructorDTO } from "./dtos";
@@ -14,6 +16,12 @@ import { GetInstructorsQuery } from "../application/get-instructors/GetInstructo
 import { GetInstructorsHandler } from "../application/get-instructors/GetInstructorHandler";
 import { GetInstructorsResponse } from "./responses/GetInstructorsResponse";
 import { GetInstructorsDTO } from "./dtos/GetInstructorsDTO";
+import { GetCoursesDTO } from "./dtos/GetCoursesDTO";
+import { GetCoursesResponse } from "./responses/GetCoursesResponse";
+import { GetCoursesHandler } from "../application/get-courses/GetCoursesHandler";
+import { GetCoursesQuery } from "../application/get-courses/GetCoursesQuery";
+import { CreateCourseHandler } from "../application/create-course/CreateCourseHandler";
+import { CreateCourseCommand } from "../application/create-course/CreateCourseCommand";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {
@@ -21,7 +29,11 @@ export class CoursesApi implements ICoursesApi {
     @inject(createInstructorHandlerID)
     private readonly createInstructorHandler: CreateInstructorHandler,
     @inject(getInstructorsHandlerID)
-    private readonly getInstructorsHandler: GetInstructorsHandler
+    private readonly getInstructorsHandler: GetInstructorsHandler,
+    @inject(createCourseHandlerID)
+    private readonly createCourseHandler: CreateCourseHandler,
+    @inject(getCoursesHandlerID)
+    private readonly getCoursesHandler: GetCoursesHandler
   ) {}
 
   async healthCheck(): Promise<boolean> {
@@ -29,8 +41,8 @@ export class CoursesApi implements ICoursesApi {
   }
 
   async createInstructor(createInstructorDTO: CreateInstructorDTO) {
-    const query = CreateInstructorCommand.fromDTO(createInstructorDTO);
-    return await this.createInstructorHandler.handle(query);
+    const command = CreateInstructorCommand.fromDTO(createInstructorDTO);
+    return await this.createInstructorHandler.handle(command);
   }
 
   async getInstructors(getInstructorsDTO: GetInstructorsDTO) {
@@ -40,6 +52,13 @@ export class CoursesApi implements ICoursesApi {
   }
 
   async createCourse(createCourseDTO: CreateCourseDTO) {
-    // Implementation for creating a course
+    const command = CreateCourseCommand.fromDTO(createCourseDTO);
+    return await this.createCourseHandler.handle(command);
+  }
+
+  async getCourses(getCoursesDTO: GetCoursesDTO): Promise<GetCoursesResponse> {
+    const query = GetCoursesQuery.fromDTO(getCoursesDTO);
+    const courses = await this.getCoursesHandler.handle(query);
+    return GetCoursesResponse.fromDomain(courses);
   }
 }

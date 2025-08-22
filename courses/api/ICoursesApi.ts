@@ -1,5 +1,7 @@
 import { CreateCourseDTO, CreateInstructorDTO } from "./dtos";
+import { GetCoursesDTO } from "./dtos/GetCoursesDTO";
 import { GetInstructorsDTO } from "./dtos/GetInstructorsDTO";
+import { GetCoursesResponse } from "./responses/GetCoursesResponse";
 import { GetInstructorsResponse } from "./responses/GetInstructorsResponse";
 
 export interface ICoursesApi {
@@ -8,8 +10,10 @@ export interface ICoursesApi {
   createInstructor(createInstructorDTO: CreateInstructorDTO): Promise<void>;
 
   getInstructors(
-    getInstructorsQuery: GetInstructorsDTO
+    getInstructorsDTO: GetInstructorsDTO
   ): Promise<GetInstructorsResponse>;
 
   createCourse(createCourseDTO: CreateCourseDTO): Promise<void>;
+
+  getCourses(getCoursesDTO: GetCoursesDTO): Promise<GetCoursesResponse>;
 }

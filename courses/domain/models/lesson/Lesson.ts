@@ -4,17 +4,20 @@ export class Lesson {
   private id: string;
   private title: string;
   private content: string;
+  private chapterId: string;
   private assessments: Assessment[];
 
   private constructor(
     id: string,
     title: string,
     content: string,
+    chapterId: string,
     assessments: Assessment[] = []
   ) {
     this.id = id;
     this.title = title;
     this.content = content;
+    this.chapterId = chapterId;
     this.assessments = assessments;
   }
 
@@ -22,9 +25,10 @@ export class Lesson {
     id: string,
     title: string,
     content: string,
+    chapterId: string,
     assessments?: Assessment[]
   ): Lesson {
-    return new Lesson(id, title, content, assessments);
+    return new Lesson(id, title, content, chapterId, assessments);
   }
 
   getId(): string {
@@ -37,6 +41,10 @@ export class Lesson {
 
   getContent(): string {
     return this.content;
+  }
+
+  getChapterId(): string {
+    return this.chapterId;
   }
 
   getAssessments(): Assessment[] {
