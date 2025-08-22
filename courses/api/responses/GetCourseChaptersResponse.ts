@@ -1,5 +1,4 @@
 import { Chapter } from "@l-p/courses/domain/models/chapter/Chapter";
-import { GetCourseChaptersDTO } from "../dtos/GetCourseChaptersDTO";
 
 class CourseChapterResponse {
   constructor(

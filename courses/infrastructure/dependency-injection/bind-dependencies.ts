@@ -1,6 +1,6 @@
 import { Container } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { CoursesApi } from "@l-p/courses/api/CoursesApi";
-import { CreateInstructorHandler } from "@l-p/courses/application/create-instructor/CreateInstructorHandler";
+import { CreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor/CreateInstructorHandler";
 import {
   coursesApiID,
   createInstructorHandlerID,
@@ -15,12 +15,12 @@ import {
 } from "./tokens";
 import { InstructorRepo } from "../repositories/InstructorRepo";
 import { CourseRepo } from "../repositories/CourseRepo";
-import { GetInstructorsHandler } from "@l-p/courses/application/get-instructors/GetInstructorHandler";
-import { GetCoursesHandler } from "@l-p/courses/application/get-courses/GetCoursesHandler";
-import { CreateCourseHandler } from "@l-p/courses/application/create-course/CreateCourseHandler";
-import { CreateChapterHandler } from "@l-p/courses/application/create-chapter/CreateChapterHandler";
+import { GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/GetInstructorHandler";
+import { GetCoursesHandler } from "@l-p/courses/application/course/get-courses/GetCoursesHandler";
+import { CreateCourseHandler } from "@l-p/courses/application/course/create-course/CreateCourseHandler";
+import { CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/CreateChapterHandler";
 import { ChapterRepo } from "../repositories/ChapterRepo";
-import { GetCourseChaptersHandler } from "@l-p/courses/application/get-course-chapters/GetCourseChaptersHandler";
+import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersHandler";
 
 export function bindDependencies(container: Container) {
   // api

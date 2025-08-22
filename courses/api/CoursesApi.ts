@@ -2,8 +2,8 @@ import {
   inject,
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { CreateInstructorCommand } from "@l-p/courses/application/create-instructor/CreateInstructorCommand";
-import { CreateInstructorHandler } from "@l-p/courses/application/create-instructor/CreateInstructorHandler";
+import { CreateInstructorCommand } from "@l-p/courses/application/instructor/create-instructor/CreateInstructorCommand";
+import { CreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor/CreateInstructorHandler";
 import {
   createChapterHandlerID,
   createCourseHandlerID,
@@ -14,23 +14,23 @@ import {
 } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { CreateCourseDTO, CreateInstructorDTO } from "./dtos";
 import { ICoursesApi } from "./ICoursesApi";
-import { GetInstructorsQuery } from "../application/get-instructors/GetInstructorQuery";
-import { GetInstructorsHandler } from "../application/get-instructors/GetInstructorHandler";
+import { GetInstructorsQuery } from "@l-p/courses/application/instructor/get-instructors/GetInstructorQuery";
+import { GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/GetInstructorHandler";
 import { GetInstructorsResponse } from "./responses/GetInstructorsResponse";
 import { GetInstructorsDTO } from "./dtos/GetInstructorsDTO";
 import { GetCoursesDTO } from "./dtos/GetCoursesDTO";
 import { GetCoursesResponse } from "./responses/GetCoursesResponse";
-import { GetCoursesHandler } from "../application/get-courses/GetCoursesHandler";
-import { GetCoursesQuery } from "../application/get-courses/GetCoursesQuery";
-import { CreateCourseHandler } from "../application/create-course/CreateCourseHandler";
-import { CreateCourseCommand } from "../application/create-course/CreateCourseCommand";
+import { GetCoursesHandler } from "@l-p/courses/application/course/get-courses/GetCoursesHandler";
+import { GetCoursesQuery } from "@l-p/courses/application/course/get-courses/GetCoursesQuery";
+import { CreateCourseHandler } from "@l-p/courses/application/course/create-course/CreateCourseHandler";
+import { CreateCourseCommand } from "@l-p/courses/application/course/create-course/CreateCourseCommand";
 import { CreateChapterDTO } from "./dtos/CreateChapterDTO";
-import { CreateChapterCommand } from "../application/create-chapter/CreateChapterCommand";
-import { CreateChapterHandler } from "../application/create-chapter/CreateChapterHandler";
-import { GetCourseChaptersHandler } from "../application/get-course-chapters/GetCourseChaptersHandler";
+import { CreateChapterCommand } from "@l-p/courses/application/chapter/create-chapter/CreateChapterCommand";
+import { CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/CreateChapterHandler";
+import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersHandler";
 import { GetCourseChaptersDTO } from "./dtos/GetCourseChaptersDTO";
 import { GetCourseChaptersResponse } from "./responses/GetCourseChaptersResponse";
-import { GetCourseChaptersQuery } from "../application/get-course-chapters/GetCourseChaptersQuery";
+import { GetCourseChaptersQuery } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersQuery";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {

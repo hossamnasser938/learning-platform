@@ -1,10 +1,10 @@
 import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
-import { CreateChapterHandler } from "@l-p/courses/application/create-chapter/CreateChapterHandler";
-import { CreateCourseHandler } from "@l-p/courses/application/create-course/CreateCourseHandler";
-import { CreateInstructorHandler } from "@l-p/courses/application/create-instructor/CreateInstructorHandler";
-import { GetCourseChaptersHandler } from "@l-p/courses/application/get-course-chapters/GetCourseChaptersHandler";
-import { GetCoursesHandler } from "@l-p/courses/application/get-courses/GetCoursesHandler";
-import { GetInstructorsHandler } from "@l-p/courses/application/get-instructors/GetInstructorHandler";
+import { CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/CreateChapterHandler";
+import { CreateCourseHandler } from "@l-p/courses/application/course/create-course/CreateCourseHandler";
+import { CreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor/CreateInstructorHandler";
+import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersHandler";
+import { GetCoursesHandler } from "@l-p/courses/application/course/get-courses/GetCoursesHandler";
+import { GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/GetInstructorHandler";
 import { IChapterRepo } from "@l-p/courses/domain/contracts/IChapterRepo";
 import { ICourseRepo } from "@l-p/courses/domain/contracts/ICourseRepo";
 import { IInstructorRepo } from "@l-p/courses/domain/contracts/IInstructorRepo";

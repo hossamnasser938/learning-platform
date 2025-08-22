@@ -1,4 +1,4 @@
-import { CreateInstructorDTO } from "../../api/dtos/CreateInstructorDTO";
+import { CreateInstructorDTO } from "@l-p/courses/api/dtos/CreateInstructorDTO";
 
 export class CreateInstructorCommand {
   constructor(public readonly name: string, public readonly bio: string) {}
