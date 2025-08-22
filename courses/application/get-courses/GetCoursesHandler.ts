@@ -6,15 +6,13 @@ import {
   inject,
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { coursesRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
+import { courseRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 
 @injectable()
 export class GetCoursesHandler
   implements IQueryHandler<GetCoursesQuery, Course[]>
 {
-  constructor(
-    @inject(coursesRepoID) private readonly courseRepo: ICourseRepo
-  ) {}
+  constructor(@inject(courseRepoID) private readonly courseRepo: ICourseRepo) {}
 
   async handle(query: GetCoursesQuery): Promise<Course[]> {
     return await this.courseRepo.getAll();

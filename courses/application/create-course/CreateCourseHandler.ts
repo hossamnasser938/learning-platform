@@ -7,7 +7,7 @@ import {
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import {
-  coursesRepoID,
+  courseRepoID,
   instructorRepoID,
 } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { uniqueIDGeneratorId } from "@l-p/shared/infrastructure/dependency-injection/tokens";
@@ -20,7 +20,7 @@ export class CreateCourseHandler
   implements ICommandHandler<CreateCourseCommand>
 {
   constructor(
-    @inject(coursesRepoID) private readonly courseRepository: ICourseRepo,
+    @inject(courseRepoID) private readonly courseRepository: ICourseRepo,
     @inject(instructorRepoID) private readonly instructorRepo: IInstructorRepo,
     @inject(uniqueIDGeneratorId)
     private readonly idGenerator: IUniqueIDGenerator
@@ -28,7 +28,6 @@ export class CreateCourseHandler
 
   async handle(command: CreateCourseCommand): Promise<void> {
     const instructor = await this.instructorRepo.getById(command.instructorId);
-
     if (!instructor) {
       throw new EntityNotFoundException("Instructor not found");
     }
@@ -40,7 +39,9 @@ export class CreateCourseHandler
       command.description,
       instructor.getId()
     );
+
     instructor.addCourse(course);
+
     await this.courseRepository.create(course, instructor);
   }
 }

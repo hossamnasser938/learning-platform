@@ -5,8 +5,10 @@ import {
 import { CreateInstructorCommand } from "@l-p/courses/application/create-instructor/CreateInstructorCommand";
 import { CreateInstructorHandler } from "@l-p/courses/application/create-instructor/CreateInstructorHandler";
 import {
+  createChapterHandlerID,
   createCourseHandlerID,
   createInstructorHandlerID,
+  getCourseChaptersHandlerID,
   getCoursesHandlerID,
   getInstructorsHandlerID,
 } from "@l-p/courses/infrastructure/dependency-injection/tokens";
@@ -22,6 +24,13 @@ import { GetCoursesHandler } from "../application/get-courses/GetCoursesHandler"
 import { GetCoursesQuery } from "../application/get-courses/GetCoursesQuery";
 import { CreateCourseHandler } from "../application/create-course/CreateCourseHandler";
 import { CreateCourseCommand } from "../application/create-course/CreateCourseCommand";
+import { CreateChapterDTO } from "./dtos/CreateChapterDTO";
+import { CreateChapterCommand } from "../application/create-chapter/CreateChapterCommand";
+import { CreateChapterHandler } from "../application/create-chapter/CreateChapterHandler";
+import { GetCourseChaptersHandler } from "../application/get-course-chapters/GetCourseChaptersHandler";
+import { GetCourseChaptersDTO } from "./dtos/GetCourseChaptersDTO";
+import { GetCourseChaptersResponse } from "./responses/GetCourseChaptersResponse";
+import { GetCourseChaptersQuery } from "../application/get-course-chapters/GetCourseChaptersQuery";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {
@@ -33,7 +42,11 @@ export class CoursesApi implements ICoursesApi {
     @inject(createCourseHandlerID)
     private readonly createCourseHandler: CreateCourseHandler,
     @inject(getCoursesHandlerID)
-    private readonly getCoursesHandler: GetCoursesHandler
+    private readonly getCoursesHandler: GetCoursesHandler,
+    @inject(createChapterHandlerID)
+    private readonly createChapterHandler: CreateChapterHandler,
+    @inject(getCourseChaptersHandlerID)
+    private readonly getCourseChaptersHandler: GetCourseChaptersHandler
   ) {}
 
   async healthCheck(): Promise<boolean> {
@@ -60,5 +73,18 @@ export class CoursesApi implements ICoursesApi {
     const query = GetCoursesQuery.fromDTO(getCoursesDTO);
     const courses = await this.getCoursesHandler.handle(query);
     return GetCoursesResponse.fromDomain(courses);
+  }
+
+  async createChapter(createChapterDTO: CreateChapterDTO): Promise<void> {
+    const command = CreateChapterCommand.fromDTO(createChapterDTO);
+    return await this.createChapterHandler.handle(command);
+  }
+
+  async getCourseChapters(
+    getCourseChaptersDTO: GetCourseChaptersDTO
+  ): Promise<GetCourseChaptersResponse> {
+    const query = GetCourseChaptersQuery.fromDTO(getCourseChaptersDTO);
+    const chapters = await this.getCourseChaptersHandler.handle(query);
+    return GetCourseChaptersResponse.fromDomain(chapters);
   }
 }

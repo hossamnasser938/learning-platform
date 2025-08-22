@@ -4,6 +4,7 @@ import { coursesApiID } from "@l-p/courses/infrastructure/dependency-injection/t
 import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
 import { GetInstructorsDTO } from "@l-p/courses/api/dtos/GetInstructorsDTO";
 import { GetCoursesDTO } from "@l-p/courses/api/dtos/GetCoursesDTO";
+import { GetCourseChaptersDTO } from "@l-p/courses/api/dtos/GetCourseChaptersDTO";
 
 export const coursesRouter = Router();
 
@@ -40,6 +41,23 @@ coursesRouter.get("/courses", async (req: Request, res: Response) => {
 coursesRouter.post("/courses", async (req: Request, res: Response) => {
   const createCourseDTO = req.body;
   await coursesApi.createCourse(createCourseDTO);
+
+  res.status(201).send();
+});
+
+coursesRouter.get("/chapters", async (req: Request, res: Response) => {
+  const courseId = req.query.courseId as string;
+
+  const dto = new GetCourseChaptersDTO(courseId);
+
+  const result = await coursesApi.getCourseChapters(dto);
+
+  res.status(200).send(result);
+});
+
+coursesRouter.post("/chapters", async (req: Request, res: Response) => {
+  const createChapterDTO = req.body;
+  await coursesApi.createChapter(createChapterDTO);
 
   res.status(201).send();
 });

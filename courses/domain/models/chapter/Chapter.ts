@@ -5,6 +5,7 @@ export class Chapter {
   private id: string;
   private title: string;
   private description: string;
+  private order: number;
   private courseId: string;
   private lessons: Lesson[];
   private assessments: Assessment[];
@@ -13,6 +14,7 @@ export class Chapter {
     id: string,
     title: string,
     description: string,
+    order: number,
     courseId: string,
     lessons: Lesson[] = [],
     assessments: Assessment[] = []
@@ -20,6 +22,7 @@ export class Chapter {
     this.id = id;
     this.title = title;
     this.description = description;
+    this.order = order;
     this.courseId = courseId;
     this.lessons = lessons;
     this.assessments = assessments;
@@ -29,11 +32,20 @@ export class Chapter {
     id: string,
     title: string,
     description: string,
+    order: number,
     courseId: string,
     lessons?: Lesson[],
     assessments?: Assessment[]
   ): Chapter {
-    return new Chapter(id, title, description, courseId, lessons, assessments);
+    return new Chapter(
+      id,
+      title,
+      description,
+      order,
+      courseId,
+      lessons,
+      assessments
+    );
   }
 
   getId(): string {
@@ -46,6 +58,10 @@ export class Chapter {
 
   getDescription(): string {
     return this.description;
+  }
+
+  getOrder(): number {
+    return this.order;
   }
 
   getCourseId(): string {
