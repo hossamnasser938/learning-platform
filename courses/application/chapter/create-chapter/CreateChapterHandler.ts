@@ -34,7 +34,7 @@ export class CreateChapterHandler
 
     const chapterId = this.idGenerator.generate();
 
-    const chapter = Chapter.create(
+    const chapter = Chapter.newChapter(
       chapterId,
       command.title,
       command.description,

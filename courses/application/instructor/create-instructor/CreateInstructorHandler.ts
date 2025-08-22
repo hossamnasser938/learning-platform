@@ -22,9 +22,8 @@ export class CreateInstructorHandler
   ) {}
 
   async handle(command: CreateInstructorCommand): Promise<void> {
-    const { name, bio } = command;
     const id = this.idGenerator.generate();
-    const instructor = Instructor.newInstructor(id, name, bio);
+    const instructor = Instructor.newInstructor(id, command.name, command.bio);
     await this.instructorRepository.create(instructor);
   }
 }

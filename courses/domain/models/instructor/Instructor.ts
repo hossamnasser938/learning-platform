@@ -29,7 +29,7 @@ export class Instructor {
 
   static newInstructor(id: string, name: string, bio: string): Instructor {
     const constructor = new Instructor(id, name, bio);
-    //raise event
+    //TODO: raise event
     return constructor;
   }
 

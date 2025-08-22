@@ -43,6 +43,12 @@ export class Course {
     );
   }
 
+  static newCourse(id: string, title: string, description: string, instructorId: string): Course {
+    const course = new Course(id, title, description, instructorId);
+    //TODO: raise event
+    return course;
+  }
+
   getId(): string {
     return this.id;
   }

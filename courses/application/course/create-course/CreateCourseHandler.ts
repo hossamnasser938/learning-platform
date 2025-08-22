@@ -33,7 +33,7 @@ export class CreateCourseHandler
     }
 
     const id = this.idGenerator.generate();
-    const course = Course.create(
+    const course = Course.newCourse(
       id,
       command.title,
       command.description,

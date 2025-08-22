@@ -48,6 +48,12 @@ export class Chapter {
     );
   }
 
+  static newChapter(id: string, title: string, description: string, order: number, courseId: string): Chapter {
+    const chapter = new Chapter(id, title, description, order, courseId);
+    //TODO: raise event
+    return chapter;
+  }
+
   getId(): string {
     return this.id;
   }
