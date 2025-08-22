@@ -1,10 +1,8 @@
 import "module-alias/register";
 
 import express, { NextFunction, Request, Response } from "express";
-import { certificationsRouter } from "./routers";
+import { certificationsRouter, coursesRouter, learnersRouter } from "./routers";
 import { ExceptionHandler } from "./ExeptionHandler";
-import { coursesRouter } from "./routers/courses";
-import { learnersRouter } from "./routers/learners";
 
 const PORT = process.env.PORT || 3000;
 

@@ -8,11 +8,13 @@ import {
   createChapterHandlerID,
   createCourseHandlerID,
   createInstructorHandlerID,
+  createLessonHandlerID,
+  getChapterLessonsHandlerID,
   getCourseChaptersHandlerID,
   getCoursesHandlerID,
   getInstructorsHandlerID,
 } from "@l-p/courses/infrastructure/dependency-injection/tokens";
-import { CreateCourseDTO, CreateInstructorDTO } from "./dtos";
+import { CreateCourseDTO, CreateInstructorDTO, CreateLessonDTO } from "./dtos";
 import { ICoursesApi } from "./ICoursesApi";
 import { GetInstructorsQuery } from "@l-p/courses/application/instructor/get-instructors/GetInstructorQuery";
 import { GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/GetInstructorHandler";
@@ -31,6 +33,12 @@ import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-c
 import { GetCourseChaptersDTO } from "./dtos/GetCourseChaptersDTO";
 import { GetCourseChaptersResponse } from "./responses/GetCourseChaptersResponse";
 import { GetCourseChaptersQuery } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersQuery";
+import { CreateLessonCommand } from "@l-p/courses/application/lesson/create-lesson/CreateLessonCommand";
+import { CreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson/CreateLessonHandler";
+import { GetChapterLessonsDTO } from "./dtos/GetChapterLessonsDTO";
+import { GetChapterLessonsResponse } from "./responses/GetChapterLessonsResponse";
+import { GetChapterLessonsQuery } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsQuery";
+import { GetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsHandler";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {
@@ -46,7 +54,11 @@ export class CoursesApi implements ICoursesApi {
     @inject(createChapterHandlerID)
     private readonly createChapterHandler: CreateChapterHandler,
     @inject(getCourseChaptersHandlerID)
-    private readonly getCourseChaptersHandler: GetCourseChaptersHandler
+    private readonly getCourseChaptersHandler: GetCourseChaptersHandler,
+    @inject(createLessonHandlerID)
+    private readonly createLessonHandler: CreateLessonHandler,
+    @inject(getChapterLessonsHandlerID)
+    private readonly getChapterLessonsHandler: GetChapterLessonsHandler
   ) {}
 
   async healthCheck(): Promise<boolean> {
@@ -98,5 +110,22 @@ export class CoursesApi implements ICoursesApi {
     const query = new GetCourseChaptersQuery(getCourseChaptersDTO.courseId);
     const chapters = await this.getCourseChaptersHandler.handle(query);
     return GetCourseChaptersResponse.fromDomain(chapters);
+  }
+
+  async createLesson(createLessonDTO: CreateLessonDTO): Promise<void> {
+    const command = new CreateLessonCommand(
+      createLessonDTO.title,
+      createLessonDTO.content,
+      createLessonDTO.chapterId,
+    );
+    return await this.createLessonHandler.handle(command);
+  }
+
+  async getChapterLessons(
+    getChapterLessonsDTO: GetChapterLessonsDTO
+  ): Promise<GetChapterLessonsResponse> {
+    const query = new GetChapterLessonsQuery(getChapterLessonsDTO.chapterId);
+    const lessons = await this.getChapterLessonsHandler.handle(query);
+    return GetChapterLessonsResponse.fromDomain(lessons);
   }
 }

@@ -12,6 +12,9 @@ import {
   createChapterHandlerID,
   chapterRepoID,
   getCourseChaptersHandlerID,
+  createLessonHandlerID,
+  getChapterLessonsHandlerID,
+  lessonRepoID,
 } from "./tokens";
 import { InstructorRepo } from "../repositories/in-memory/InstructorRepo";
 import { CourseRepo } from "../repositories/in-memory/CourseRepo";
@@ -21,6 +24,9 @@ import { CreateCourseHandler } from "@l-p/courses/application/course/create-cour
 import { CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/CreateChapterHandler";
 import { ChapterRepo } from "../repositories/in-memory/ChapterRepo";
 import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersHandler";
+import { CreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson/CreateLessonHandler";
+import { GetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsHandler";
+import { LessonRepo } from "../repositories/in-memory/LessonRepo";
 
 export function bindDependencies(container: Container) {
   // api
@@ -40,4 +46,9 @@ export function bindDependencies(container: Container) {
   container.bind(createChapterHandlerID).to(CreateChapterHandler);
   container.bind(getCourseChaptersHandlerID).to(GetCourseChaptersHandler);
   container.bind(chapterRepoID).to(ChapterRepo).inSingletonScope();
+
+  // lesson
+  container.bind(createLessonHandlerID).to(CreateLessonHandler);
+  container.bind(getChapterLessonsHandlerID).to(GetChapterLessonsHandler);
+  container.bind(lessonRepoID).to(LessonRepo).inSingletonScope();
 }

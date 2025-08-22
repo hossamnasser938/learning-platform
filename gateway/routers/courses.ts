@@ -5,6 +5,7 @@ import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
 import { GetInstructorsDTO } from "@l-p/courses/api/dtos/GetInstructorsDTO";
 import { GetCoursesDTO } from "@l-p/courses/api/dtos/GetCoursesDTO";
 import { GetCourseChaptersDTO } from "@l-p/courses/api/dtos/GetCourseChaptersDTO";
+import { GetChapterLessonsDTO } from "@l-p/courses/api/dtos/GetChapterLessonsDTO";
 
 export const coursesRouter = Router();
 
@@ -58,6 +59,23 @@ coursesRouter.get("/chapters", async (req: Request, res: Response) => {
 coursesRouter.post("/chapters", async (req: Request, res: Response) => {
   const createChapterDTO = req.body;
   await coursesApi.createChapter(createChapterDTO);
+
+  res.status(201).send();
+});
+
+coursesRouter.get("/lessons", async (req: Request, res: Response) => {
+  const chapterId = req.query.chapterId as string;
+
+  const dto = new GetChapterLessonsDTO(chapterId);
+
+  const result = await coursesApi.getChapterLessons(dto);
+
+  res.status(200).send(result);
+});
+
+coursesRouter.post("/lessons", async (req: Request, res: Response) => {
+  const createLessonDTO = req.body;
+  await coursesApi.createLesson(createLessonDTO);
 
   res.status(201).send();
 });

@@ -1,8 +1,10 @@
-import { CreateCourseDTO, CreateInstructorDTO } from "./dtos";
+import { CreateCourseDTO, CreateInstructorDTO, CreateLessonDTO } from "./dtos";
 import { CreateChapterDTO } from "./dtos/CreateChapterDTO";
+import { GetChapterLessonsDTO } from "./dtos/GetChapterLessonsDTO";
 import { GetCourseChaptersDTO } from "./dtos/GetCourseChaptersDTO";
 import { GetCoursesDTO } from "./dtos/GetCoursesDTO";
 import { GetInstructorsDTO } from "./dtos/GetInstructorsDTO";
+import { GetChapterLessonsResponse } from "./responses/GetChapterLessonsResponse";
 import { GetCourseChaptersResponse } from "./responses/GetCourseChaptersResponse";
 import { GetCoursesResponse } from "./responses/GetCoursesResponse";
 import { GetInstructorsResponse } from "./responses/GetInstructorsResponse";
@@ -25,4 +27,10 @@ export interface ICoursesApi {
   getCourseChapters(
     getCourseChaptersDTO: GetCourseChaptersDTO
   ): Promise<GetCourseChaptersResponse>;
+
+  createLesson(createLessonDTO: CreateLessonDTO): Promise<void>;
+
+  getChapterLessons(
+    getChapterLessonsDTO: GetChapterLessonsDTO
+  ): Promise<GetChapterLessonsResponse>;
 }

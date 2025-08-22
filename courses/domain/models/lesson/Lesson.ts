@@ -31,6 +31,12 @@ export class Lesson {
     return new Lesson(id, title, content, chapterId, assessments);
   }
 
+  static newLesson(id: string, title: string, content: string, chapterId: string): Lesson {
+    const lesson = new Lesson(id, title, content, chapterId);
+    //TODO: raise event
+    return lesson;
+  }
+
   getId(): string {
     return this.id;
   }

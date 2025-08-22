@@ -2,11 +2,14 @@ import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
 import { CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/CreateChapterHandler";
 import { CreateCourseHandler } from "@l-p/courses/application/course/create-course/CreateCourseHandler";
 import { CreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor/CreateInstructorHandler";
+import { CreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson/CreateLessonHandler";
+import { GetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsHandler";
 import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersHandler";
 import { GetCoursesHandler } from "@l-p/courses/application/course/get-courses/GetCoursesHandler";
 import { GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/GetInstructorHandler";
 import { IChapterRepo } from "@l-p/courses/domain/contracts/IChapterRepo";
 import { ICourseRepo } from "@l-p/courses/domain/contracts/ICourseRepo";
+import { ILessonRepo } from "@l-p/courses/domain/contracts/ILessonRepo";
 import { IInstructorRepo } from "@l-p/courses/domain/contracts/IInstructorRepo";
 import { ServiceIdentifier } from "@l-p/shared/infrastructure/dependency-injection/utils";
 
@@ -38,3 +41,11 @@ export const getCourseChaptersHandlerID: ServiceIdentifier<GetCourseChaptersHand
   Symbol.for("GetCourseChaptersHandler");
 export const chapterRepoID: ServiceIdentifier<IChapterRepo> =
   Symbol.for("ChapterRepository");
+
+// lesson
+export const createLessonHandlerID: ServiceIdentifier<CreateLessonHandler> =
+  Symbol.for("CreateLessonHandler");
+export const getChapterLessonsHandlerID: ServiceIdentifier<GetChapterLessonsHandler> =
+  Symbol.for("GetChapterLessonsHandler");
+export const lessonRepoID: ServiceIdentifier<ILessonRepo> =
+  Symbol.for("LessonRepository");
