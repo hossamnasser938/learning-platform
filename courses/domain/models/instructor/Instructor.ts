@@ -27,6 +27,12 @@ export class Instructor {
     return new Instructor(id, name, bio, courses);
   }
 
+  static newInstructor(id: string, name: string, bio: string): Instructor {
+    const constructor = new Instructor(id, name, bio);
+    //raise event
+    return constructor;
+  }
+
   getId(): string {
     return this.id;
   }
