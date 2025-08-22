@@ -54,36 +54,48 @@ export class CoursesApi implements ICoursesApi {
   }
 
   async createInstructor(createInstructorDTO: CreateInstructorDTO) {
-    const command = CreateInstructorCommand.fromDTO(createInstructorDTO);
+    const command = new CreateInstructorCommand(
+      createInstructorDTO.name,
+      createInstructorDTO.bio
+    );
     return await this.createInstructorHandler.handle(command);
   }
 
   async getInstructors(getInstructorsDTO: GetInstructorsDTO) {
-    const query = GetInstructorsQuery.fromDTO(getInstructorsDTO);
+    const query = new GetInstructorsQuery();
     const instructors = await this.getInstructorsHandler.handle(query);
     return GetInstructorsResponse.fromDomain(instructors);
   }
 
   async createCourse(createCourseDTO: CreateCourseDTO) {
-    const command = CreateCourseCommand.fromDTO(createCourseDTO);
+    const command = new CreateCourseCommand(
+      createCourseDTO.title,
+      createCourseDTO.description,
+      createCourseDTO.instructorId
+    );
     return await this.createCourseHandler.handle(command);
   }
 
   async getCourses(getCoursesDTO: GetCoursesDTO): Promise<GetCoursesResponse> {
-    const query = GetCoursesQuery.fromDTO(getCoursesDTO);
+    const query = new GetCoursesQuery();
     const courses = await this.getCoursesHandler.handle(query);
     return GetCoursesResponse.fromDomain(courses);
   }
 
   async createChapter(createChapterDTO: CreateChapterDTO): Promise<void> {
-    const command = CreateChapterCommand.fromDTO(createChapterDTO);
+    const command = new CreateChapterCommand(
+      createChapterDTO.courseId,
+      createChapterDTO.title,
+      createChapterDTO.description,
+      createChapterDTO.order
+    );
     return await this.createChapterHandler.handle(command);
   }
 
   async getCourseChapters(
     getCourseChaptersDTO: GetCourseChaptersDTO
   ): Promise<GetCourseChaptersResponse> {
-    const query = GetCourseChaptersQuery.fromDTO(getCourseChaptersDTO);
+    const query = new GetCourseChaptersQuery(getCourseChaptersDTO.courseId);
     const chapters = await this.getCourseChaptersHandler.handle(query);
     return GetCourseChaptersResponse.fromDomain(chapters);
   }

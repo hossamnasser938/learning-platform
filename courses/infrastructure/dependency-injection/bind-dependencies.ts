@@ -13,13 +13,13 @@ import {
   chapterRepoID,
   getCourseChaptersHandlerID,
 } from "./tokens";
-import { InstructorRepo } from "../repositories/InstructorRepo";
-import { CourseRepo } from "../repositories/CourseRepo";
+import { InstructorRepo } from "../repositories/in-memory/InstructorRepo";
+import { CourseRepo } from "../repositories/in-memory/CourseRepo";
 import { GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/GetInstructorHandler";
 import { GetCoursesHandler } from "@l-p/courses/application/course/get-courses/GetCoursesHandler";
 import { CreateCourseHandler } from "@l-p/courses/application/course/create-course/CreateCourseHandler";
 import { CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/CreateChapterHandler";
-import { ChapterRepo } from "../repositories/ChapterRepo";
+import { ChapterRepo } from "../repositories/in-memory/ChapterRepo";
 import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersHandler";
 
 export function bindDependencies(container: Container) {

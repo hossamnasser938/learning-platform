@@ -7,13 +7,4 @@ export class CreateChapterCommand {
     public readonly description: string,
     public readonly order: number
   ) {}
-
-  static fromDTO(dto: CreateChapterDTO): CreateChapterCommand {
-    return new CreateChapterCommand(
-      dto.courseId,
-      dto.title,
-      dto.description,
-      dto.order
-    );
-  }
 }

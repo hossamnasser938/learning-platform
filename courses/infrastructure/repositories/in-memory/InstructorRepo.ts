@@ -13,25 +13,11 @@ export class InstructorRepo implements IInstructorRepo {
   }
 
   async getAll(): Promise<Instructor[]> {
-    console.log(
-      "🚀 ~ InstructorRepo ~ getAll ~ this.instructors:",
-      this.instructors
-    );
     return this.instructors;
   }
 
   async create(instructor: Instructor): Promise<void> {
-    console.log("🚀 ~ InstructorRepo ~ create ~ instructor:", instructor);
-
-    console.log(
-      "🚀 ~ InstructorRepo ~ create ~ before this.instructors:",
-      this.instructors
-    );
     this.instructors.push(instructor);
-    console.log(
-      "🚀 ~ InstructorRepo ~ create ~ after this.instructors:",
-      this.instructors
-    );
   }
 
   async update(instructor: Instructor): Promise<void> {
