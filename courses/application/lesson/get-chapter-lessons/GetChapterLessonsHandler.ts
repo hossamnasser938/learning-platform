@@ -1,12 +1,12 @@
 import { GetChapterLessonsQuery } from "./GetChapterLessonsQuery";
 import { ILessonRepo } from "@l-p/courses/domain/contracts";
-import { IQueryHandler } from "@l-p/shared/domain/contracts";
-import { inject } from "@l-p/shared/infrastructure/dependency-injection/utils";
+import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { lessonRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { Lesson } from "@l-p/courses/domain/models";
+import { IGetChapterLessonsHandler } from "./IGetChapterLessonsHandler";
 
-export class GetChapterLessonsHandler
-  implements IQueryHandler<GetChapterLessonsQuery, Lesson[]>
+@injectable()
+export class GetChapterLessonsHandler implements IGetChapterLessonsHandler
 {
   constructor(
     @inject(lessonRepoID) private readonly lessonRepo: ILessonRepo

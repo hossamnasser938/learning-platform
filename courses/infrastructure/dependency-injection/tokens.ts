@@ -1,64 +1,69 @@
-import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
-import { CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/CreateChapterHandler";
-import { CreateCourseHandler } from "@l-p/courses/application/course/create-course/CreateCourseHandler";
-import { CreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor/CreateInstructorHandler";
-import { CreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson/CreateLessonHandler";
-import { GetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsHandler";
-import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersHandler";
-import { GetCoursesHandler } from "@l-p/courses/application/course/get-courses/GetCoursesHandler";
-import { GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/GetInstructorHandler";
-import { IChapterRepo } from "@l-p/courses/domain/contracts/IChapterRepo";
-import { ICourseRepo } from "@l-p/courses/domain/contracts/ICourseRepo";
-import { ILessonRepo } from "@l-p/courses/domain/contracts/ILessonRepo";
-import { IInstructorRepo } from "@l-p/courses/domain/contracts/IInstructorRepo";
 import { ServiceIdentifier } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { IChapterService, ILessonService } from "@l-p/courses/domain/services";
-import { ICourseService } from "@l-p/courses/domain/services/course/ICourseService";
-import { PublishCourseHandler } from "@l-p/courses/application/course/publish-course/PublishCourseHandler";
-import { ArchiveCourseHandler } from "@l-p/courses/application/course/archive-course/ArchiveCourseHandler";
+import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
+import { ICreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/ICreateChapterHandler";
+import { ICreateCourseHandler } from "@l-p/courses/application/course/create-course/ICreateCourseHandler";
+import { ICreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor/ICreateInstructorHandler";
+import { ICreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson/ICreateLessonHandler";
+import { IGetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/IGetChapterLessonsHandler";
+import { IGetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/IGetCourseChaptersHandler";
+import { IGetCoursesHandler } from "@l-p/courses/application/course/get-courses/IGetCoursesHandler";
+import { IGetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/IGetInstructorsHandler";
+import { IPublishCourseHandler } from "@l-p/courses/application/course/publish-course/IPublishCourseHandler";
+import { IArchiveCourseHandler } from "@l-p/courses/application/course/archive-course/IArchiveCourseHandler";
+import {
+  IInstructorRepo,
+  ICourseRepo,
+  IChapterRepo,
+  ILessonRepo,
+} from "@l-p/courses/domain/contracts";
+import {
+  ICourseService,
+  IChapterService,
+  ILessonService,
+} from "@l-p/courses/domain/services";
 
 // api
 export const coursesApiID: ServiceIdentifier<ICoursesApi> =
-  Symbol.for("CoursesApi");
+  Symbol.for("ICoursesApi");
 
 // instructor
-export const createInstructorHandlerID: ServiceIdentifier<CreateInstructorHandler> =
-  Symbol.for("CreateInstructorHandler");
-export const getInstructorsHandlerID: ServiceIdentifier<GetInstructorsHandler> =
-  Symbol.for("GetInstructorsHandler");
+export const createInstructorHandlerID: ServiceIdentifier<ICreateInstructorHandler> =
+  Symbol.for("ICreateInstructorHandler");
+export const getInstructorsHandlerID: ServiceIdentifier<IGetInstructorsHandler> =
+  Symbol.for("IGetInstructorsHandler");
 export const instructorRepoID: ServiceIdentifier<IInstructorRepo> = Symbol.for(
   "InstructorRepository"
 );
 
 // course
-export const createCourseHandlerID: ServiceIdentifier<CreateCourseHandler> =
-  Symbol.for("CreateCourseHandler");
-export const getCoursesHandlerID: ServiceIdentifier<GetCoursesHandler> =
-  Symbol.for("GetCoursesHandler");
+export const createCourseHandlerID: ServiceIdentifier<ICreateCourseHandler> =
+  Symbol.for("ICreateCourseHandler");
+export const getCoursesHandlerID: ServiceIdentifier<IGetCoursesHandler> =
+  Symbol.for("IGetCoursesHandler");
 export const courseRepoID: ServiceIdentifier<ICourseRepo> =
   Symbol.for("CoursesRepository");
 export const courseServiceID: ServiceIdentifier<ICourseService> =
   Symbol.for("CourseService");
-export const publishCourseHandlerID: ServiceIdentifier<PublishCourseHandler> =
-  Symbol.for("PublishCourseHandler");
-export const archiveCourseHandlerID: ServiceIdentifier<ArchiveCourseHandler> =
-  Symbol.for("ArchiveCourseHandler");
+export const publishCourseHandlerID: ServiceIdentifier<IPublishCourseHandler> =
+  Symbol.for("IPublishCourseHandler");
+export const archiveCourseHandlerID: ServiceIdentifier<IArchiveCourseHandler> =
+  Symbol.for("IArchiveCourseHandler");
 
 // chapter
-export const createChapterHandlerID: ServiceIdentifier<CreateChapterHandler> =
-  Symbol.for("CreateChapterHandler");
-export const getCourseChaptersHandlerID: ServiceIdentifier<GetCourseChaptersHandler> =
-  Symbol.for("GetCourseChaptersHandler");
+export const createChapterHandlerID: ServiceIdentifier<ICreateChapterHandler> =
+  Symbol.for("ICreateChapterHandler");
+export const getCourseChaptersHandlerID: ServiceIdentifier<IGetCourseChaptersHandler> =
+  Symbol.for("IGetCourseChaptersHandler");
 export const chapterRepoID: ServiceIdentifier<IChapterRepo> =
   Symbol.for("ChapterRepository");
 export const chapterServiceID: ServiceIdentifier<IChapterService> =
   Symbol.for("ChapterService");
 
 // lesson
-export const createLessonHandlerID: ServiceIdentifier<CreateLessonHandler> =
-  Symbol.for("CreateLessonHandler");
-export const getChapterLessonsHandlerID: ServiceIdentifier<GetChapterLessonsHandler> =
-  Symbol.for("GetChapterLessonsHandler");
+export const createLessonHandlerID: ServiceIdentifier<ICreateLessonHandler> =
+  Symbol.for("ICreateLessonHandler");
+export const getChapterLessonsHandlerID: ServiceIdentifier<IGetChapterLessonsHandler> =
+  Symbol.for("IGetChapterLessonsHandler");
 export const lessonRepoID: ServiceIdentifier<ILessonRepo> =
   Symbol.for("LessonRepository");
 export const lessonServiceID: ServiceIdentifier<ILessonService> =

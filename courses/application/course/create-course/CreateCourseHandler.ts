@@ -1,4 +1,3 @@
-import { ICommandHandler } from "@l-p/shared/domain/contracts";
 import { CreateCourseCommand } from "./CreateCourseCommand";
 import { ICourseRepo } from "@l-p/courses/domain/contracts";
 import { Course } from "@l-p/courses/domain/models";
@@ -6,10 +5,10 @@ import { inject, injectable } from "@l-p/shared/infrastructure/dependency-inject
 import { courseRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { ICourseService } from "@l-p/courses/domain/services/course/ICourseService";
 import { courseServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
+import { ICreateCourseHandler } from "./ICreateCourseHandler";
 
 @injectable()
-export class CreateCourseHandler
-  implements ICommandHandler<CreateCourseCommand, Course>
+export class CreateCourseHandler implements ICreateCourseHandler
 {
   constructor(
     @inject(courseRepoID) private readonly courseRepo: ICourseRepo,

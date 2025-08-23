@@ -1,4 +1,3 @@
-import { ICommandHandler } from "@l-p/shared/domain/contracts";
 import { CreateLessonCommand } from "./CreateLessonCommand";
 import { Lesson } from "@l-p/courses/domain/models";
 import {
@@ -8,10 +7,10 @@ import {
 import { lessonRepoID, lessonServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { ILessonService } from "@l-p/courses/domain/services";
 import { ILessonRepo } from "@l-p/courses/domain/contracts";
+import { ICreateLessonHandler } from "./ICreateLessonHandler";
 
 @injectable()
-export class CreateLessonHandler
-  implements ICommandHandler<CreateLessonCommand, Lesson>
+export class CreateLessonHandler implements ICreateLessonHandler
 {
   constructor(
     @inject(lessonServiceID) private readonly lessonService: ILessonService,

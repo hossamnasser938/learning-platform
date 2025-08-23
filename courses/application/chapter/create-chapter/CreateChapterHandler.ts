@@ -1,21 +1,22 @@
-import { ICommandHandler } from "@l-p/shared/domain/contracts";
 import { CreateChapterCommand } from "./CreateChapterCommand";
 import { Chapter } from "@l-p/courses/domain/models";
 import {
   inject,
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { chapterRepoID, chapterServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
+import {
+  chapterRepoID,
+  chapterServiceID,
+} from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { IChapterService } from "@l-p/courses/domain/services";
 import { IChapterRepo } from "@l-p/courses/domain/contracts";
+import { ICreateChapterHandler } from "./ICreateChapterHandler";
 
 @injectable()
-export class CreateChapterHandler
-  implements ICommandHandler<CreateChapterCommand, Chapter>
-{
+export class CreateChapterHandler implements ICreateChapterHandler {
   constructor(
     @inject(chapterServiceID) private readonly chapterService: IChapterService,
-    @inject(chapterRepoID) private readonly chapterRepo: IChapterRepo,
+    @inject(chapterRepoID) private readonly chapterRepo: IChapterRepo
   ) {}
 
   async handle(command: CreateChapterCommand): Promise<Chapter> {

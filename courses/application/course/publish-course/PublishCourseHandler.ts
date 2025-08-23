@@ -1,13 +1,13 @@
-import { ICommandHandler } from "@l-p/shared/domain/contracts";
 import { PublishCourseCommand } from "./PublishCourseCommand";
 import { Course } from "@l-p/courses/domain/models";
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { courseRepoID, courseServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { ICourseService } from "@l-p/courses/domain/services/course/ICourseService";
 import { ICourseRepo } from "@l-p/courses/domain/contracts";
+import { IPublishCourseHandler } from "./IPublishCourseHandler";
 
 @injectable()
-export class PublishCourseHandler implements ICommandHandler<PublishCourseCommand, Course> {
+export class PublishCourseHandler implements IPublishCourseHandler {
   constructor(
     @inject(courseServiceID) private readonly courseService: ICourseService,
     @inject(courseRepoID) private readonly courseRepo: ICourseRepo

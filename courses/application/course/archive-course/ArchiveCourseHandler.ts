@@ -1,13 +1,13 @@
-import { ICommandHandler } from "@l-p/shared/domain/contracts";
 import { ArchiveCourseCommand } from "./ArchiveCourseCommand";
 import { Course } from "@l-p/courses/domain/models";
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { courseRepoID, courseServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { ICourseService } from "@l-p/courses/domain/services/course/ICourseService";
 import { ICourseRepo } from "@l-p/courses/domain/contracts";
+import { IArchiveCourseHandler } from "./IArchiveCourseHandler";
 
 @injectable()
-export class ArchiveCourseHandler implements ICommandHandler<ArchiveCourseCommand, Course> {
+export class ArchiveCourseHandler implements IArchiveCourseHandler {
   constructor(
     @inject(courseServiceID) private readonly courseService: ICourseService,
     @inject(courseRepoID) private readonly courseRepo: ICourseRepo
