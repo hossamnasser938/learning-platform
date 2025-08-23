@@ -2,7 +2,10 @@ import { IChapterService } from "./IChapterService";
 import { Chapter } from "../../models";
 import { ICourseRepo } from "../../contracts";
 import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts";
-import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
+import {
+  inject,
+  injectable,
+} from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { courseRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { uniqueIDGeneratorID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 import { CourseNotFoundException } from "../../models/course/exceptions";
@@ -11,8 +14,20 @@ import { CourseNotFoundException } from "../../models/course/exceptions";
 export class ChapterService implements IChapterService {
   constructor(
     @inject(courseRepoID) private readonly courseRepo: ICourseRepo,
-    @inject(uniqueIDGeneratorID) private readonly idGenerator: IUniqueIDGenerator
+    @inject(uniqueIDGeneratorID)
+    private readonly idGenerator: IUniqueIDGenerator
   ) {}
+
+  private async assertCourseExists(courseId: string) {
+    const course = await this.courseRepo.getById(courseId);
+
+    const courseExists = !!course;
+    if (!courseExists) {
+      throw new CourseNotFoundException(courseId);
+    }
+
+    return course;
+  }
 
   async createNewChapter(
     title: string,
@@ -20,16 +35,16 @@ export class ChapterService implements IChapterService {
     order: number,
     courseId: string
   ): Promise<Chapter> {
-    const course = await this.courseRepo.getById(courseId);
-    
-    const courseExists = !!course;
-    if (!courseExists) {
-      throw new CourseNotFoundException(courseId);
-    }
+    const course = await this.assertCourseExists(courseId);
 
     const chapterId = this.idGenerator.generate();
-
-    const chapter = Chapter.newChapter(chapterId, title, description, order, courseId);
+    const chapter = Chapter.newChapter(
+      chapterId,
+      title,
+      description,
+      order,
+      courseId
+    );
 
     course.addChapter(chapter);
 
