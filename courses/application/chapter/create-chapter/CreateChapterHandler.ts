@@ -17,7 +17,7 @@ import { EntityNotFoundException } from "@l-p/shared/domain/exceptions";
 
 @injectable()
 export class CreateChapterHandler
-  implements ICommandHandler<CreateChapterCommand>
+  implements ICommandHandler<CreateChapterCommand, Chapter>
 {
   constructor(
     @inject(chapterRepoID) private readonly chapterRepo: IChapterRepo,
@@ -26,7 +26,7 @@ export class CreateChapterHandler
     private readonly idGenerator: IUniqueIDGenerator
   ) {}
 
-  async handle(command: CreateChapterCommand): Promise<void> {
+  async handle(command: CreateChapterCommand): Promise<Chapter> {
     const course = await this.courseRepo.getById(command.courseId);
     if (!course) {
       throw new EntityNotFoundException("Course not found");
@@ -45,5 +45,7 @@ export class CreateChapterHandler
     course.addChapter(chapter);
 
     await this.chapterRepo.create(chapter);
+
+    return chapter;
   }
 }

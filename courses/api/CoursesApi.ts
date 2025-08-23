@@ -39,6 +39,10 @@ import { GetChapterLessonsDTO } from "./dtos/GetChapterLessonsDTO";
 import { GetChapterLessonsResponse } from "./responses/GetChapterLessonsResponse";
 import { GetChapterLessonsQuery } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsQuery";
 import { GetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsHandler";
+import { CreateInstructorResponse } from "./responses/CreateInstructorResponse";
+import { CreateCourseResponse } from "./responses/CreateCourseResponse";
+import { CreateChapterResponse } from "./responses/CreateChapterResponse";
+import { CreateLessonResponse } from "./responses/CreateLessonResponse";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {
@@ -65,12 +69,13 @@ export class CoursesApi implements ICoursesApi {
     return true;
   }
 
-  async createInstructor(createInstructorDTO: CreateInstructorDTO) {
+  async createInstructor(createInstructorDTO: CreateInstructorDTO): Promise<CreateInstructorResponse> {
     const command = new CreateInstructorCommand(
       createInstructorDTO.name,
       createInstructorDTO.bio
     );
-    return await this.createInstructorHandler.handle(command);
+    const instructor = await this.createInstructorHandler.handle(command);
+    return CreateInstructorResponse.fromDomain(instructor);
   }
 
   async getInstructors(getInstructorsDTO: GetInstructorsDTO) {
@@ -79,13 +84,14 @@ export class CoursesApi implements ICoursesApi {
     return GetInstructorsResponse.fromDomain(instructors);
   }
 
-  async createCourse(createCourseDTO: CreateCourseDTO) {
+  async createCourse(createCourseDTO: CreateCourseDTO): Promise<CreateCourseResponse> {
     const command = new CreateCourseCommand(
       createCourseDTO.title,
       createCourseDTO.description,
       createCourseDTO.instructorId
     );
-    return await this.createCourseHandler.handle(command);
+    const course = await this.createCourseHandler.handle(command);
+    return CreateCourseResponse.fromDomain(course);
   }
 
   async getCourses(getCoursesDTO: GetCoursesDTO): Promise<GetCoursesResponse> {
@@ -94,14 +100,15 @@ export class CoursesApi implements ICoursesApi {
     return GetCoursesResponse.fromDomain(courses);
   }
 
-  async createChapter(createChapterDTO: CreateChapterDTO): Promise<void> {
+  async createChapter(createChapterDTO: CreateChapterDTO): Promise<CreateChapterResponse> {
     const command = new CreateChapterCommand(
       createChapterDTO.courseId,
       createChapterDTO.title,
       createChapterDTO.description,
       createChapterDTO.order
     );
-    return await this.createChapterHandler.handle(command);
+    const chapter = await this.createChapterHandler.handle(command);
+    return CreateChapterResponse.fromDomain(chapter);
   }
 
   async getCourseChapters(
@@ -112,13 +119,14 @@ export class CoursesApi implements ICoursesApi {
     return GetCourseChaptersResponse.fromDomain(chapters);
   }
 
-  async createLesson(createLessonDTO: CreateLessonDTO): Promise<void> {
+  async createLesson(createLessonDTO: CreateLessonDTO): Promise<CreateLessonResponse> {
     const command = new CreateLessonCommand(
       createLessonDTO.title,
       createLessonDTO.content,
-      createLessonDTO.chapterId,
+      createLessonDTO.chapterId
     );
-    return await this.createLessonHandler.handle(command);
+    const lesson = await this.createLessonHandler.handle(command);
+    return CreateLessonResponse.fromDomain(lesson);
   }
 
   async getChapterLessons(

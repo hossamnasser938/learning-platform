@@ -17,7 +17,7 @@ import { EntityNotFoundException } from "@l-p/shared/domain/exceptions";
 
 @injectable()
 export class CreateLessonHandler
-  implements ICommandHandler<CreateLessonCommand>
+  implements ICommandHandler<CreateLessonCommand, Lesson>
 {
   constructor(
     @inject(lessonRepoID) private readonly lessonRepo: ILessonRepo,
@@ -26,7 +26,7 @@ export class CreateLessonHandler
     private readonly idGenerator: IUniqueIDGenerator
   ) {}
 
-  async handle(command: CreateLessonCommand): Promise<void> {
+  async handle(command: CreateLessonCommand): Promise<Lesson> {
     const chapter = await this.chapterRepo.getById(command.chapterId);
     if (!chapter) {
       throw new EntityNotFoundException("Chapter not found");
@@ -44,5 +44,7 @@ export class CreateLessonHandler
     chapter.addLesson(lesson);
 
     await this.lessonRepo.create(lesson);
+
+    return lesson;
   }
 }

@@ -4,6 +4,10 @@ import { GetChapterLessonsDTO } from "./dtos/GetChapterLessonsDTO";
 import { GetCourseChaptersDTO } from "./dtos/GetCourseChaptersDTO";
 import { GetCoursesDTO } from "./dtos/GetCoursesDTO";
 import { GetInstructorsDTO } from "./dtos/GetInstructorsDTO";
+import { CreateInstructorResponse } from "./responses/CreateInstructorResponse";
+import { CreateCourseResponse } from "./responses/CreateCourseResponse";
+import { CreateChapterResponse } from "./responses/CreateChapterResponse";
+import { CreateLessonResponse } from "./responses/CreateLessonResponse";
 import { GetChapterLessonsResponse } from "./responses/GetChapterLessonsResponse";
 import { GetCourseChaptersResponse } from "./responses/GetCourseChaptersResponse";
 import { GetCoursesResponse } from "./responses/GetCoursesResponse";
@@ -12,23 +16,23 @@ import { GetInstructorsResponse } from "./responses/GetInstructorsResponse";
 export interface ICoursesApi {
   healthCheck(): Promise<boolean>;
 
-  createInstructor(createInstructorDTO: CreateInstructorDTO): Promise<void>;
+  createInstructor(createInstructorDTO: CreateInstructorDTO): Promise<CreateInstructorResponse>;
 
   getInstructors(
     getInstructorsDTO: GetInstructorsDTO
   ): Promise<GetInstructorsResponse>;
 
-  createCourse(createCourseDTO: CreateCourseDTO): Promise<void>;
+  createCourse(createCourseDTO: CreateCourseDTO): Promise<CreateCourseResponse>;
 
   getCourses(getCoursesDTO: GetCoursesDTO): Promise<GetCoursesResponse>;
 
-  createChapter(createChapterDTO: CreateChapterDTO): Promise<void>;
+  createChapter(createChapterDTO: CreateChapterDTO): Promise<CreateChapterResponse>;
 
   getCourseChapters(
     getCourseChaptersDTO: GetCourseChaptersDTO
   ): Promise<GetCourseChaptersResponse>;
 
-  createLesson(createLessonDTO: CreateLessonDTO): Promise<void>;
+  createLesson(createLessonDTO: CreateLessonDTO): Promise<CreateLessonResponse>;
 
   getChapterLessons(
     getChapterLessonsDTO: GetChapterLessonsDTO

@@ -26,9 +26,9 @@ coursesRouter.get("/instructors", async (req: Request, res: Response) => {
 
 coursesRouter.post("/instructors", async (req: Request, res: Response) => {
   const createInstructorDTO = req.body;
-  await coursesApi.createInstructor(createInstructorDTO);
+  const result = await coursesApi.createInstructor(createInstructorDTO);
 
-  res.status(201).send();
+  res.status(200).send(result);
 });
 
 coursesRouter.get("/courses", async (req: Request, res: Response) => {
@@ -41,9 +41,9 @@ coursesRouter.get("/courses", async (req: Request, res: Response) => {
 
 coursesRouter.post("/courses", async (req: Request, res: Response) => {
   const createCourseDTO = req.body;
-  await coursesApi.createCourse(createCourseDTO);
+  const result = await coursesApi.createCourse(createCourseDTO);
 
-  res.status(201).send();
+  res.status(200).send(result);
 });
 
 coursesRouter.get("/chapters", async (req: Request, res: Response) => {
@@ -58,9 +58,9 @@ coursesRouter.get("/chapters", async (req: Request, res: Response) => {
 
 coursesRouter.post("/chapters", async (req: Request, res: Response) => {
   const createChapterDTO = req.body;
-  await coursesApi.createChapter(createChapterDTO);
+  const result = await coursesApi.createChapter(createChapterDTO);
 
-  res.status(201).send();
+  res.status(200).send(result);
 });
 
 coursesRouter.get("/lessons", async (req: Request, res: Response) => {
@@ -75,7 +75,7 @@ coursesRouter.get("/lessons", async (req: Request, res: Response) => {
 
 coursesRouter.post("/lessons", async (req: Request, res: Response) => {
   const createLessonDTO = req.body;
-  await coursesApi.createLesson(createLessonDTO);
+  const result = await coursesApi.createLesson(createLessonDTO);
 
-  res.status(201).send();
+  res.status(200).send(result);
 });
