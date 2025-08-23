@@ -1,30 +1,18 @@
 import { Assessment } from "../assessment/Assessment";
 import { Chapter } from "../chapter/Chapter";
 import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
+import { CourseTitle } from "./CourseTitle";
+import { CourseDescription } from "./CourseDescription";
 
 export class Course {
-  private id: ModelId;
-  private title: string;
-  private description: string;
-  private instructorId: ModelId;
-  private chapters: Chapter[];
-  private assessments: Assessment[];
-
   private constructor(
-    id: ModelId,
-    title: string,
-    description: string,
-    instructorId: ModelId,
-    chapters: Chapter[] = [],
-    assessments: Assessment[] = []
-  ) {
-    this.id = id;
-    this.title = title;
-    this.description = description;
-    this.instructorId = instructorId;
-    this.chapters = chapters;
-    this.assessments = assessments;
-  }
+    private readonly id: ModelId,
+    private readonly title: CourseTitle,
+    private readonly description: CourseDescription,
+    private readonly instructorId: ModelId,
+    private readonly chapters: Chapter[] = [],
+    private readonly assessments: Assessment[] = []
+  ) {}
 
   static create(
     id: string,
@@ -36,8 +24,8 @@ export class Course {
   ): Course {
     return new Course(
       ModelId.create(id),
-      title,
-      description,
+      CourseTitle.create(title),
+      CourseDescription.create(description),
       ModelId.create(instructorId),
       chapters,
       assessments
@@ -47,8 +35,8 @@ export class Course {
   static newCourse(id: string, title: string, description: string, instructorId: string): Course {
     const course = new Course(
       ModelId.create(id),
-      title,
-      description,
+      CourseTitle.create(title),
+      CourseDescription.create(description),
       ModelId.create(instructorId)
     );
     //TODO: raise event
@@ -59,11 +47,11 @@ export class Course {
     return this.id;
   }
 
-  getTitle(): string {
+  getTitle(): CourseTitle {
     return this.title;
   }
 
-  getDescription(): string {
+  getDescription(): CourseDescription {
     return this.description;
   }
 

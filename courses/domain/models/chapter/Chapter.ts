@@ -6,31 +6,16 @@ import { ChapterDescription } from "./ChapterDescription";
 import { ItemOrder } from "@l-p/shared/domain/models/ItemOrder/ItemOrder";
 
 export class Chapter {
-  private id: ModelId;
-  private title: ChapterTitle;
-  private description: ChapterDescription;
-  private order: ItemOrder;
-  private courseId: ModelId;
-  private lessons: Lesson[];
-  private assessments: Assessment[];
 
   private constructor(
-    id: ModelId,
-    title: ChapterTitle,
-    description: ChapterDescription,
-    order: ItemOrder,
-    courseId: ModelId,
-    lessons: Lesson[] = [],
-    assessments: Assessment[] = []
-  ) {
-    this.id = id;
-    this.title = title;
-    this.description = description;
-    this.order = order;
-    this.courseId = courseId;
-    this.lessons = lessons;
-    this.assessments = assessments;
-  }
+    private readonly id: ModelId,
+    private readonly title: ChapterTitle,
+    private readonly description: ChapterDescription,
+    private readonly order: ItemOrder,
+    private readonly courseId: ModelId,
+    private readonly lessons: Lesson[] = [],
+    private readonly assessments: Assessment[] = []
+  ) {}
 
   static create(
     id: string,

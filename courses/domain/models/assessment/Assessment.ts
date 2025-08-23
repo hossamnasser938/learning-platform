@@ -9,12 +9,7 @@ export class Assessment {
     private readonly title: AssessmentTitle,
     private readonly description: AssessmentDescription,
     private readonly questions: Question[]
-  ) {
-    this.id = id;
-    this.title = title;
-    this.description = description;
-    this.questions = questions;
-  }
+  ) {}
 
   static create(id: string, title: string, description: string, questions: Question[]): Assessment {
     return new Assessment(ModelId.create(id), AssessmentTitle.create(title), AssessmentDescription.create(description), questions);

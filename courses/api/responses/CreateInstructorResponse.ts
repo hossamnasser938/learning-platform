@@ -8,8 +8,8 @@ export class CreateInstructorResponse {
   static fromDomain(instructor: any): CreateInstructorResponse {
     return new CreateInstructorResponse(
       instructor.getId().getValue(),
-      instructor.getName(),
-      instructor.getBio()
+      instructor.getName().getValue(),
+      instructor.getBio().getValue()
     );
   }
 }

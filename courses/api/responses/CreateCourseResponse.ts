@@ -9,8 +9,8 @@ export class CreateCourseResponse {
   static fromDomain(course: any): CreateCourseResponse {
     return new CreateCourseResponse(
       course.getId().getValue(),
-      course.getTitle(),
-      course.getDescription(),
+      course.getTitle().getValue(),
+      course.getDescription().getValue(),
       course.getInstructorId().getValue()
     );
   }

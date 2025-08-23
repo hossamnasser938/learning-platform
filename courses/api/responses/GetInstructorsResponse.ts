@@ -16,8 +16,8 @@ export class GetInstructorsResponse {
       (instructor) =>
         new InstructorResponse(
           instructor.getId().getValue(),
-          instructor.getName(),
-          instructor.getBio()
+          instructor.getName().getValue(),
+          instructor.getBio().getValue()
         )
     );
     return new GetInstructorsResponse(instructorResponses);

@@ -17,8 +17,8 @@ export class GetCoursesResponse {
       (course) =>
         new CourseResponse(
           course.getId().getValue(),
-          course.getTitle(),
-          course.getDescription(),
+          course.getTitle().getValue(),
+          course.getDescription().getValue(),
           course.getInstructorId().getValue()
         )
     );

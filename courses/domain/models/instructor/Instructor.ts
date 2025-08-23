@@ -1,23 +1,15 @@
 import { Course } from "../course/Course";
 import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
+import { InstructorName } from "./InstructorName";
+import { InstructorBio } from "./InstructorBio";
 
 export class Instructor {
-  private id: ModelId;
-  private name: string;
-  private bio: string;
-  private courses: Course[];
-
   private constructor(
-    id: ModelId,
-    name: string,
-    bio: string,
-    courses: Course[] = []
-  ) {
-    this.id = id;
-    this.name = name;
-    this.bio = bio;
-    this.courses = courses;
-  }
+    private readonly id: ModelId,
+    private readonly name: InstructorName,
+    private readonly bio: InstructorBio,
+    private readonly courses: Course[] = []
+  ) {}
 
   static create(
     id: string,
@@ -25,11 +17,20 @@ export class Instructor {
     bio: string,
     courses?: Course[]
   ): Instructor {
-    return new Instructor(ModelId.create(id), name, bio, courses);
+    return new Instructor(
+      ModelId.create(id), 
+      InstructorName.create(name), 
+      InstructorBio.create(bio), 
+      courses
+    );
   }
 
   static newInstructor(id: string, name: string, bio: string): Instructor {
-    const instructor = new Instructor(ModelId.create(id), name, bio);
+    const instructor = new Instructor(
+      ModelId.create(id), 
+      InstructorName.create(name), 
+      InstructorBio.create(bio)
+    );
     //TODO: raise event
     return instructor;
   }
@@ -38,11 +39,11 @@ export class Instructor {
     return this.id;
   }
 
-  getName(): string {
+  getName(): InstructorName {
     return this.name;
   }
 
-  getBio(): string {
+  getBio(): InstructorBio {
     return this.bio;
   }
 

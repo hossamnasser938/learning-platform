@@ -8,12 +8,7 @@ export abstract class Question {
     protected readonly body: QuestionBody,
     protected readonly order: ItemOrder,
     protected readonly assessmentId: ModelId
-  ) {
-    this.id = id;
-    this.body = body;
-    this.order = order;
-    this.assessmentId = assessmentId;
-  }
+  ) {}
 
   getId(): ModelId {
     return this.id;

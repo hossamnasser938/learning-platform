@@ -1,30 +1,18 @@
 import { ItemOrder } from "@l-p/shared/domain/models/ItemOrder/ItemOrder";
 import { Assessment } from "../assessment/Assessment";
 import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
+import { LessonTitle } from "./LessonTitle";
+import { LessonContent } from "./LessonContent";
 
 export class Lesson {
-  private id: ModelId;
-  private title: string;
-  private content: string;
-  private order: ItemOrder;
-  private chapterId: ModelId;
-  private assessments: Assessment[];
-
   private constructor(
-    id: ModelId,
-    title: string,
-    content: string,
-    order: ItemOrder,
-    chapterId: ModelId,
-    assessments: Assessment[] = []
-  ) {
-    this.id = id;
-    this.title = title;
-    this.content = content;
-    this.order = order;
-    this.chapterId = chapterId;
-    this.assessments = assessments;
-  }
+    private readonly id: ModelId,
+    private readonly title: LessonTitle,
+    private readonly content: LessonContent,
+    private readonly order: ItemOrder,
+    private readonly chapterId: ModelId,
+    private readonly assessments: Assessment[] = []
+  ) {}
 
   static create(
     id: string,
@@ -36,8 +24,8 @@ export class Lesson {
   ): Lesson {
     return new Lesson(
       ModelId.create(id),
-      title,
-      content,
+      LessonTitle.create(title),
+      LessonContent.create(content),
       ItemOrder.create(order),
       ModelId.create(chapterId),
       assessments
@@ -47,8 +35,8 @@ export class Lesson {
   static newLesson(id: string, title: string, content: string, order: number, chapterId: string): Lesson {
     const lesson = new Lesson(
       ModelId.create(id),
-      title,
-      content,
+      LessonTitle.create(title),
+      LessonContent.create(content),
       ItemOrder.create(order),
       ModelId.create(chapterId)
     );
@@ -60,11 +48,11 @@ export class Lesson {
     return this.id;
   }
 
-  getTitle(): string {
+  getTitle(): LessonTitle {
     return this.title;
   }
 
-  getContent(): string {
+  getContent(): LessonContent {
     return this.content;
   }
 
