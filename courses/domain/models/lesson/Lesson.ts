@@ -40,7 +40,7 @@ export class Lesson {
       ItemOrder.create(order),
       ModelId.create(chapterId)
     );
-    //TODO: raise event
+    //TODO: add event
     return lesson;
   }
 

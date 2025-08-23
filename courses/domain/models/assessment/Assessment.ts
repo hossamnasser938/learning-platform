@@ -17,7 +17,7 @@ export class Assessment {
 
   static newAssessment(id: string, title: string, description: string, questions: Question[]): Assessment {
     const assessment = new Assessment(ModelId.create(id), AssessmentTitle.create(title), AssessmentDescription.create(description), questions);
-    //TODO: raise event
+    //TODO: add event
     return assessment;
   }
 

@@ -31,7 +31,7 @@ export class Instructor {
       InstructorName.create(name), 
       InstructorBio.create(bio)
     );
-    //TODO: raise event
+    //TODO: add event
     return instructor;
   }
 

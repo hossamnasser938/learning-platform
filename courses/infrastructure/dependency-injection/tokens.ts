@@ -12,6 +12,7 @@ import { ICourseRepo } from "@l-p/courses/domain/contracts/ICourseRepo";
 import { ILessonRepo } from "@l-p/courses/domain/contracts/ILessonRepo";
 import { IInstructorRepo } from "@l-p/courses/domain/contracts/IInstructorRepo";
 import { ServiceIdentifier } from "@l-p/shared/infrastructure/dependency-injection/utils";
+import { CourseService } from "@l-p/courses/domain/services/course/CourseService";
 
 // api
 export const coursesApiID: ServiceIdentifier<ICoursesApi> =
@@ -33,6 +34,8 @@ export const getCoursesHandlerID: ServiceIdentifier<GetCoursesHandler> =
   Symbol.for("GetCoursesHandler");
 export const courseRepoID: ServiceIdentifier<ICourseRepo> =
   Symbol.for("CoursesRepository");
+export const courseServiceID: ServiceIdentifier<CourseService> =
+  Symbol.for("CourseService");
 
 // chapter
 export const createChapterHandlerID: ServiceIdentifier<CreateChapterHandler> =

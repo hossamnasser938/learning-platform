@@ -39,7 +39,7 @@ export class Course {
       CourseDescription.create(description),
       ModelId.create(instructorId)
     );
-    //TODO: raise event
+    //TODO: add event
     return course;
   }
 

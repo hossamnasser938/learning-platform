@@ -45,7 +45,7 @@ export class Chapter {
       ItemOrder.create(order),
       ModelId.create(courseId)
     );
-    //TODO: raise event
+    //TODO: add event
     return chapter;
   }
 
