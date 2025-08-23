@@ -18,9 +18,9 @@ export class GetCourseChaptersResponse {
       (chapter) =>
         new CourseChapterResponse(
           chapter.getId().getValue(),
-          chapter.getTitle(),
-          chapter.getDescription(),
-          chapter.getOrder(),
+          chapter.getTitle().getValue(),
+          chapter.getDescription().getValue(),
+          chapter.getOrder().getValue(),
           chapter.getCourseId().getValue()
         )
     );

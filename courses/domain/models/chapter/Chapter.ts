@@ -1,21 +1,24 @@
 import { Assessment } from "../assessment/Assessment";
 import { Lesson } from "../lesson/Lesson";
 import { ModelId } from "@l-p/shared/domain/models/ModelId";
+import { ChapterTitle } from "./ChapterTitle";
+import { ChapterDescription } from "./ChapterDescription";
+import { ChapterOrder } from "./ChapterOrder";
 
 export class Chapter {
   private id: ModelId;
-  private title: string;
-  private description: string;
-  private order: number;
+  private title: ChapterTitle;
+  private description: ChapterDescription;
+  private order: ChapterOrder;
   private courseId: ModelId;
   private lessons: Lesson[];
   private assessments: Assessment[];
 
   private constructor(
     id: ModelId,
-    title: string,
-    description: string,
-    order: number,
+    title: ChapterTitle,
+    description: ChapterDescription,
+    order: ChapterOrder,
     courseId: ModelId,
     lessons: Lesson[] = [],
     assessments: Assessment[] = []
@@ -40,9 +43,9 @@ export class Chapter {
   ): Chapter {
     return new Chapter(
       ModelId.create(id),
-      title,
-      description,
-      order,
+      ChapterTitle.create(title),
+      ChapterDescription.create(description),
+      ChapterOrder.create(order),
       ModelId.create(courseId),
       lessons,
       assessments
@@ -52,9 +55,9 @@ export class Chapter {
   static newChapter(id: string, title: string, description: string, order: number, courseId: string): Chapter {
     const chapter = new Chapter(
       ModelId.create(id),
-      title,
-      description,
-      order,
+      ChapterTitle.create(title),
+      ChapterDescription.create(description),
+      ChapterOrder.create(order),
       ModelId.create(courseId)
     );
     //TODO: raise event
@@ -65,15 +68,15 @@ export class Chapter {
     return this.id;
   }
 
-  getTitle(): string {
+  getTitle(): ChapterTitle {
     return this.title;
   }
 
-  getDescription(): string {
+  getDescription(): ChapterDescription {
     return this.description;
   }
 
-  getOrder(): number {
+  getOrder(): ChapterOrder {
     return this.order;
   }
 

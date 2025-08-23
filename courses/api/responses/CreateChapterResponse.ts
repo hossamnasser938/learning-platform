@@ -10,9 +10,9 @@ export class CreateChapterResponse {
   static fromDomain(chapter: any): CreateChapterResponse {
     return new CreateChapterResponse(
       chapter.getId().getValue(),
-      chapter.getTitle(),
-      chapter.getDescription(),
-      chapter.getOrder(),
+      chapter.getTitle().getValue(),
+      chapter.getDescription().getValue(),
+      chapter.getOrder().getValue(),
       chapter.getCourseId().getValue()
     );
   }
