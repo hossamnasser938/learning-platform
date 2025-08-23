@@ -37,7 +37,7 @@ export class CreateCourseHandler
       id,
       command.title,
       command.description,
-      instructor.getId()
+      instructor.getId().getValue()
     );
 
     instructor.addCourse(course);

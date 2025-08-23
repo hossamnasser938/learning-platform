@@ -16,10 +16,10 @@ export class GetCoursesResponse {
     const courseResponses = courses.map(
       (course) =>
         new CourseResponse(
-          course.getId(),
+          course.getId().getValue(),
           course.getTitle(),
           course.getDescription(),
-          course.getInstructorId()
+          course.getInstructorId().getValue()
         )
     );
     return new GetCoursesResponse(courseResponses);

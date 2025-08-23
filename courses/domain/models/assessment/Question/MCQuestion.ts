@@ -1,4 +1,5 @@
 import { Question } from "./Question";
+import { ModelId } from "@l-p/shared/domain/models/ModelId";
 
 export class MCQuestion extends Question {
   private options: string[];
@@ -7,10 +8,11 @@ export class MCQuestion extends Question {
   private constructor(
     id: string,
     body: string,
+    assessmentId: string,
     options: string[],
     correctOptionIndices: number[]
   ) {
-    super(id, body);
+    super(id, body, assessmentId);
     this.options = options;
     this.correctOptionIndices = correctOptionIndices;
   }
@@ -18,10 +20,11 @@ export class MCQuestion extends Question {
   static create(
     id: string,
     body: string,
+    assessmentId: string,
     options: string[],
     correctOptionIndices: number[]
   ): MCQuestion {
-    return new MCQuestion(id, body, options, correctOptionIndices);
+    return new MCQuestion(id, body, assessmentId, options, correctOptionIndices);
   }
 
   getOptions(): string[] {

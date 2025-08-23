@@ -1,19 +1,20 @@
 import { Assessment } from "../assessment/Assessment";
 import { Chapter } from "../chapter/Chapter";
+import { ModelId } from "@l-p/shared/domain/models/ModelId";
 
 export class Course {
-  private id: string;
+  private id: ModelId;
   private title: string;
   private description: string;
-  private instructorId: string;
+  private instructorId: ModelId;
   private chapters: Chapter[];
   private assessments: Assessment[];
 
   private constructor(
-    id: string,
+    id: ModelId,
     title: string,
     description: string,
-    instructorId: string,
+    instructorId: ModelId,
     chapters: Chapter[] = [],
     assessments: Assessment[] = []
   ) {
@@ -34,22 +35,27 @@ export class Course {
     assessments?: Assessment[]
   ): Course {
     return new Course(
-      id,
+      ModelId.create(id),
       title,
       description,
-      instructorId,
+      ModelId.create(instructorId),
       chapters,
       assessments
     );
   }
 
   static newCourse(id: string, title: string, description: string, instructorId: string): Course {
-    const course = new Course(id, title, description, instructorId);
+    const course = new Course(
+      ModelId.create(id),
+      title,
+      description,
+      ModelId.create(instructorId)
+    );
     //TODO: raise event
     return course;
   }
 
-  getId(): string {
+  getId(): ModelId {
     return this.id;
   }
 
@@ -61,7 +67,7 @@ export class Course {
     return this.description;
   }
 
-  getInstructorId(): string {
+  getInstructorId(): ModelId {
     return this.instructorId;
   }
 

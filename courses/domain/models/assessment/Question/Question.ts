@@ -1,15 +1,17 @@
+import { ModelId } from "@l-p/shared/domain/models/ModelId";
+
 export abstract class Question {
-  private id: string;
+  private id: ModelId;
   private body: string;
-  private assessmentId: string;
+  private assessmentId: ModelId;
 
   constructor(id: string, body: string, assessmentId: string) {
-    this.id = id;
+    this.id = ModelId.create(id);
     this.body = body;
-    this.assessmentId = assessmentId;
+    this.assessmentId = ModelId.create(assessmentId);
   }
 
-  getId(): string {
+  getId(): ModelId {
     return this.id;
   }
 
@@ -17,7 +19,7 @@ export abstract class Question {
     return this.body;
   }
 
-  getAssessmentId(): string {
+  getAssessmentId(): ModelId {
     return this.assessmentId;
   }
 }

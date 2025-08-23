@@ -8,7 +8,9 @@ export class CourseRepo implements ICourseRepo {
   private courses: Course[] = [];
 
   async getById(id: string): Promise<Course | null> {
-    return this.courses.find((course) => course.getId() === id) || null;
+    return (
+      this.courses.find((course) => course.getId().equals(id)) || null
+    );
   }
 
   async getAll(): Promise<Course[]> {

@@ -17,11 +17,11 @@ export class GetCourseChaptersResponse {
     const chapterResponses = chapters.map(
       (chapter) =>
         new CourseChapterResponse(
-          chapter.getId(),
+          chapter.getId().getValue(),
           chapter.getTitle(),
           chapter.getDescription(),
           chapter.getOrder(),
-          chapter.getCourseId()
+          chapter.getCourseId().getValue()
         )
     );
     return new GetCourseChaptersResponse(chapterResponses);

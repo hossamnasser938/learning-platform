@@ -1,13 +1,14 @@
 import { Course } from "../course/Course";
+import { ModelId } from "@l-p/shared/domain/models/ModelId";
 
 export class Instructor {
-  private id: string;
+  private id: ModelId;
   private name: string;
   private bio: string;
   private courses: Course[];
 
   private constructor(
-    id: string,
+    id: ModelId,
     name: string,
     bio: string,
     courses: Course[] = []
@@ -24,16 +25,16 @@ export class Instructor {
     bio: string,
     courses?: Course[]
   ): Instructor {
-    return new Instructor(id, name, bio, courses);
+    return new Instructor(ModelId.create(id), name, bio, courses);
   }
 
   static newInstructor(id: string, name: string, bio: string): Instructor {
-    const constructor = new Instructor(id, name, bio);
+    const instructor = new Instructor(ModelId.create(id), name, bio);
     //TODO: raise event
-    return constructor;
+    return instructor;
   }
 
-  getId(): string {
+  getId(): ModelId {
     return this.id;
   }
 

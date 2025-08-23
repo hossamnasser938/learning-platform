@@ -9,22 +9,22 @@ export class LessonRepo implements ILessonRepo {
   }
 
   async getById(id: string): Promise<Lesson | null> {
-    return this.lessons.find(lesson => lesson.getId() === id) || null;
+    return this.lessons.find(lesson => lesson.getId().equals(id)) || null;
   }
 
   async getByChapterId(chapterId: string): Promise<Lesson[]> {
-    return this.lessons.filter(lesson => lesson.getChapterId() === chapterId);
+    return this.lessons.filter(lesson => lesson.getChapterId().equals(chapterId));
   }
 
   async update(lesson: Lesson): Promise<void> {
-    const index = this.lessons.findIndex(l => l.getId() === lesson.getId());
+    const index = this.lessons.findIndex(l => l.getId().equals(lesson.getId()));
     if (index !== -1) {
       this.lessons[index] = lesson;
     }
   }
 
   async delete(id: string): Promise<void> {
-    const index = this.lessons.findIndex(lesson => lesson.getId() === id);
+    const index = this.lessons.findIndex(lesson => lesson.getId().equals(id));
     if (index !== -1) {
       this.lessons.splice(index, 1);
     }

@@ -8,7 +8,8 @@ export class InstructorRepo implements IInstructorRepo {
 
   async getById(id: string): Promise<Instructor | null> {
     return (
-      this.instructors.find((instructor) => instructor.getId() === id) || null
+      this.instructors.find((instructor) => instructor.getId().equals(id)) ||
+      null
     );
   }
 
@@ -30,6 +31,6 @@ export class InstructorRepo implements IInstructorRepo {
   }
 
   async delete(id: string): Promise<void> {
-    this.instructors = this.instructors.filter((i) => i.getId() !== id);
+    this.instructors = this.instructors.filter((i) => i.getId().equals(id));
   }
 }

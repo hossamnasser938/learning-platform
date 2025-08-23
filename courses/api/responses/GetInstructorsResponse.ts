@@ -15,7 +15,7 @@ export class GetInstructorsResponse {
     const instructorResponses = instructors.map(
       (instructor) =>
         new InstructorResponse(
-          instructor.getId(),
+          instructor.getId().getValue(),
           instructor.getName(),
           instructor.getBio()
         )

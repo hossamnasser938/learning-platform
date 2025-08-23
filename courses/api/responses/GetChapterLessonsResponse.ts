@@ -16,10 +16,10 @@ export class GetChapterLessonsResponse {
     const lessonResponses = lessons.map(
       (lesson) =>
         new LessonResponse(
-          lesson.getId(),
+          lesson.getId().getValue(),
           lesson.getTitle(),
           lesson.getContent(),
-          lesson.getChapterId()
+          lesson.getChapterId().getValue()
         )
     );
     return new GetChapterLessonsResponse(lessonResponses);

@@ -1,4 +1,5 @@
 import { Question } from "./Question";
+import { ModelId } from "@l-p/shared/domain/models/ModelId";
 
 export class SCQuestion extends Question {
   private options: string[];
@@ -7,10 +8,11 @@ export class SCQuestion extends Question {
   private constructor(
     id: string,
     body: string,
+    assessmentId: string,
     options: string[],
     correctOptionIndex: number
   ) {
-    super(id, body);
+    super(id, body, assessmentId);
     this.options = options;
     this.correctOptionIndex = correctOptionIndex;
   }
@@ -18,10 +20,11 @@ export class SCQuestion extends Question {
   public static create(
     id: string,
     body: string,
+    assessmentId: string,
     options: string[],
     correctOptionIndex: number
   ): SCQuestion {
-    return new SCQuestion(id, body, options, correctOptionIndex);
+    return new SCQuestion(id, body, assessmentId, options, correctOptionIndex);
   }
 
   getOptions(): string[] {
