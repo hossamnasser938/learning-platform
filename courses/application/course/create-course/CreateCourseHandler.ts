@@ -22,9 +22,10 @@ export class CreateCourseHandler
   ) {}
 
   async handle(command: CreateCourseCommand): Promise<Course> {
-    const {course, instructor} = await this.courseService.createNewCourse(command.title, command.description, command.instructorId);
+    const course = await this.courseService.createNewCourse(command.title, command.description, command.instructorId);
 
-    await this.courseRepo.create(course, instructor);
+    await this.courseRepo.create(course);
+    // TODO: fire events
 
     return course;
   }

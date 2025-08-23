@@ -1,6 +1,5 @@
 import { ICourseRepo } from "@l-p/courses/domain/contracts/ICourseRepo";
 import { Course } from "@l-p/courses/domain/models/course/Course";
-import { Instructor } from "@l-p/courses/domain/models/instructor/Instructor";
 import { injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
 
 @injectable()
@@ -17,7 +16,7 @@ export class CourseRepo implements ICourseRepo {
     return this.courses;
   }
 
-  async create(course: Course, instructor: Instructor): Promise<void> {
+  async create(course: Course): Promise<void> {
     this.courses.push(course);
   }
 
