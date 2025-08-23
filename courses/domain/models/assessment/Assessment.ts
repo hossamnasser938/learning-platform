@@ -1,10 +1,12 @@
 import { Question } from "./Question/Question";
 import { ModelId } from "@l-p/shared/domain/models/ModelId";
+import { AssessmentTitle } from "./AssessmentTitle";
+import { AssessmentDescription } from "./AssessmentDescription";
 
 export abstract class Assessment {
   private id: ModelId;
-  private title: string;
-  private description: string;
+  private title: AssessmentTitle;
+  private description: AssessmentDescription;
   private questions: Question[];
 
   public constructor(
@@ -14,8 +16,8 @@ export abstract class Assessment {
     questions: Question[]
   ) {
     this.id = id;
-    this.title = title;
-    this.description = description;
+    this.title = AssessmentTitle.create(title);
+    this.description = AssessmentDescription.create(description);
     this.questions = questions;
   }
 
@@ -23,11 +25,11 @@ export abstract class Assessment {
     return this.id;
   }
 
-  getTitle(): string {
+  getTitle(): AssessmentTitle {
     return this.title;
   }
 
-  getDescription(): string {
+  getDescription(): AssessmentDescription {
     return this.description;
   }
 
