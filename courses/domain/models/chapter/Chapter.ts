@@ -1,15 +1,15 @@
 import { Assessment } from "../assessment/Assessment";
 import { Lesson } from "../lesson/Lesson";
-import { ModelId } from "@l-p/shared/domain/models/ModelId";
+import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
 import { ChapterTitle } from "./ChapterTitle";
 import { ChapterDescription } from "./ChapterDescription";
-import { ChapterOrder } from "./ChapterOrder";
+import { ItemOrder } from "@l-p/shared/domain/models/ItemOrder/ItemOrder";
 
 export class Chapter {
   private id: ModelId;
   private title: ChapterTitle;
   private description: ChapterDescription;
-  private order: ChapterOrder;
+  private order: ItemOrder;
   private courseId: ModelId;
   private lessons: Lesson[];
   private assessments: Assessment[];
@@ -18,7 +18,7 @@ export class Chapter {
     id: ModelId,
     title: ChapterTitle,
     description: ChapterDescription,
-    order: ChapterOrder,
+    order: ItemOrder,
     courseId: ModelId,
     lessons: Lesson[] = [],
     assessments: Assessment[] = []
@@ -45,7 +45,7 @@ export class Chapter {
       ModelId.create(id),
       ChapterTitle.create(title),
       ChapterDescription.create(description),
-      ChapterOrder.create(order),
+      ItemOrder.create(order),
       ModelId.create(courseId),
       lessons,
       assessments
@@ -57,7 +57,7 @@ export class Chapter {
       ModelId.create(id),
       ChapterTitle.create(title),
       ChapterDescription.create(description),
-      ChapterOrder.create(order),
+      ItemOrder.create(order),
       ModelId.create(courseId)
     );
     //TODO: raise event
@@ -76,7 +76,7 @@ export class Chapter {
     return this.description;
   }
 
-  getOrder(): ChapterOrder {
+  getOrder(): ItemOrder {
     return this.order;
   }
 

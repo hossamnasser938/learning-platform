@@ -38,6 +38,7 @@ export class CreateLessonHandler
       lessonId,
       command.title,
       command.content,
+      command.order,
       command.chapterId
     );
 

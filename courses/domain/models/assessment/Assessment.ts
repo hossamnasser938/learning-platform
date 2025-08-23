@@ -1,5 +1,5 @@
 import { Question } from "./Question/Question";
-import { ModelId } from "@l-p/shared/domain/models/ModelId";
+import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
 import { AssessmentTitle } from "./AssessmentTitle";
 import { AssessmentDescription } from "./AssessmentDescription";
 

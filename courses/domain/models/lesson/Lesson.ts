@@ -1,10 +1,12 @@
+import { ItemOrder } from "@l-p/shared/domain/models/ItemOrder/ItemOrder";
 import { Assessment } from "../assessment/Assessment";
-import { ModelId } from "@l-p/shared/domain/models/ModelId";
+import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
 
 export class Lesson {
   private id: ModelId;
   private title: string;
   private content: string;
+  private order: ItemOrder;
   private chapterId: ModelId;
   private assessments: Assessment[];
 
@@ -12,12 +14,14 @@ export class Lesson {
     id: ModelId,
     title: string,
     content: string,
+    order: ItemOrder,
     chapterId: ModelId,
     assessments: Assessment[] = []
   ) {
     this.id = id;
     this.title = title;
     this.content = content;
+    this.order = order;
     this.chapterId = chapterId;
     this.assessments = assessments;
   }
@@ -26,6 +30,7 @@ export class Lesson {
     id: string,
     title: string,
     content: string,
+    order: number,
     chapterId: string,
     assessments?: Assessment[]
   ): Lesson {
@@ -33,16 +38,18 @@ export class Lesson {
       ModelId.create(id),
       title,
       content,
+      ItemOrder.create(order),
       ModelId.create(chapterId),
       assessments
     );
   }
 
-  static newLesson(id: string, title: string, content: string, chapterId: string): Lesson {
+  static newLesson(id: string, title: string, content: string, order: number, chapterId: string): Lesson {
     const lesson = new Lesson(
       ModelId.create(id),
       title,
       content,
+      ItemOrder.create(order),
       ModelId.create(chapterId)
     );
     //TODO: raise event
@@ -59,6 +66,10 @@ export class Lesson {
 
   getContent(): string {
     return this.content;
+  }
+
+  getOrder(): ItemOrder {
+    return this.order;
   }
 
   getChapterId(): ModelId {

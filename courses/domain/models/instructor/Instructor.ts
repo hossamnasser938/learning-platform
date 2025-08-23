@@ -1,5 +1,5 @@
 import { Course } from "../course/Course";
-import { ModelId } from "@l-p/shared/domain/models/ModelId";
+import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
 
 export class Instructor {
   private id: ModelId;

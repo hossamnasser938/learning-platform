@@ -1,7 +1,8 @@
 export class CreateLessonCommand {
   constructor(
-      public readonly title: string,
-      public readonly content: string,
-      public readonly chapterId: string,
+    public readonly title: string,
+    public readonly content: string,
+    public readonly order: number,
+    public readonly chapterId: string
   ) {}
 }

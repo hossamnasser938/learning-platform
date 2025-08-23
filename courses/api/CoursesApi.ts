@@ -123,6 +123,7 @@ export class CoursesApi implements ICoursesApi {
     const command = new CreateLessonCommand(
       createLessonDTO.title,
       createLessonDTO.content,
+      createLessonDTO.order,
       createLessonDTO.chapterId
     );
     const lesson = await this.createLessonHandler.handle(command);
