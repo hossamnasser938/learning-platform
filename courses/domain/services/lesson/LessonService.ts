@@ -5,7 +5,7 @@ import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts/IUniqueIDGenera
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { chapterRepoID, lessonRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { uniqueIDGeneratorId } from "@l-p/shared/infrastructure/dependency-injection/tokens";
-import { ChapterNotFoundException } from "./exceptions/LessonServiceException";
+import { ChapterNotFoundException } from "../../models/chapter/exceptions/ChapterExceptions";
 
 @injectable()
 export class LessonService implements ILessonService {

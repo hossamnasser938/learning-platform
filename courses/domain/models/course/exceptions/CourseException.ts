@@ -1,3 +1,5 @@
+import { CourseStatus } from "../CourseStatus";
+
 export class CourseException extends Error {
   constructor(message: string) {
     super(message);
@@ -30,5 +32,19 @@ export class InvalidCourseDescriptionMaxLengthException extends CourseException 
   constructor(description: string, maxLength: number) {
     super(`Invalid course description length: ${description}. Description cannot exceed ${maxLength} characters.`);
     this.name = 'InvalidCourseDescriptionMaxLengthException';
+  }
+}
+
+export class InvalidCourseStatusException extends CourseException {
+  constructor(status: CourseStatus) {
+    super(`Invalid course status: ${status}`);
+    this.name = 'InvalidCourseStatusException';
+  }
+}
+
+export class CourseNotFoundException extends CourseException {
+  constructor(courseId: string) {
+    super(`Course with ID ${courseId} not found`);
+    this.name = 'CourseNotFoundException';
   }
 }

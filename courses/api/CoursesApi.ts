@@ -13,6 +13,8 @@ import {
   getCourseChaptersHandlerID,
   getCoursesHandlerID,
   getInstructorsHandlerID,
+  publishCourseHandlerID,
+  archiveCourseHandlerID,
 } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { CreateCourseDTO, CreateInstructorDTO, CreateLessonDTO } from "./dtos";
 import { ICoursesApi } from "./ICoursesApi";
@@ -43,6 +45,14 @@ import { CreateInstructorResponse } from "./responses/CreateInstructorResponse";
 import { CreateCourseResponse } from "./responses/CreateCourseResponse";
 import { CreateChapterResponse } from "./responses/CreateChapterResponse";
 import { CreateLessonResponse } from "./responses/CreateLessonResponse";
+import { PublishCourseDTO } from "./dtos/PublishCourseDTO";
+import { ArchiveCourseDTO } from "./dtos/ArchiveCourseDTO";
+import { PublishCourseCommand } from "@l-p/courses/application/course/publish-course/PublishCourseCommand";
+import { PublishCourseHandler } from "@l-p/courses/application/course/publish-course/PublishCourseHandler";
+import { ArchiveCourseCommand } from "@l-p/courses/application/course/archive-course/ArchiveCourseCommand";
+import { ArchiveCourseHandler } from "@l-p/courses/application/course/archive-course/ArchiveCourseHandler";
+import { PublishCourseResponse } from "./responses/PublishCourseResponse";
+import { ArchiveCourseResponse } from "./responses/ArchiveCourseResponse";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {
@@ -62,7 +72,11 @@ export class CoursesApi implements ICoursesApi {
     @inject(createLessonHandlerID)
     private readonly createLessonHandler: CreateLessonHandler,
     @inject(getChapterLessonsHandlerID)
-    private readonly getChapterLessonsHandler: GetChapterLessonsHandler
+    private readonly getChapterLessonsHandler: GetChapterLessonsHandler,
+    @inject(publishCourseHandlerID)
+    private readonly publishCourseHandler: PublishCourseHandler,
+    @inject(archiveCourseHandlerID)
+    private readonly archiveCourseHandler: ArchiveCourseHandler
   ) {}
 
   async healthCheck(): Promise<boolean> {
@@ -136,5 +150,17 @@ export class CoursesApi implements ICoursesApi {
     const query = new GetChapterLessonsQuery(getChapterLessonsDTO.chapterId);
     const lessons = await this.getChapterLessonsHandler.handle(query);
     return GetChapterLessonsResponse.fromDomain(lessons);
+  }
+
+  async publishCourse(publishCourseDTO: PublishCourseDTO): Promise<PublishCourseResponse> {
+    const command = new PublishCourseCommand(publishCourseDTO.courseId);
+    const course = await this.publishCourseHandler.handle(command);
+    return PublishCourseResponse.fromDomain(course);
+  }
+
+  async archiveCourse(archiveCourseDTO: ArchiveCourseDTO): Promise<ArchiveCourseResponse> {
+    const command = new ArchiveCourseCommand(archiveCourseDTO.courseId);
+    const course = await this.archiveCourseHandler.handle(command);
+    return ArchiveCourseResponse.fromDomain(course);
   }
 }

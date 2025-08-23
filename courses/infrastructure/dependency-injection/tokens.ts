@@ -14,6 +14,8 @@ import { IInstructorRepo } from "@l-p/courses/domain/contracts/IInstructorRepo";
 import { ServiceIdentifier } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { IChapterService, ILessonService } from "@l-p/courses/domain/services";
 import { ICourseService } from "@l-p/courses/domain/services/course/ICourseService";
+import { PublishCourseHandler } from "@l-p/courses/application/course/publish-course/PublishCourseHandler";
+import { ArchiveCourseHandler } from "@l-p/courses/application/course/archive-course/ArchiveCourseHandler";
 
 // api
 export const coursesApiID: ServiceIdentifier<ICoursesApi> =
@@ -37,6 +39,10 @@ export const courseRepoID: ServiceIdentifier<ICourseRepo> =
   Symbol.for("CoursesRepository");
 export const courseServiceID: ServiceIdentifier<ICourseService> =
   Symbol.for("CourseService");
+export const publishCourseHandlerID: ServiceIdentifier<PublishCourseHandler> =
+  Symbol.for("PublishCourseHandler");
+export const archiveCourseHandlerID: ServiceIdentifier<ArchiveCourseHandler> =
+  Symbol.for("ArchiveCourseHandler");
 
 // chapter
 export const createChapterHandlerID: ServiceIdentifier<CreateChapterHandler> =

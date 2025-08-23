@@ -4,20 +4,21 @@ import { AssessmentTitle } from "./AssessmentTitle";
 import { AssessmentDescription } from "./AssessmentDescription";
 
 export class Assessment {
+  private readonly questions: Question[] = [];
+
   private constructor(
     private readonly id: ModelId,
     private readonly title: AssessmentTitle,
     private readonly description: AssessmentDescription,
-    private readonly questions: Question[]
   ) {}
 
-  static create(id: string, title: string, description: string, questions: Question[]): Assessment {
-    return new Assessment(ModelId.create(id), AssessmentTitle.create(title), AssessmentDescription.create(description), questions);
+  static create(id: string, title: string, description: string): Assessment {
+    return new Assessment(ModelId.create(id), AssessmentTitle.create(title), AssessmentDescription.create(description));
   }
 
-  static newAssessment(id: string, title: string, description: string, questions: Question[]): Assessment {
-    const assessment = new Assessment(ModelId.create(id), AssessmentTitle.create(title), AssessmentDescription.create(description), questions);
-    //TODO: add event
+  static newAssessment(id: string, title: string, description: string): Assessment {
+    const assessment = new Assessment(ModelId.create(id), AssessmentTitle.create(title), AssessmentDescription.create(description));
+    //TODO: raise event
     return assessment;
   }
 

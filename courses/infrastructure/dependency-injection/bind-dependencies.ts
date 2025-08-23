@@ -18,6 +18,8 @@ import {
   courseServiceID,
   chapterServiceID,
   lessonServiceID,
+  publishCourseHandlerID,
+  archiveCourseHandlerID,
 } from "./tokens";
 import { InstructorRepo } from "../repositories/in-memory/InstructorRepo";
 import { CourseRepo } from "../repositories/in-memory/CourseRepo";
@@ -33,6 +35,8 @@ import { LessonRepo } from "../repositories/in-memory/LessonRepo";
 import { CourseService } from "@l-p/courses/domain/services/course/CourseService";
 import { ChapterService } from "@l-p/courses/domain/services/chapter/ChapterService";
 import { LessonService } from "@l-p/courses/domain/services/lesson/LessonService";
+import { PublishCourseHandler } from "@l-p/courses/application/course/publish-course/PublishCourseHandler";
+import { ArchiveCourseHandler } from "@l-p/courses/application/course/archive-course/ArchiveCourseHandler";
 
 export function bindDependencies(container: Container) {
   // api
@@ -48,6 +52,8 @@ export function bindDependencies(container: Container) {
   container.bind(getCoursesHandlerID).to(GetCoursesHandler);
   container.bind(courseRepoID).to(CourseRepo).inSingletonScope();
   container.bind(courseServiceID).to(CourseService);
+  container.bind(publishCourseHandlerID).to(PublishCourseHandler);
+  container.bind(archiveCourseHandlerID).to(ArchiveCourseHandler);
   
   // chapter
   container.bind(createChapterHandlerID).to(CreateChapterHandler);

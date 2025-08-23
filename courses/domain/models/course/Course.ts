@@ -3,15 +3,19 @@ import { Chapter } from "../chapter/Chapter";
 import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
 import { CourseTitle } from "./CourseTitle";
 import { CourseDescription } from "./CourseDescription";
+import { CourseStatus } from "./CourseStatus";
+import { InvalidCourseStatusException } from "./exceptions/CourseException";
 
 export class Course {
+  private readonly chapters: Chapter[] = [];
+  private readonly assessments: Assessment[] = [];
+  private status: CourseStatus = CourseStatus.DRAFT;  
+  
   private constructor(
     private readonly id: ModelId,
     private readonly title: CourseTitle,
     private readonly description: CourseDescription,
     private readonly instructorId: ModelId,
-    private readonly chapters: Chapter[] = [],
-    private readonly assessments: Assessment[] = []
   ) {}
 
   static create(
@@ -19,16 +23,12 @@ export class Course {
     title: string,
     description: string,
     instructorId: string,
-    chapters?: Chapter[],
-    assessments?: Assessment[]
   ): Course {
     return new Course(
       ModelId.create(id),
       CourseTitle.create(title),
       CourseDescription.create(description),
       ModelId.create(instructorId),
-      chapters,
-      assessments
     );
   }
 
@@ -73,5 +73,29 @@ export class Course {
 
   addAssessment(assessment: Assessment): void {
     this.assessments.push(assessment);
+  }
+
+  getStatus(): CourseStatus {
+    return this.status;
+  }
+
+  publish(): void {
+    if (this.status !== CourseStatus.DRAFT) {
+      throw new InvalidCourseStatusException(this.status);
+    }
+
+    this.status = CourseStatus.PUBLISHED;
+
+    // TODO: add event
+  }
+
+  archive(): void {
+    if (this.status !== CourseStatus.PUBLISHED) {
+      throw new InvalidCourseStatusException(this.status);
+    }
+
+    this.status = CourseStatus.ARCHIVED;
+
+    // TODO: add event
   }
 }

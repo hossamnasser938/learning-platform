@@ -6,6 +6,8 @@ import { ChapterDescription } from "./ChapterDescription";
 import { ItemOrder } from "@l-p/shared/domain/models/ItemOrder/ItemOrder";
 
 export class Chapter {
+  private readonly lessons: Lesson[] = [];
+  private readonly assessments: Assessment[] = [];
 
   private constructor(
     private readonly id: ModelId,
@@ -13,8 +15,6 @@ export class Chapter {
     private readonly description: ChapterDescription,
     private readonly order: ItemOrder,
     private readonly courseId: ModelId,
-    private readonly lessons: Lesson[] = [],
-    private readonly assessments: Assessment[] = []
   ) {}
 
   static create(
@@ -23,8 +23,6 @@ export class Chapter {
     description: string,
     order: number,
     courseId: string,
-    lessons?: Lesson[],
-    assessments?: Assessment[]
   ): Chapter {
     return new Chapter(
       ModelId.create(id),
@@ -32,8 +30,6 @@ export class Chapter {
       ChapterDescription.create(description),
       ItemOrder.create(order),
       ModelId.create(courseId),
-      lessons,
-      assessments
     );
   }
 

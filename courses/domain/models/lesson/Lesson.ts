@@ -5,13 +5,14 @@ import { LessonTitle } from "./LessonTitle";
 import { LessonContent } from "./LessonContent";
 
 export class Lesson {
+  private readonly assessments: Assessment[] = [];
+
   private constructor(
     private readonly id: ModelId,
     private readonly title: LessonTitle,
     private readonly content: LessonContent,
     private readonly order: ItemOrder,
     private readonly chapterId: ModelId,
-    private readonly assessments: Assessment[] = []
   ) {}
 
   static create(
@@ -20,7 +21,6 @@ export class Lesson {
     content: string,
     order: number,
     chapterId: string,
-    assessments?: Assessment[]
   ): Lesson {
     return new Lesson(
       ModelId.create(id),
@@ -28,7 +28,6 @@ export class Lesson {
       LessonContent.create(content),
       ItemOrder.create(order),
       ModelId.create(chapterId),
-      assessments
     );
   }
 

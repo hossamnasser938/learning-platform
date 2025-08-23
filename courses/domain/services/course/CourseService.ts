@@ -1,16 +1,19 @@
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { IInstructorRepo } from "../../contracts/IInstructorRepo";
+import { ICourseRepo } from "../../contracts/ICourseRepo";
 import { Course } from "../../models/course/Course";
-import { instructorRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
-import { InstructorNotFoundException } from "./exceptions/CourseServiceExptions";
+import { instructorRepoID, courseRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
+import { InstructorNotFoundException } from "../../models/instructor/exceptions/InstructorException";
 import { uniqueIDGeneratorId } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts";
 import { ICourseService } from "./ICourseService";
+import { CourseNotFoundException } from "../../models/course/exceptions/CourseException";
 
 @injectable()
 export class CourseService implements ICourseService {
     constructor(
         @inject(instructorRepoID) private readonly instructorRepo: IInstructorRepo,
+        @inject(courseRepoID) private readonly courseRepo: ICourseRepo,
         @inject(uniqueIDGeneratorId) private readonly idGenerator: IUniqueIDGenerator) {}
 
     async createNewCourse(title: string, description: string, instructorId: string): Promise<Course> {
@@ -27,6 +30,32 @@ export class CourseService implements ICourseService {
 
         instructor.addCourse(course);
 
+        return course;
+    }
+
+    async publishCourse(courseId: string): Promise<Course> {
+        const course = await this.courseRepo.getById(courseId);
+        
+        const courseExists = !!course;
+        if (!courseExists) {
+            throw new CourseNotFoundException(courseId);
+        }
+
+        course.publish();
+
+        return course;
+    }
+
+    async archiveCourse(courseId: string): Promise<Course> {
+        const course = await this.courseRepo.getById(courseId);
+        
+        const courseExists = !!course;
+        if (!courseExists) {
+            throw new CourseNotFoundException(courseId);
+        }
+
+        course.archive();
+        
         return course;
     }
 }

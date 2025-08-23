@@ -12,6 +12,10 @@ import { GetChapterLessonsResponse } from "./responses/GetChapterLessonsResponse
 import { GetCourseChaptersResponse } from "./responses/GetCourseChaptersResponse";
 import { GetCoursesResponse } from "./responses/GetCoursesResponse";
 import { GetInstructorsResponse } from "./responses/GetInstructorsResponse";
+import { PublishCourseDTO } from "./dtos/PublishCourseDTO";
+import { ArchiveCourseDTO } from "./dtos/ArchiveCourseDTO";
+import { PublishCourseResponse } from "./responses/PublishCourseResponse";
+import { ArchiveCourseResponse } from "./responses/ArchiveCourseResponse";
 
 export interface ICoursesApi {
   healthCheck(): Promise<boolean>;
@@ -37,4 +41,8 @@ export interface ICoursesApi {
   getChapterLessons(
     getChapterLessonsDTO: GetChapterLessonsDTO
   ): Promise<GetChapterLessonsResponse>;
+
+  publishCourse(publishCourseDTO: PublishCourseDTO): Promise<PublishCourseResponse>;
+
+  archiveCourse(archiveCourseDTO: ArchiveCourseDTO): Promise<ArchiveCourseResponse>;
 }

@@ -6,6 +6,8 @@ import { GetInstructorsDTO } from "@l-p/courses/api/dtos/GetInstructorsDTO";
 import { GetCoursesDTO } from "@l-p/courses/api/dtos/GetCoursesDTO";
 import { GetCourseChaptersDTO } from "@l-p/courses/api/dtos/GetCourseChaptersDTO";
 import { GetChapterLessonsDTO } from "@l-p/courses/api/dtos/GetChapterLessonsDTO";
+import { PublishCourseDTO } from "@l-p/courses/api/dtos/PublishCourseDTO";
+import { ArchiveCourseDTO } from "@l-p/courses/api/dtos/ArchiveCourseDTO";
 
 export const coursesRouter = Router();
 
@@ -42,6 +44,20 @@ coursesRouter.get("/courses", async (req: Request, res: Response) => {
 coursesRouter.post("/courses", async (req: Request, res: Response) => {
   const createCourseDTO = req.body;
   const result = await coursesApi.createCourse(createCourseDTO);
+
+  res.status(200).send(result);
+});
+
+coursesRouter.post("/courses/publish", async (req: Request, res: Response) => {
+  const publishCourseDTO = new PublishCourseDTO(req.body.courseId);
+  const result = await coursesApi.publishCourse(publishCourseDTO);
+
+  res.status(200).send(result);
+});
+
+coursesRouter.post("/courses/archive", async (req: Request, res: Response) => {
+  const archiveCourseDTO = new ArchiveCourseDTO(req.body.courseId);
+  const result = await coursesApi.archiveCourse(archiveCourseDTO);
 
   res.status(200).send(result);
 });

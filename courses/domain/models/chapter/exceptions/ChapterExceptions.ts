@@ -39,3 +39,10 @@ export class ChapterNonPositiveIntegerOrderException extends ChapterException {
     this.name = 'ChapterNonPositiveIntegerOrderException';
   }
 }
+
+export class ChapterNotFoundException extends ChapterException {
+  constructor(chapterId: string) {
+    super(`Chapter with ID ${chapterId} not found`);
+    this.name = 'ChapterNotFoundException';
+  }
+}

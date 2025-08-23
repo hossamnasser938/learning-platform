@@ -4,24 +4,23 @@ import { InstructorName } from "./InstructorName";
 import { InstructorBio } from "./InstructorBio";
 
 export class Instructor {
+  private readonly courses: Course[] = [];
+
   private constructor(
     private readonly id: ModelId,
     private readonly name: InstructorName,
     private readonly bio: InstructorBio,
-    private readonly courses: Course[] = []
   ) {}
 
   static create(
     id: string,
     name: string,
     bio: string,
-    courses?: Course[]
   ): Instructor {
     return new Instructor(
       ModelId.create(id), 
       InstructorName.create(name), 
       InstructorBio.create(bio), 
-      courses
     );
   }
 

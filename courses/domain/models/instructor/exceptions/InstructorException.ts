@@ -32,3 +32,9 @@ export class InvalidInstructorBioMaxLengthException extends InstructorException 
     this.name = 'InvalidInstructorBioMaxLengthException';
   }
 }
+
+export class InstructorNotFoundException extends InstructorException {
+  constructor(instructorId: string) {
+      super(`Instructor with id ${instructorId} not found`);
+  }
+}
