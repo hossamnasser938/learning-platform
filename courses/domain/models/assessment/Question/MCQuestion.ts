@@ -1,9 +1,8 @@
 import { Question } from "./Question";
-import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
+import { ModelId, ItemOrder } from "@l-p/shared/domain/models";
 import { QuestionBody } from "./QuestionBody";
 import { QuestionOption } from "./QuestionOption";
 import { QuestionCorrectOptionIndex } from "./QuestionCorrectOptionIndex";
-import { ItemOrder } from "@l-p/shared/domain/models/ItemOrder/ItemOrder";
 
 export class MCQuestion extends Question {
   private constructor(

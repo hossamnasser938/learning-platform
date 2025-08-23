@@ -1,5 +1,4 @@
-import { DomainException } from "@l-p/shared/domain/exceptions";
-import { ExceptionType } from "@l-p/shared/domain/exceptions/ExceptionType";
+import { DomainException, ExceptionType } from "@l-p/shared/domain/exceptions";
 import { CourseStatus } from "../CourseStatus";
 
 export class CourseException extends DomainException {
@@ -45,7 +44,7 @@ export class InvalidCourseStatusException extends CourseException {
 }
 
 export class CourseNotFoundException extends CourseException {
-  constructor(courseId: string) {
+  constructor(courseId: string) {   
     super(`Course with ID ${courseId} not found`, ExceptionType.ENTITY_NOT_FOUND);
     this.name = 'CourseNotFoundException';
   }

@@ -1,3 +1,4 @@
+export * from './ArchiveCourseDTO'
 export * from "./CreateChapterDTO";
 export * from "./CreateCourseDTO";
 export * from "./CreateInstructorDTO";
@@ -6,3 +7,4 @@ export * from "./GetChapterLessonsDTO";
 export * from "./GetCourseChaptersDTO";
 export * from "./GetCoursesDTO";
 export * from "./GetInstructorsDTO";
+export * from './PublishCourseDTO'

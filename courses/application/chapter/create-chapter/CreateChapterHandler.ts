@@ -1,13 +1,13 @@
-import { ICommandHandler } from "@l-p/shared/domain/contracts/ICommandHandler";
+import { ICommandHandler } from "@l-p/shared/domain/contracts";
 import { CreateChapterCommand } from "./CreateChapterCommand";
-import { Chapter } from "@l-p/courses/domain/models/chapter/Chapter";
+import { Chapter } from "@l-p/courses/domain/models";
 import {
   inject,
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { chapterRepoID, chapterServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { IChapterService } from "@l-p/courses/domain/services";
-import { IChapterRepo } from "@l-p/courses/domain/contracts/IChapterRepo";
+import { IChapterRepo } from "@l-p/courses/domain/contracts";
 
 @injectable()
 export class CreateChapterHandler

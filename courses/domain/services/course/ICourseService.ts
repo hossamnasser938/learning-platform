@@ -1,4 +1,4 @@
-import { Course } from "../../models/course/Course";
+import { Course } from "../../models";
 
 export interface ICourseService {
   createNewCourse(title: string, description: string, instructorId: string): Promise<Course>;

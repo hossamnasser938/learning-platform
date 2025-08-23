@@ -1,4 +1,4 @@
-import { Lesson } from "../../models/lesson/Lesson";
+import { Lesson } from "../../models";
 
 export interface ILessonService {
   createNewLesson(

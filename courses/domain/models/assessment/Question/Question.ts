@@ -1,6 +1,5 @@
-import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
+import { ModelId, ItemOrder } from "@l-p/shared/domain/models";
 import { QuestionBody } from "./QuestionBody";
-import { ItemOrder } from "@l-p/shared/domain/models/ItemOrder/ItemOrder";
 
 export abstract class Question {
   protected constructor(

@@ -2,12 +2,14 @@ import { Request, Response, Router } from "express";
 import { container } from "@l-p/shared/infrastructure/dependency-injection";
 import { coursesApiID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
-import { GetInstructorsDTO } from "@l-p/courses/api/dtos/GetInstructorsDTO";
-import { GetCoursesDTO } from "@l-p/courses/api/dtos/GetCoursesDTO";
-import { GetCourseChaptersDTO } from "@l-p/courses/api/dtos/GetCourseChaptersDTO";
-import { GetChapterLessonsDTO } from "@l-p/courses/api/dtos/GetChapterLessonsDTO";
-import { PublishCourseDTO } from "@l-p/courses/api/dtos/PublishCourseDTO";
-import { ArchiveCourseDTO } from "@l-p/courses/api/dtos/ArchiveCourseDTO";
+import { 
+  GetInstructorsDTO,
+  GetCoursesDTO,
+  GetCourseChaptersDTO,
+  GetChapterLessonsDTO,
+  PublishCourseDTO,
+  ArchiveCourseDTO
+} from "@l-p/courses/api/dtos";
 
 export const coursesRouter = Router();
 

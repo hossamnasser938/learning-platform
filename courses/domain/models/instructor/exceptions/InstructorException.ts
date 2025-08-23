@@ -1,5 +1,4 @@
-import { DomainException } from "@l-p/shared/domain/exceptions";
-import { ExceptionType } from "@l-p/shared/domain/exceptions/ExceptionType";
+import { DomainException, ExceptionType } from "@l-p/shared/domain/exceptions";
 
 export class InstructorException extends DomainException {
   constructor(message: string, errorType?: ExceptionType) {

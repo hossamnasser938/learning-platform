@@ -1,9 +1,8 @@
 import { Assessment } from "../assessment/Assessment";
 import { Lesson } from "../lesson/Lesson";
-import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
+import { ModelId, ItemOrder } from "@l-p/shared/domain/models";
 import { ChapterTitle } from "./ChapterTitle";
 import { ChapterDescription } from "./ChapterDescription";
-import { ItemOrder } from "@l-p/shared/domain/models/ItemOrder/ItemOrder";
 
 export class Chapter {
   private readonly lessons: Lesson[] = [];

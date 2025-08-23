@@ -1,21 +1,28 @@
-import { CreateCourseDTO, CreateInstructorDTO, CreateLessonDTO } from "./dtos";
-import { CreateChapterDTO } from "./dtos/CreateChapterDTO";
-import { GetChapterLessonsDTO } from "./dtos/GetChapterLessonsDTO";
-import { GetCourseChaptersDTO } from "./dtos/GetCourseChaptersDTO";
-import { GetCoursesDTO } from "./dtos/GetCoursesDTO";
-import { GetInstructorsDTO } from "./dtos/GetInstructorsDTO";
-import { CreateInstructorResponse } from "./responses/CreateInstructorResponse";
-import { CreateCourseResponse } from "./responses/CreateCourseResponse";
-import { CreateChapterResponse } from "./responses/CreateChapterResponse";
-import { CreateLessonResponse } from "./responses/CreateLessonResponse";
-import { GetChapterLessonsResponse } from "./responses/GetChapterLessonsResponse";
-import { GetCourseChaptersResponse } from "./responses/GetCourseChaptersResponse";
-import { GetCoursesResponse } from "./responses/GetCoursesResponse";
-import { GetInstructorsResponse } from "./responses/GetInstructorsResponse";
-import { PublishCourseDTO } from "./dtos/PublishCourseDTO";
-import { ArchiveCourseDTO } from "./dtos/ArchiveCourseDTO";
-import { PublishCourseResponse } from "./responses/PublishCourseResponse";
-import { ArchiveCourseResponse } from "./responses/ArchiveCourseResponse";
+import { 
+  CreateCourseDTO, 
+  CreateInstructorDTO, 
+  CreateLessonDTO,
+  CreateChapterDTO,
+  GetChapterLessonsDTO,
+  GetCourseChaptersDTO,
+  GetCoursesDTO,
+  GetInstructorsDTO,
+  PublishCourseDTO,
+  ArchiveCourseDTO
+} from "./dtos";
+
+import { 
+  CreateInstructorResponse,
+  CreateCourseResponse,
+  CreateChapterResponse,
+  CreateLessonResponse,
+  GetChapterLessonsResponse,
+  GetCourseChaptersResponse,
+  GetCoursesResponse,
+  GetInstructorsResponse,
+  PublishCourseResponse,
+  ArchiveCourseResponse
+} from "./responses";
 
 export interface ICoursesApi {
   healthCheck(): Promise<boolean>;

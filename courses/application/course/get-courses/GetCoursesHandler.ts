@@ -1,12 +1,12 @@
-import { IQueryHandler } from "@l-p/shared/domain/contracts/IQueryHandler";
 import { GetCoursesQuery } from "./GetCoursesQuery";
-import { Course } from "@l-p/courses/domain/models/course/Course";
-import { ICourseRepo } from "@l-p/courses/domain/contracts/ICourseRepo";
+import { ICourseRepo } from "@l-p/courses/domain/contracts";
+import { IQueryHandler } from "@l-p/shared/domain/contracts";
 import {
   inject,
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { courseRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
+import { Course } from "@l-p/courses/domain/models";
 
 @injectable()
 export class GetCoursesHandler

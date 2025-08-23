@@ -1,6 +1,5 @@
-import { ItemOrder } from "@l-p/shared/domain/models/ItemOrder/ItemOrder";
 import { Assessment } from "../assessment/Assessment";
-import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
+import { ModelId, ItemOrder } from "@l-p/shared/domain/models";
 import { LessonTitle } from "./LessonTitle";
 import { LessonContent } from "./LessonContent";
 

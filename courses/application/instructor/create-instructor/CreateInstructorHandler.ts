@@ -1,15 +1,9 @@
-import { ICommandHandler } from "@l-p/shared/domain/contracts/ICommandHandler";
+import { ICommandHandler, IUniqueIDGenerator } from "@l-p/shared/domain/contracts";
 import { CreateInstructorCommand } from "./CreateInstructorCommand";
-import { IInstructorRepo } from "@l-p/courses/domain/contracts/IInstructorRepo";
-import { Instructor } from "@l-p/courses/domain/models/instructor/Instructor";
-import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts/IUniqueIDGenerator";
-import {
-  inject,
-  injectable,
-} from "@l-p/shared/infrastructure/dependency-injection/utils";
-import {
-  instructorRepoID,
-} from "@l-p/courses/infrastructure/dependency-injection/tokens";
+import { IInstructorRepo } from "@l-p/courses/domain/contracts";
+import { Instructor } from "@l-p/courses/domain/models";
+import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
+import { instructorRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { uniqueIDGeneratorId } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 
 @injectable()

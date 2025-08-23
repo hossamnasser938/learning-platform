@@ -1,13 +1,13 @@
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { IInstructorRepo } from "../../contracts/IInstructorRepo";
-import { ICourseRepo } from "../../contracts/ICourseRepo";
-import { Course } from "../../models/course/Course";
+import { IInstructorRepo, ICourseRepo } from "../../contracts";
+import { Course } from "../../models";
 import { instructorRepoID, courseRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
-import { InstructorNotFoundException } from "../../models/instructor/exceptions/InstructorException";
 import { uniqueIDGeneratorId } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts";
 import { ICourseService } from "./ICourseService";
-import { CourseNotFoundException } from "../../models/course/exceptions/CourseException";
+import { InstructorNotFoundException } from "../../models/instructor/exceptions";
+import { CourseNotFoundException } from "../../models/course/exceptions";
+
 
 @injectable()
 export class CourseService implements ICourseService {

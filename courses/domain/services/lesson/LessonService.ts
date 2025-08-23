@@ -1,9 +1,9 @@
 import { ILessonService } from "./ILessonService";
-import { Lesson } from "../../models/lesson/Lesson";
-import { IChapterRepo } from "../../contracts/IChapterRepo";
-import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts/IUniqueIDGenerator";
+import { Lesson } from "../../models";
+import { IChapterRepo } from "../../contracts";
+import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts";
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { chapterRepoID, lessonRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
+import { chapterRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { uniqueIDGeneratorId } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 import { ChapterNotFoundException } from "../../models/chapter/exceptions/ChapterExceptions";
 

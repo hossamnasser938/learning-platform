@@ -1,6 +1,6 @@
 import { Assessment } from "../assessment/Assessment";
 import { Chapter } from "../chapter/Chapter";
-import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
+import { ModelId } from "@l-p/shared/domain/models";
 import { CourseTitle } from "./CourseTitle";
 import { CourseDescription } from "./CourseDescription";
 import { CourseStatus } from "./CourseStatus";

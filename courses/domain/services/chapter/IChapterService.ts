@@ -1,4 +1,4 @@
-import { Chapter } from "../../models/chapter/Chapter";
+import { Chapter } from "../../models";
 
 export interface IChapterService {
   createNewChapter(

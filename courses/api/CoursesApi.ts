@@ -1,9 +1,21 @@
+import { ICoursesApi } from "./ICoursesApi";
+
 import {
   inject,
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { CreateInstructorCommand } from "@l-p/courses/application/instructor/create-instructor/CreateInstructorCommand";
-import { CreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor/CreateInstructorHandler";
+
+import { CreateInstructorCommand, CreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor";
+import { GetInstructorsQuery, GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors";
+import { GetCoursesHandler, GetCoursesQuery } from "@l-p/courses/application/course/get-courses";
+import { CreateCourseHandler, CreateCourseCommand } from "@l-p/courses/application/course/create-course";
+import { CreateChapterCommand, CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter";
+import { GetCourseChaptersHandler, GetCourseChaptersQuery } from "@l-p/courses/application/chapter/get-course-chapters";
+import { CreateLessonCommand, CreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson";
+import { GetChapterLessonsHandler, GetChapterLessonsQuery } from "@l-p/courses/application/lesson/get-chapter-lessons";  
+import { PublishCourseCommand, PublishCourseHandler } from "@l-p/courses/application/course/publish-course";
+import { ArchiveCourseCommand, ArchiveCourseHandler } from "@l-p/courses/application/course/archive-course";
+
 import {
   createChapterHandlerID,
   createCourseHandlerID,
@@ -16,43 +28,32 @@ import {
   publishCourseHandlerID,
   archiveCourseHandlerID,
 } from "@l-p/courses/infrastructure/dependency-injection/tokens";
-import { CreateCourseDTO, CreateInstructorDTO, CreateLessonDTO } from "./dtos";
-import { ICoursesApi } from "./ICoursesApi";
-import { GetInstructorsQuery } from "@l-p/courses/application/instructor/get-instructors/GetInstructorQuery";
-import { GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/GetInstructorHandler";
-import { GetInstructorsResponse } from "./responses/GetInstructorsResponse";
-import { GetInstructorsDTO } from "./dtos/GetInstructorsDTO";
-import { GetCoursesDTO } from "./dtos/GetCoursesDTO";
-import { GetCoursesResponse } from "./responses/GetCoursesResponse";
-import { GetCoursesHandler } from "@l-p/courses/application/course/get-courses/GetCoursesHandler";
-import { GetCoursesQuery } from "@l-p/courses/application/course/get-courses/GetCoursesQuery";
-import { CreateCourseHandler } from "@l-p/courses/application/course/create-course/CreateCourseHandler";
-import { CreateCourseCommand } from "@l-p/courses/application/course/create-course/CreateCourseCommand";
-import { CreateChapterDTO } from "./dtos/CreateChapterDTO";
-import { CreateChapterCommand } from "@l-p/courses/application/chapter/create-chapter/CreateChapterCommand";
-import { CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/CreateChapterHandler";
-import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersHandler";
-import { GetCourseChaptersDTO } from "./dtos/GetCourseChaptersDTO";
-import { GetCourseChaptersResponse } from "./responses/GetCourseChaptersResponse";
-import { GetCourseChaptersQuery } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersQuery";
-import { CreateLessonCommand } from "@l-p/courses/application/lesson/create-lesson/CreateLessonCommand";
-import { CreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson/CreateLessonHandler";
-import { GetChapterLessonsDTO } from "./dtos/GetChapterLessonsDTO";
-import { GetChapterLessonsResponse } from "./responses/GetChapterLessonsResponse";
-import { GetChapterLessonsQuery } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsQuery";
-import { GetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsHandler";
-import { CreateInstructorResponse } from "./responses/CreateInstructorResponse";
-import { CreateCourseResponse } from "./responses/CreateCourseResponse";
-import { CreateChapterResponse } from "./responses/CreateChapterResponse";
-import { CreateLessonResponse } from "./responses/CreateLessonResponse";
-import { PublishCourseDTO } from "./dtos/PublishCourseDTO";
-import { ArchiveCourseDTO } from "./dtos/ArchiveCourseDTO";
-import { PublishCourseCommand } from "@l-p/courses/application/course/publish-course/PublishCourseCommand";
-import { PublishCourseHandler } from "@l-p/courses/application/course/publish-course/PublishCourseHandler";
-import { ArchiveCourseCommand } from "@l-p/courses/application/course/archive-course/ArchiveCourseCommand";
-import { ArchiveCourseHandler } from "@l-p/courses/application/course/archive-course/ArchiveCourseHandler";
-import { PublishCourseResponse } from "./responses/PublishCourseResponse";
-import { ArchiveCourseResponse } from "./responses/ArchiveCourseResponse";
+
+import {
+  ArchiveCourseResponse,
+  CreateChapterResponse,
+  CreateCourseResponse,
+  CreateInstructorResponse,
+  CreateLessonResponse,
+  PublishCourseResponse,
+  GetChapterLessonsResponse,
+  GetCourseChaptersResponse,
+  GetCoursesResponse,
+  GetInstructorsResponse
+} from "./responses";
+
+import {
+  ArchiveCourseDTO,
+  CreateChapterDTO,
+  CreateCourseDTO,
+  CreateInstructorDTO,
+  CreateLessonDTO,
+  GetInstructorsDTO,
+  GetCoursesDTO,
+  GetCourseChaptersDTO,
+  GetChapterLessonsDTO,
+  PublishCourseDTO,
+} from "./dtos";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {

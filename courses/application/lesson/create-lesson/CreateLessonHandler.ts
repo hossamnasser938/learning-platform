@@ -1,13 +1,13 @@
-import { ICommandHandler } from "@l-p/shared/domain/contracts/ICommandHandler";
+import { ICommandHandler } from "@l-p/shared/domain/contracts";
 import { CreateLessonCommand } from "./CreateLessonCommand";
-import { Lesson } from "@l-p/courses/domain/models/lesson/Lesson";
+import { Lesson } from "@l-p/courses/domain/models";
 import {
   inject,
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { lessonRepoID, lessonServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { ILessonService } from "@l-p/courses/domain/services";
-import { ILessonRepo } from "@l-p/courses/domain/contracts/ILessonRepo";
+import { ILessonRepo } from "@l-p/courses/domain/contracts";
 
 @injectable()
 export class CreateLessonHandler

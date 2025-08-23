@@ -1,14 +1,10 @@
-import { IChapterRepo } from "@l-p/courses/domain/contracts/IChapterRepo";
-import { IQueryHandler } from "@l-p/shared/domain/contracts/IQueryHandler";
-import { Chapter } from "@l-p/courses/domain/models/chapter/Chapter";
 import { GetCourseChaptersQuery } from "./GetCourseChaptersQuery";
-import { ICourseRepo } from "@l-p/courses/domain/contracts/ICourseRepo";
+import { IChapterRepo, ICourseRepo } from "@l-p/courses/domain/contracts";
+import { IQueryHandler } from "@l-p/shared/domain/contracts";
+import { inject } from "@l-p/shared/infrastructure/dependency-injection/utils";
+import { chapterRepoID, courseRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
+import { Chapter } from "@l-p/courses/domain/models";
 import { CourseNotFoundException } from "@l-p/courses/domain/models/course/exceptions/CourseException";
-import { inject } from "inversify";
-import {
-  chapterRepoID,
-  courseRepoID,
-} from "@l-p/courses/infrastructure/dependency-injection/tokens";
 
 export class GetCourseChaptersHandler
   implements IQueryHandler<GetCourseChaptersQuery, Chapter[]>

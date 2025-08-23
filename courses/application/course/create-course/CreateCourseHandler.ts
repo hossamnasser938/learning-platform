@@ -1,16 +1,11 @@
-import { ICommandHandler } from "@l-p/shared/domain/contracts/ICommandHandler";
+import { ICommandHandler } from "@l-p/shared/domain/contracts";
 import { CreateCourseCommand } from "./CreateCourseCommand";
-import { ICourseRepo } from "@l-p/courses/domain/contracts/ICourseRepo";
-import { Course } from "@l-p/courses/domain/models/course/Course";
-import {
-  inject,
-  injectable,
-} from "@l-p/shared/infrastructure/dependency-injection/utils";
-import {
-  courseRepoID,
-  courseServiceID,
-} from "@l-p/courses/infrastructure/dependency-injection/tokens";
-import { CourseService } from "@l-p/courses/domain/services/course/CourseService";
+import { ICourseRepo } from "@l-p/courses/domain/contracts";
+import { Course } from "@l-p/courses/domain/models";
+import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
+import { courseRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
+import { ICourseService } from "@l-p/courses/domain/services/course/ICourseService";
+import { courseServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 
 @injectable()
 export class CreateCourseHandler
@@ -18,7 +13,7 @@ export class CreateCourseHandler
 {
   constructor(
     @inject(courseRepoID) private readonly courseRepo: ICourseRepo,
-    @inject(courseServiceID) private readonly courseService: CourseService
+    @inject(courseServiceID) private readonly courseService: ICourseService
   ) {}
 
   async handle(command: CreateCourseCommand): Promise<Course> {

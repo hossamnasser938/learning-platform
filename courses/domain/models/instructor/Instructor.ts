@@ -1,5 +1,5 @@
 import { Course } from "../course/Course";
-import { ModelId } from "@l-p/shared/domain/models/ModelId/ModelId";
+import { ModelId } from "@l-p/shared/domain/models";
 import { InstructorName } from "./InstructorName";
 import { InstructorBio } from "./InstructorBio";
 
