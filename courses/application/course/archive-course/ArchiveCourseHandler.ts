@@ -1,20 +1,20 @@
 import { ArchiveCourseCommand } from "./ArchiveCourseCommand";
 import { Course } from "@l-p/courses/domain/models";
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { courseRepoID, courseServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
-import { ICourseService } from "@l-p/courses/domain/services/course/ICourseService";
+import { courseRepoID, courseStatusUpdateServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { ICourseRepo } from "@l-p/courses/domain/contracts";
+import { ICourseStatusUpdateService } from "@l-p/courses/domain/services";
 import { IArchiveCourseHandler } from "./IArchiveCourseHandler";
 
 @injectable()
 export class ArchiveCourseHandler implements IArchiveCourseHandler {
   constructor(
-    @inject(courseServiceID) private readonly courseService: ICourseService,
+    @inject(courseStatusUpdateServiceID) private readonly courseStatusUpdateService: ICourseStatusUpdateService,
     @inject(courseRepoID) private readonly courseRepo: ICourseRepo
   ) {}
 
   async handle(command: ArchiveCourseCommand): Promise<Course> {
-    const course = await this.courseService.archiveCourse(command.courseId);
+    const course = await this.courseStatusUpdateService.archiveCourse(command.courseId);
 
     await this.courseRepo.update(course);
     // TODO: raise event

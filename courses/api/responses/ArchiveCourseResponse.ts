@@ -1,3 +1,5 @@
+import { Course } from "@l-p/courses/domain/models";
+
     export class ArchiveCourseResponse {
   constructor(
     public readonly id: string,
@@ -7,7 +9,7 @@
     public readonly status: string
   ) {}
 
-  static fromDomain(course: any): ArchiveCourseResponse {
+  static fromDomain(course: Course): ArchiveCourseResponse {
     return new ArchiveCourseResponse(
       course.getId().getValue(),
       course.getTitle().getValue(),

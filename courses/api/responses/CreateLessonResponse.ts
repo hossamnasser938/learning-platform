@@ -1,3 +1,5 @@
+import { Lesson } from "@l-p/courses/domain/models";
+
 export class CreateLessonResponse {
   constructor(
     public readonly id: string,
@@ -7,7 +9,7 @@ export class CreateLessonResponse {
     public readonly chapterId: string
   ) {}
 
-  static fromDomain(lesson: any): CreateLessonResponse {
+  static fromDomain(lesson: Lesson): CreateLessonResponse {
     return new CreateLessonResponse(
       lesson.getId().getValue(),
       lesson.getTitle().getValue(),

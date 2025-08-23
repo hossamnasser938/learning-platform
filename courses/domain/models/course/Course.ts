@@ -66,6 +66,10 @@ export class Course extends AggregateRoot<ModelId> {
     return this.assessments;
   }
 
+  getStatus(): CourseStatus {
+    return this.status;
+  }
+
   isDraft(): boolean {
     return this.status === CourseStatus.DRAFT;
   }

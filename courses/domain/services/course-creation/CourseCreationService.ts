@@ -2,23 +2,30 @@ import {
   inject,
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { IInstructorRepo, ICourseRepo } from "../../contracts";
-import { Course } from "../../models";
+import { 
+  IInstructorRepo, 
+  ICourseRepo, 
+  IChapterRepo 
+} from "../../contracts";
+import { Course, Chapter, Lesson } from "../../models";
 import {
   instructorRepoID,
   courseRepoID,
+  chapterRepoID,
 } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { uniqueIDGeneratorID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts";
-import { ICourseService } from "./ICourseService";
+import { ICourseCreationService } from "./ICourseCreationService";
 import { InstructorNotFoundException } from "../../models/instructor/exceptions";
 import { CourseNotFoundException } from "../../models/course/exceptions";
+import { ChapterNotFoundException } from "../../models/chapter/exceptions/ChapterExceptions";
 
 @injectable()
-export class CourseService implements ICourseService {
+export class CourseCreationService implements ICourseCreationService {
   constructor(
     @inject(instructorRepoID) private readonly instructorRepo: IInstructorRepo,
     @inject(courseRepoID) private readonly courseRepo: ICourseRepo,
+    @inject(chapterRepoID) private readonly chapterRepo: IChapterRepo,
     @inject(uniqueIDGeneratorID)
     private readonly idGenerator: IUniqueIDGenerator
   ) {}
@@ -45,6 +52,17 @@ export class CourseService implements ICourseService {
     return course;
   }
 
+  private async assertChapterExists(chapterId: string) {
+    const chapter = await this.chapterRepo.getById(chapterId);
+
+    const chapterExists = !!chapter;
+    if (!chapterExists) {
+      throw new ChapterNotFoundException(chapterId);
+    }
+
+    return chapter;
+  }
+
   async createNewCourse(
     title: string,
     description: string,
@@ -60,19 +78,41 @@ export class CourseService implements ICourseService {
     return course;
   }
 
-  async publishCourse(courseId: string): Promise<Course> {
+  async createNewChapter(
+    title: string,
+    description: string,
+    order: number,
+    courseId: string
+  ): Promise<Chapter> {
     const course = await this.assertCourseExists(courseId);
 
-    course.publish();
+    const chapterId = this.idGenerator.generate();
+    const chapter = Chapter.newChapter(
+      chapterId,
+      title,
+      description,
+      order,
+      courseId
+    );
 
-    return course;
+    course.addChapter(chapter);
+
+    return chapter;
   }
 
-  async archiveCourse(courseId: string): Promise<Course> {
-    const course = await this.assertCourseExists(courseId);
+  async createNewLesson(
+    title: string,
+    content: string,
+    order: number,
+    chapterId: string
+  ): Promise<Lesson> {
+    const chapter = await this.assertChapterExists(chapterId);
 
-    course.archive();
+    const lessonId = this.idGenerator.generate();
+    const lesson = Lesson.newLesson(lessonId, title, content, order, chapterId);
 
-    return course;
+    chapter.addLesson(lesson);
+
+    return lesson;
   }
 }

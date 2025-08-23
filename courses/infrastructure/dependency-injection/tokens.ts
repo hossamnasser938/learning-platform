@@ -17,9 +17,8 @@ import {
   ILessonRepo,
 } from "@l-p/courses/domain/contracts";
 import {
-  ICourseService,
-  IChapterService,
-  ILessonService,
+  ICourseCreationService,
+  ICourseStatusUpdateService,
 } from "@l-p/courses/domain/services";
 
 // api
@@ -42,8 +41,10 @@ export const getCoursesHandlerID: ServiceIdentifier<IGetCoursesHandler> =
   Symbol.for("IGetCoursesHandler");
 export const courseRepoID: ServiceIdentifier<ICourseRepo> =
   Symbol.for("CoursesRepository");
-export const courseServiceID: ServiceIdentifier<ICourseService> =
-  Symbol.for("CourseService");
+export const courseCreationServiceID: ServiceIdentifier<ICourseCreationService> =
+  Symbol.for("CourseCreationService");
+export const courseStatusUpdateServiceID: ServiceIdentifier<ICourseStatusUpdateService> =
+  Symbol.for("CourseStatusUpdateService");
 export const publishCourseHandlerID: ServiceIdentifier<IPublishCourseHandler> =
   Symbol.for("IPublishCourseHandler");
 export const archiveCourseHandlerID: ServiceIdentifier<IArchiveCourseHandler> =
@@ -56,8 +57,6 @@ export const getCourseChaptersHandlerID: ServiceIdentifier<IGetCourseChaptersHan
   Symbol.for("IGetCourseChaptersHandler");
 export const chapterRepoID: ServiceIdentifier<IChapterRepo> =
   Symbol.for("ChapterRepository");
-export const chapterServiceID: ServiceIdentifier<IChapterService> =
-  Symbol.for("ChapterService");
 
 // lesson
 export const createLessonHandlerID: ServiceIdentifier<ICreateLessonHandler> =
@@ -66,5 +65,3 @@ export const getChapterLessonsHandlerID: ServiceIdentifier<IGetChapterLessonsHan
   Symbol.for("IGetChapterLessonsHandler");
 export const lessonRepoID: ServiceIdentifier<ILessonRepo> =
   Symbol.for("LessonRepository");
-export const lessonServiceID: ServiceIdentifier<ILessonService> =
-  Symbol.for("LessonService");

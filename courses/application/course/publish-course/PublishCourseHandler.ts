@@ -1,20 +1,20 @@
 import { PublishCourseCommand } from "./PublishCourseCommand";
 import { Course } from "@l-p/courses/domain/models";
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { courseRepoID, courseServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
-import { ICourseService } from "@l-p/courses/domain/services/course/ICourseService";
+import { courseRepoID, courseStatusUpdateServiceID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { ICourseRepo } from "@l-p/courses/domain/contracts";
+import { ICourseStatusUpdateService } from "@l-p/courses/domain/services";
 import { IPublishCourseHandler } from "./IPublishCourseHandler";
 
 @injectable()
 export class PublishCourseHandler implements IPublishCourseHandler {
   constructor(
-    @inject(courseServiceID) private readonly courseService: ICourseService,
+    @inject(courseStatusUpdateServiceID) private readonly courseStatusUpdateService: ICourseStatusUpdateService,
     @inject(courseRepoID) private readonly courseRepo: ICourseRepo
   ) {}
 
   async handle(command: PublishCourseCommand): Promise<Course> {
-    const course = await this.courseService.publishCourse(command.courseId);
+    const course = await this.courseStatusUpdateService.publishCourse(command.courseId);
 
     await this.courseRepo.update(course);
     // TODO: raise event

@@ -15,9 +15,8 @@ import {
   createLessonHandlerID,
   getChapterLessonsHandlerID,
   lessonRepoID,
-  courseServiceID,
-  chapterServiceID,
-  lessonServiceID,
+  courseCreationServiceID,
+  courseStatusUpdateServiceID,
   publishCourseHandlerID,
   archiveCourseHandlerID,
 } from "./tokens";
@@ -32,9 +31,8 @@ import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-c
 import { CreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson/CreateLessonHandler";
 import { GetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsHandler";
 import { LessonRepo } from "../repositories/in-memory/LessonRepo";
-import { CourseService } from "@l-p/courses/domain/services/course/CourseService";
-import { ChapterService } from "@l-p/courses/domain/services/chapter/ChapterService";
-import { LessonService } from "@l-p/courses/domain/services/lesson/LessonService";
+import { CourseCreationService } from "@l-p/courses/domain/services/course-creation/CourseCreationService";
+import { CourseStatusUpdateService } from "@l-p/courses/domain/services/course-status-update/CourseStatusUpdateService";
 import { PublishCourseHandler } from "@l-p/courses/application/course/publish-course/PublishCourseHandler";
 import { ArchiveCourseHandler } from "@l-p/courses/application/course/archive-course/ArchiveCourseHandler";
 
@@ -51,7 +49,8 @@ export function bindDependencies(container: Container) {
   container.bind(createCourseHandlerID).to(CreateCourseHandler);
   container.bind(getCoursesHandlerID).to(GetCoursesHandler);
   container.bind(courseRepoID).to(CourseRepo).inSingletonScope();
-  container.bind(courseServiceID).to(CourseService);
+  container.bind(courseCreationServiceID).to(CourseCreationService);
+  container.bind(courseStatusUpdateServiceID).to(CourseStatusUpdateService);
   container.bind(publishCourseHandlerID).to(PublishCourseHandler);
   container.bind(archiveCourseHandlerID).to(ArchiveCourseHandler);
   
@@ -59,11 +58,9 @@ export function bindDependencies(container: Container) {
   container.bind(createChapterHandlerID).to(CreateChapterHandler);
   container.bind(getCourseChaptersHandlerID).to(GetCourseChaptersHandler);
   container.bind(chapterRepoID).to(ChapterRepo).inSingletonScope();
-  container.bind(chapterServiceID).to(ChapterService);
 
   // lesson
   container.bind(createLessonHandlerID).to(CreateLessonHandler);
   container.bind(getChapterLessonsHandlerID).to(GetChapterLessonsHandler);
   container.bind(lessonRepoID).to(LessonRepo).inSingletonScope();
-  container.bind(lessonServiceID).to(LessonService);
 }
