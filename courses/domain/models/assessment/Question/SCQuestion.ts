@@ -1,5 +1,4 @@
 import { Question } from "./Question";
-import { ModelId } from "@l-p/shared/domain/models/ModelId";
 
 export class SCQuestion extends Question {
   private options: string[];
