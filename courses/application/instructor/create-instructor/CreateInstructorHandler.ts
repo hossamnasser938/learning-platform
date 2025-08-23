@@ -4,7 +4,7 @@ import { IInstructorRepo } from "@l-p/courses/domain/contracts";
 import { Instructor } from "@l-p/courses/domain/models";
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { instructorRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
-import { uniqueIDGeneratorId } from "@l-p/shared/infrastructure/dependency-injection/tokens";
+import { uniqueIDGeneratorID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 
 @injectable()
 export class CreateInstructorHandler
@@ -12,7 +12,7 @@ export class CreateInstructorHandler
 {
   constructor(
     @inject(instructorRepoID) private readonly instructorRepo: IInstructorRepo,
-    @inject(uniqueIDGeneratorId)
+    @inject(uniqueIDGeneratorID)
     private readonly idGenerator: IUniqueIDGenerator
   ) {}
 

@@ -1,6 +1,7 @@
 import { InvalidEmptyInstructorBioException, InvalidInstructorBioMaxLengthException } from "./exceptions/InstructorException";
+import { ValueObject } from "@l-p/shared/domain/models/value-object";
 
-export class InstructorBio {
+export class InstructorBio implements ValueObject {
   static MAX_LENGTH = 1000;
 
   private constructor(private readonly value: string) {}

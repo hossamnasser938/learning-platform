@@ -1,2 +1,2 @@
-export * from "./ItemOrder";
-export * from "./ModelId";
+export * from "./item-order";
+export * from "./model-id";

@@ -3,4 +3,4 @@ import { ServiceIdentifier } from "./utils";
 
 export const loggerID: ServiceIdentifier<ILogger> = Symbol.for("Logger");
 export const eventBusID: ServiceIdentifier<IEventBus> = Symbol.for("EventBus");
-export const uniqueIDGeneratorId: ServiceIdentifier<IUniqueIDGenerator> = Symbol.for("UniqueIDGenerator");
+export const uniqueIDGeneratorID: ServiceIdentifier<IUniqueIDGenerator> = Symbol.for("UniqueIDGenerator");

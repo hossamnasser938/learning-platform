@@ -1,6 +1,7 @@
 import { InvalidQuestionCorrectOptionIndexException } from "./exceptions/QuestionException";
+import { ValueObject } from "@l-p/shared/domain/models/value-object";
 
-export class QuestionCorrectOptionIndex {
+export class QuestionCorrectOptionIndex implements ValueObject {
   private constructor(private readonly value: number) {}
 
   static create(index: number): QuestionCorrectOptionIndex {

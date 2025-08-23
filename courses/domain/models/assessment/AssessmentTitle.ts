@@ -1,6 +1,7 @@
 import { AssessmentTitleEmptyException, AssessmentTitleTooLongException } from "./exceptions/AssessmentExceptions";
+import { ValueObject } from "@l-p/shared/domain/models/value-object";
 
-export class AssessmentTitle {
+export class AssessmentTitle implements ValueObject {
   static MAX_LENGTH = 100;
   
   private constructor(private readonly value: string) {}

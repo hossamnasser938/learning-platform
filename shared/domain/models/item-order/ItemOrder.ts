@@ -1,6 +1,7 @@
 import { ItemOrderNonPositiveIntegerException } from "./exceptions/ItemOrderException";
+import { ValueObject } from "../value-object";
 
-export class ItemOrder {
+export class ItemOrder implements ValueObject {
   private constructor(private readonly value: number) {}
 
   static create(order: number): ItemOrder {

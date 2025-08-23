@@ -3,18 +3,22 @@ import { Lesson } from "../lesson/Lesson";
 import { ModelId, ItemOrder } from "@l-p/shared/domain/models";
 import { ChapterTitle } from "./ChapterTitle";
 import { ChapterDescription } from "./ChapterDescription";
+import { InvalidExistingLessonOrderException } from "../lesson/exceptions/LessonException";
+import { AggregateRoot } from "@l-p/shared/domain/models/aggregate-root";
 
-export class Chapter {
+export class Chapter extends AggregateRoot<ModelId> {
   private readonly lessons: Lesson[] = [];
   private readonly assessments: Assessment[] = [];
 
   private constructor(
-    private readonly id: ModelId,
+    id: ModelId,
     private readonly title: ChapterTitle,
     private readonly description: ChapterDescription,
     private readonly order: ItemOrder,
     private readonly courseId: ModelId,
-  ) {}
+  ) {
+    super(id);
+  }
 
   static create(
     id: string,
@@ -40,12 +44,7 @@ export class Chapter {
       ItemOrder.create(order),
       ModelId.create(courseId)
     );
-    //TODO: add event
     return chapter;
-  }
-
-  getId(): ModelId {
-    return this.id;
   }
 
   getTitle(): ChapterTitle {
@@ -74,9 +73,17 @@ export class Chapter {
 
   addAssessment(assessment: Assessment): void {
     this.assessments.push(assessment);
+
+    // TODO: add event
   }
 
   addLesson(lesson: Lesson): void {
+    if (this.lessons.some(l => l.getOrder().equals(lesson.getOrder()))) {
+      throw new InvalidExistingLessonOrderException(lesson.getOrder());
+    }
+
     this.lessons.push(lesson);
+
+    // TODO: add event
   }
 }

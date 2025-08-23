@@ -1,5 +1,6 @@
 import { DomainException } from "@l-p/shared/domain/exceptions";
 import { ExceptionType } from "@l-p/shared/domain/exceptions/ExceptionType";
+import { ItemOrder } from "@l-p/shared/domain/models";
 
 export class QuestionException extends DomainException {
   constructor(message: string, errorType?: ExceptionType) {
@@ -26,5 +27,26 @@ export class InvalidQuestionCorrectOptionIndexException extends QuestionExceptio
   constructor(index: number) {
     super(`Invalid question correct option index: ${index}`, ExceptionType.INVALID_DATA);
     this.name = 'InvalidQuestionCorrectOptionIndexException';
+  }
+}
+
+export class InvalidExistingQuestionOrderException extends QuestionException {
+  constructor(order: ItemOrder) {
+    super(`Question with order ${order} already exists`, ExceptionType.INVALID_DATA);
+    this.name = 'InvalidExistingQuestionOrderException';
+  }
+}
+
+export class InvalidEmptyQuestionBodyException extends QuestionException {
+  constructor(body: string) {
+    super(`Invalid empty question body: ${body}`, ExceptionType.INVALID_DATA);
+    this.name = 'InvalidEmptyQuestionBodyException';
+  }
+}
+
+export class InvalidQuestionBodyMaxLengthException extends QuestionException {
+  constructor(body: string) {
+    super(`Invalid question body too long: ${body}`, ExceptionType.INVALID_DATA);
+    this.name = 'InvalidQuestionBodyMaxLengthException';
   }
 }

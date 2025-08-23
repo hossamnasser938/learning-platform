@@ -5,18 +5,22 @@ import { CourseTitle } from "./CourseTitle";
 import { CourseDescription } from "./CourseDescription";
 import { CourseStatus } from "./CourseStatus";
 import { InvalidCourseStatusException } from "./exceptions/CourseException";
+import { InvalidExistingChapterOrderException } from "../chapter/exceptions/ChapterExceptions";
+import { AggregateRoot } from "@l-p/shared/domain/models/aggregate-root";
 
-export class Course {
+export class Course extends AggregateRoot<ModelId> {
   private readonly chapters: Chapter[] = [];
   private readonly assessments: Assessment[] = [];
   private status: CourseStatus = CourseStatus.DRAFT;  
   
   private constructor(
-    private readonly id: ModelId,
+    id: ModelId,
     private readonly title: CourseTitle,
     private readonly description: CourseDescription,
     private readonly instructorId: ModelId,
-  ) {}
+  ) {
+    super(id);
+  }
 
   static create(
     id: string,
@@ -39,12 +43,7 @@ export class Course {
       CourseDescription.create(description),
       ModelId.create(instructorId)
     );
-    //TODO: add event
     return course;
-  }
-
-  getId(): ModelId {
-    return this.id;
   }
 
   getTitle(): CourseTitle {
@@ -67,16 +66,16 @@ export class Course {
     return this.assessments;
   }
 
-  addChapter(chapter: Chapter): void {
-    this.chapters.push(chapter);
+  isDraft(): boolean {
+    return this.status === CourseStatus.DRAFT;
   }
 
-  addAssessment(assessment: Assessment): void {
-    this.assessments.push(assessment);
+  isPublished(): boolean {
+    return this.status === CourseStatus.PUBLISHED;
   }
 
-  getStatus(): CourseStatus {
-    return this.status;
+  isArchived(): boolean {
+    return this.status === CourseStatus.ARCHIVED;
   }
 
   publish(): void {
@@ -98,4 +97,21 @@ export class Course {
 
     // TODO: add event
   }
+
+  addChapter(chapter: Chapter): void {
+    if (this.chapters.some(c => c.getOrder().equals(chapter.getOrder()))) {
+      throw new InvalidExistingChapterOrderException(chapter.getOrder());
+    }
+
+    this.chapters.push(chapter);
+
+    // TODO: add event
+  }
+
+  addAssessment(assessment: Assessment): void {
+    this.assessments.push(assessment);
+
+    // TODO: add event
+  }
 }
+  

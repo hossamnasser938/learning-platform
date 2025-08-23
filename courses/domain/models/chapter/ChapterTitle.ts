@@ -1,6 +1,7 @@
 import { ChapterTitleEmptyException, ChapterTitleTooLongException } from './exceptions/ChapterExceptions';
+import { ValueObject } from "@l-p/shared/domain/models/value-object";
 
-export class ChapterTitle {
+export class ChapterTitle implements ValueObject {
   static MAX_LENGTH = 100;
   
   private constructor(private readonly value: string) {}

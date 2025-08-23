@@ -2,17 +2,20 @@ import { Assessment } from "../assessment/Assessment";
 import { ModelId, ItemOrder } from "@l-p/shared/domain/models";
 import { LessonTitle } from "./LessonTitle";
 import { LessonContent } from "./LessonContent";
+import { AggregateRoot } from "@l-p/shared/domain/models/aggregate-root";
 
-export class Lesson {
+export class Lesson extends AggregateRoot<ModelId> {
   private readonly assessments: Assessment[] = [];
 
   private constructor(
-    private readonly id: ModelId,
+    id: ModelId,
     private readonly title: LessonTitle,
     private readonly content: LessonContent,
     private readonly order: ItemOrder,
     private readonly chapterId: ModelId,
-  ) {}
+  ) {
+    super(id);
+  }
 
   static create(
     id: string,
@@ -38,12 +41,7 @@ export class Lesson {
       ItemOrder.create(order),
       ModelId.create(chapterId)
     );
-    //TODO: add event
     return lesson;
-  }
-
-  getId(): ModelId {
-    return this.id;
   }
 
   getTitle(): LessonTitle {
@@ -68,5 +66,7 @@ export class Lesson {
 
   addAssessment(assessment: Assessment): void {
     this.assessments.push(assessment);
+
+    // TODO: add event
   }
 }

@@ -1,6 +1,7 @@
-import { InvalidEmptyQuestionOptionException, InvalidQuestionOptionTooLongException } from "../../../exceptions/QuestionException";
+import { ValueObject } from "@l-p/shared/domain/models/value-object";
+import { InvalidEmptyQuestionOptionException, InvalidQuestionOptionTooLongException } from "./exceptions";
 
-export class QuestionOption {
+export class QuestionOption implements ValueObject {
   static MAX_LENGTH = 500;
   
   private constructor(private readonly value: string) {}

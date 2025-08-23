@@ -2,15 +2,18 @@ import { Course } from "../course/Course";
 import { ModelId } from "@l-p/shared/domain/models";
 import { InstructorName } from "./InstructorName";
 import { InstructorBio } from "./InstructorBio";
+import { AggregateRoot } from "@l-p/shared/domain/models/aggregate-root";
 
-export class Instructor {
+export class Instructor extends AggregateRoot<ModelId> {
   private readonly courses: Course[] = [];
 
   private constructor(
-    private readonly id: ModelId,
+    id: ModelId,
     private readonly name: InstructorName,
     private readonly bio: InstructorBio,
-  ) {}
+  ) {
+    super(id);
+  }
 
   static create(
     id: string,
@@ -34,10 +37,6 @@ export class Instructor {
     return instructor;
   }
 
-  getId(): ModelId {
-    return this.id;
-  }
-
   getName(): InstructorName {
     return this.name;
   }
@@ -52,5 +51,7 @@ export class Instructor {
 
   addCourse(course: Course): void {
     this.courses.push(course);
+
+    // TODO: add event
   }
 }

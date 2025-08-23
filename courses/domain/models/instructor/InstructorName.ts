@@ -1,6 +1,7 @@
 import { InvalidEmptyInstructorNameException, InvalidInstructorNameMaxLengthException } from "./exceptions/InstructorException";
+import { ValueObject } from "@l-p/shared/domain/models/value-object";
 
-export class InstructorName {
+export class InstructorName implements ValueObject {
   static MAX_LENGTH = 100;
 
   private constructor(private readonly value: string) {}

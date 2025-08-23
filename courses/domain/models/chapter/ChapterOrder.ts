@@ -1,6 +1,7 @@
 import { ChapterNonPositiveIntegerOrderException } from './exceptions/ChapterExceptions';
+import { ValueObject } from "@l-p/shared/domain/models/value-object";
 
-export class ChapterOrder {
+export class ChapterOrder implements ValueObject {
   private constructor(private readonly value: number) {}
 
   static create(value: number): ChapterOrder {

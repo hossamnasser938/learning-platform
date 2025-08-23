@@ -1,6 +1,7 @@
 import { InvalidEmptyCourseDescriptionException, InvalidCourseDescriptionMaxLengthException } from "./exceptions/CourseException";
+import { ValueObject } from "@l-p/shared/domain/models/value-object";
 
-export class CourseDescription {
+export class CourseDescription implements ValueObject {
   static MAX_LENGTH = 500;
 
   private constructor(private readonly value: string) {}

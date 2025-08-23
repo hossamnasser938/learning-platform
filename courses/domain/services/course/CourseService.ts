@@ -2,7 +2,7 @@ import { inject, injectable } from "@l-p/shared/infrastructure/dependency-inject
 import { IInstructorRepo, ICourseRepo } from "../../contracts";
 import { Course } from "../../models";
 import { instructorRepoID, courseRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
-import { uniqueIDGeneratorId } from "@l-p/shared/infrastructure/dependency-injection/tokens";
+import { uniqueIDGeneratorID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts";
 import { ICourseService } from "./ICourseService";
 import { InstructorNotFoundException } from "../../models/instructor/exceptions";
@@ -14,7 +14,7 @@ export class CourseService implements ICourseService {
     constructor(
         @inject(instructorRepoID) private readonly instructorRepo: IInstructorRepo,
         @inject(courseRepoID) private readonly courseRepo: ICourseRepo,
-        @inject(uniqueIDGeneratorId) private readonly idGenerator: IUniqueIDGenerator) {}
+        @inject(uniqueIDGeneratorID) private readonly idGenerator: IUniqueIDGenerator) {}
 
     async createNewCourse(title: string, description: string, instructorId: string): Promise<Course> {
         const instructor = await this.instructorRepo.getById(instructorId);

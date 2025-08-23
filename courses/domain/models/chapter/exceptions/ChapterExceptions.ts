@@ -1,5 +1,6 @@
 import { DomainException } from "@l-p/shared/domain/exceptions";
 import { ExceptionType } from "@l-p/shared/domain/exceptions/ExceptionType";
+import { ItemOrder } from "@l-p/shared/domain/models";
 
 export class ChapterException extends DomainException {
   constructor(message: string, errorType?: ExceptionType) {
@@ -47,5 +48,12 @@ export class ChapterNotFoundException extends ChapterException {
   constructor(chapterId: string) {
     super(`Chapter with ID ${chapterId} not found`, ExceptionType.ENTITY_NOT_FOUND);
     this.name = 'ChapterNotFoundException';
+  }
+}
+
+export class InvalidExistingChapterOrderException extends ChapterException {
+  constructor(order: ItemOrder) {
+    super(`Chapter with order ${order} already exists`, ExceptionType.INVALID_DATA);
+    this.name = 'InvalidExistingChapterOrderException';
   }
 }

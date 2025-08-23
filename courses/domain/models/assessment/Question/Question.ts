@@ -1,16 +1,15 @@
 import { ModelId, ItemOrder } from "@l-p/shared/domain/models";
 import { QuestionBody } from "./QuestionBody";
+import { Entity } from "@l-p/shared/domain/models/entity";
 
-export abstract class Question {
+export abstract class Question extends Entity<ModelId> {
   protected constructor(
-    protected readonly id: ModelId,
+    id: ModelId,
     protected readonly body: QuestionBody,
     protected readonly order: ItemOrder,
     protected readonly assessmentId: ModelId
-  ) {}
-
-  getId(): ModelId {
-    return this.id;
+  ) {
+    super(id);
   }
 
   getBody(): QuestionBody {

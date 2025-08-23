@@ -1,6 +1,7 @@
 
 import { DomainException } from "@l-p/shared/domain/exceptions";
 import { ExceptionType } from "@l-p/shared/domain/exceptions/ExceptionType";
+import { ItemOrder } from "@l-p/shared/domain/models";
 
 export class LessonException extends DomainException {
   constructor(message: string, errorType?: ExceptionType) {
@@ -34,5 +35,12 @@ export class InvalidLessonContentMaxLengthException extends LessonException {
   constructor(content: string, maxLength: number) {
     super(`Invalid lesson content length: ${content}. Content cannot exceed ${maxLength} characters.`, ExceptionType.INVALID_DATA);
     this.name = 'InvalidLessonContentMaxLengthException';
+  }
+}
+
+export class InvalidExistingLessonOrderException extends LessonException {
+  constructor(order: ItemOrder) {
+    super(`Lesson with order ${order} already exists`, ExceptionType.INVALID_DATA);
+    this.name = 'InvalidExistingLessonOrderException';
   }
 }

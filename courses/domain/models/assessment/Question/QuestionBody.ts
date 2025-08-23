@@ -1,6 +1,7 @@
-import { InvalidEmptyQuestionBodyException, InvalidQuestionBodyMaxLengthException } from "./exceptions/QuestionException";
+import { ValueObject } from "@l-p/shared/domain/models/value-object";
+import { InvalidEmptyQuestionBodyException, InvalidQuestionBodyMaxLengthException } from "./exceptions";
 
-export class QuestionBody {
+export class QuestionBody implements ValueObject  {
   static MAX_LENGTH = 1000;
   
   private constructor(private readonly value: string) {}
