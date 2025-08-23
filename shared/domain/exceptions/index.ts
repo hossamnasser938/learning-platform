@@ -1,2 +1,2 @@
-export * from "./EntityNotFoundException";
-export * from "./InvalidDataException";
+export * from "./DomainException";  
+export * from "./ExceptionType";

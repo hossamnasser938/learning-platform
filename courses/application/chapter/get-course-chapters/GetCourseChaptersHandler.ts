@@ -3,7 +3,7 @@ import { IQueryHandler } from "@l-p/shared/domain/contracts/IQueryHandler";
 import { Chapter } from "@l-p/courses/domain/models/chapter/Chapter";
 import { GetCourseChaptersQuery } from "./GetCourseChaptersQuery";
 import { ICourseRepo } from "@l-p/courses/domain/contracts/ICourseRepo";
-import { EntityNotFoundException } from "@l-p/shared/domain/exceptions";
+import { CourseNotFoundException } from "@l-p/courses/domain/models/course/exceptions/CourseException";
 import { inject } from "inversify";
 import {
   chapterRepoID,
@@ -21,7 +21,7 @@ export class GetCourseChaptersHandler
   async handle(query: GetCourseChaptersQuery): Promise<Chapter[]> {
     const course = await this.courseRepo.getById(query.courseId);
     if (!course) {
-      throw new EntityNotFoundException("Course not found");
+      throw new CourseNotFoundException(query.courseId);
     }
 
     return await this.chapterRepo.getByCourseId(query.courseId);
