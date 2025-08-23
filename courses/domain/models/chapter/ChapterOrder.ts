@@ -1,15 +1,11 @@
-import { ChapterOrderException } from './exceptions/ChapterExceptions';
+import { ChapterNonPositiveIntegerOrderException } from './exceptions/ChapterExceptions';
 
 export class ChapterOrder {
-  private value: number;
-
-  private constructor(value: number) {
-    this.value = value;
-  }
+  private constructor(private readonly value: number) {}
 
   static create(value: number): ChapterOrder {
     if (!Number.isInteger(value) || value <= 0) {
-      throw new ChapterOrderException("Chapter order must be a positive integer");
+      throw new ChapterNonPositiveIntegerOrderException(value);
     }
     
     return new ChapterOrder(value);

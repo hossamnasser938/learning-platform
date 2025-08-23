@@ -1,47 +1,41 @@
-// Base Chapter Domain Exception
-export class ChapterDomainException extends Error {
+export class ChapterException extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'ChapterDomainException';
+    this.name = 'ChapterException';
   }
 }
 
-// Chapter Title Exception
-export class ChapterTitleException extends ChapterDomainException {
+export class ChapterTitleEmptyException extends ChapterException {
   constructor(message: string) {
     super(message);
-    this.name = 'ChapterTitleException';
+    this.name = 'ChapterTitleEmptyException';
   }
 }
 
-// Chapter Description Exception
-export class ChapterDescriptionException extends ChapterDomainException {
+export class ChapterTitleTooLongException extends ChapterException {
   constructor(message: string) {
     super(message);
-    this.name = 'ChapterDescriptionException';
+    this.name = 'ChapterTitleTooLongException';
   }
 }
 
-// Chapter Order Exception
-export class ChapterOrderException extends ChapterDomainException {
+export class ChapterDescriptionEmptyException extends ChapterException {
   constructor(message: string) {
     super(message);
-    this.name = 'ChapterOrderException';
+    this.name = 'ChapterDescriptionEmptyException';
   }
 }
 
-// Chapter Validation Exception
-export class ChapterValidationException extends ChapterDomainException {
+export class ChapterDescriptionTooLongException extends ChapterException {
   constructor(message: string) {
     super(message);
-    this.name = 'ChapterValidationException';
+    this.name = 'ChapterDescriptionTooLongException';
   }
 }
 
-// Chapter Business Rule Exception
-export class ChapterBusinessRuleException extends ChapterDomainException {
-  constructor(message: string) {
-    super(message);
-    this.name = 'ChapterBusinessRuleException';
+export class ChapterNonPositiveIntegerOrderException extends ChapterException {
+  constructor(value: number) {
+    super(`Chapter order must be a positive integer: ${value}`);
+    this.name = 'ChapterNonPositiveIntegerOrderException';
   }
 }

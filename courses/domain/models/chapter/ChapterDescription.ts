@@ -1,6 +1,8 @@
-import { ChapterDescriptionException } from './exceptions/ChapterExceptions';
+import { ChapterDescriptionEmptyException, ChapterDescriptionTooLongException } from './exceptions/ChapterExceptions';
 
 export class ChapterDescription {
+  static MAX_LENGTH = 500;
+  
   private value: string;
 
   private constructor(value: string) {
@@ -9,9 +11,13 @@ export class ChapterDescription {
 
   static create(value: string): ChapterDescription {
     if (!value || value.trim().length === 0) {
-      throw new ChapterDescriptionException("Chapter description cannot be empty");
+      throw new ChapterDescriptionEmptyException(value);
     }
-    
+
+    if (value.trim().length > ChapterDescription.MAX_LENGTH) {
+      throw new ChapterDescriptionTooLongException(value);
+    }
+
     return new ChapterDescription(value.trim());
   }
 

@@ -1,15 +1,17 @@
-import { ChapterTitleException } from './exceptions/ChapterExceptions';
+import { ChapterTitleEmptyException, ChapterTitleTooLongException } from './exceptions/ChapterExceptions';
 
 export class ChapterTitle {
-  private value: string;
-
-  private constructor(value: string) {
-    this.value = value;
-  }
+  static MAX_LENGTH = 100;
+  
+  private constructor(private readonly value: string) {}
 
   static create(value: string): ChapterTitle {
     if (!value || value.trim().length === 0) {
-      throw new ChapterTitleException("Chapter title cannot be empty");
+      throw new ChapterTitleEmptyException(value);
+    }
+
+    if (value.trim().length > ChapterTitle.MAX_LENGTH) {
+      throw new ChapterTitleTooLongException(value);
     }
     
     return new ChapterTitle(value.trim());

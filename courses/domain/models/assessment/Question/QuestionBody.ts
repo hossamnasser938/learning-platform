@@ -1,9 +1,9 @@
-import { InvalidEmptyQuestionBodyException, InvalidQuestionBodyMaxLengthException } from "../../../exceptions/QuestionDomainException";
+import { InvalidEmptyQuestionBodyException, InvalidQuestionBodyMaxLengthException } from "./exceptions/QuestionException";
 
 export class QuestionBody {
-  private constructor(private readonly value: string) {}
-
   static MAX_LENGTH = 1000;
+  
+  private constructor(private readonly value: string) {}
 
   static create(body: string): QuestionBody {
     if (!body || body.trim().length === 0) {

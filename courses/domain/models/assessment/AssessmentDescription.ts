@@ -1,4 +1,4 @@
-import { AssessmentDescriptionEmptyException, AssessmentDescriptionTooLongException } from "./exceptions";
+import { AssessmentDescriptionEmptyException, AssessmentDescriptionTooLongException } from "./exceptions/AssessmentExceptions";
 
 export class AssessmentDescription {
   static MAX_LENGTH = 500;

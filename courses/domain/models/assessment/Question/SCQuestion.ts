@@ -1,19 +1,18 @@
 import { Question } from "./Question";
+import { ModelId } from "@l-p/shared/domain/models/ModelId";
+import { QuestionBody } from "./QuestionBody";
+import { QuestionOption } from "./QuestionOption";
+import { QuestionCorrectOptionIndex } from "./QuestionCorrectOptionIndex";
 
 export class SCQuestion extends Question {
-  private options: string[];
-  private correctOptionIndex: number;
-
   private constructor(
-    id: string,
-    body: string,
-    assessmentId: string,
-    options: string[],
-    correctOptionIndex: number
+    id: ModelId,
+    body: QuestionBody,
+    assessmentId: ModelId,
+    private readonly options: QuestionOption[],
+    private readonly correctOptionIndex: QuestionCorrectOptionIndex
   ) {
     super(id, body, assessmentId);
-    this.options = options;
-    this.correctOptionIndex = correctOptionIndex;
   }
 
   public static create(
@@ -23,14 +22,23 @@ export class SCQuestion extends Question {
     options: string[],
     correctOptionIndex: number
   ): SCQuestion {
-    return new SCQuestion(id, body, assessmentId, options, correctOptionIndex);
+    const questionOptions = options.map(option => QuestionOption.create(option));
+    const correctIndex = QuestionCorrectOptionIndex.create(correctOptionIndex);
+
+    return new SCQuestion(
+      ModelId.create(id),
+      QuestionBody.create(body),
+      ModelId.create(assessmentId),
+      questionOptions,
+      correctIndex
+    );
   }
 
-  getOptions(): string[] {
+  getOptions(): QuestionOption[] {
     return this.options;
   }
 
-  getCorrectOptionIndex(): number {
+  getCorrectOptionIndex(): QuestionCorrectOptionIndex {
     return this.correctOptionIndex;
   }
 }
