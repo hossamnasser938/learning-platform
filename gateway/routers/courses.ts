@@ -9,7 +9,7 @@ import {
   GetChapterLessonsDTO,
   PublishCourseDTO,
   ArchiveCourseDTO
-} from "@l-p/courses/api/dtos";
+} from "@l-p/courses/api/request-dtos";
 
 export const coursesRouter = Router();
 

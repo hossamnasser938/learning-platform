@@ -1,5 +1,3 @@
-import { EventDTO } from "./EventDTO";
-
-export interface EventHandler<T extends EventDTO> {
+export interface EventHandler<T extends any> {
   handle(event: T): void;
 }

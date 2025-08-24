@@ -53,7 +53,7 @@ import {
   GetCourseChaptersDTO,
   GetChapterLessonsDTO,
   PublishCourseDTO,
-} from "./dtos";
+} from "./request-dtos";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {

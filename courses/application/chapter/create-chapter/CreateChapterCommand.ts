@@ -1,4 +1,4 @@
-import { CreateChapterDTO } from "@l-p/courses/api/dtos/CreateChapterDTO";
+import { CreateChapterDTO } from "@l-p/courses/api/request-dtos/CreateChapterDTO";
 
 export class CreateChapterCommand {
   constructor(

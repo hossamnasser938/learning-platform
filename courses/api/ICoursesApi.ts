@@ -9,7 +9,7 @@ import {
   GetInstructorsDTO,
   PublishCourseDTO,
   ArchiveCourseDTO
-} from "./dtos";
+} from "./request-dtos";
 
 import { 
   CreateInstructorResponse,

@@ -6,4 +6,3 @@ export * from "./IQueryHandler";
 export * from "./IUniqueIDGenerator";
 export * from "./EventHandler";
 export * from "./IEventBusConsumer";
-export * from "./EventDTO";
