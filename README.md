@@ -18,6 +18,8 @@ This project demonstrates a **Modular Monolith** approach where:
 - Shared infrastructure and utilities are centralized in the `shared` module
 - The `gateway` module provides a unified API entry point
 
+<img width="683" height="737" alt="a" src="https://github.com/user-attachments/assets/3a9fdcea-ccf5-4480-be75-3be4c5ceb33f" />
+
 ### Architectural Principles
 
 - **Domain-Centric**: Business logic is organized around domain concepts, not technical concerns
@@ -25,6 +27,143 @@ This project demonstrates a **Modular Monolith** approach where:
 - **Event-Driven**: Domain events enable loose coupling between modules
 - **Dependency Inversion**: High-level modules don't depend on low-level modules
 - **Single Responsibility**: Each class and module has one clear purpose
+
+## 📊 Data Model
+
+The project implements a rich domain model following Domain-Driven Design principles. Here's the core data structure:
+
+### 🎓 **Core Learning Entities**
+
+#### **Course Aggregate**
+```typescript
+Course {
+  id: ModelId
+  title: CourseTitle (Value Object)
+  description: CourseDescription (Value Object)
+  instructorId: ModelId
+  status: CourseStatus (DRAFT | PUBLISHED | ARCHIVED)
+  chapters: Chapter[]
+  assessments: Assessment[]
+  
+  // Business Methods
+  publish(): void
+  archive(): void
+  addChapter(chapter: Chapter): void
+  addAssessment(assessment: Assessment): void
+}
+```
+
+#### **Chapter Aggregate**
+```typescript
+Chapter {
+  id: ModelId
+  title: ChapterTitle (Value Object)
+  description: ChapterDescription (Value Object)
+  order: ItemOrder (Value Object)
+  courseId: ModelId
+  lessons: Lesson[]
+  assessments: Assessment[]
+  
+  // Business Methods
+  addLesson(lesson: Lesson): void
+  addAssessment(assessment: Assessment): void
+}
+```
+
+#### **Lesson Aggregate**
+```typescript
+Lesson {
+  id: ModelId
+  title: LessonTitle (Value Object)
+  content: LessonContent (Value Object)
+  order: ItemOrder (Value Object)
+  chapterId: ModelId
+  assessments: Assessment[]
+  
+  // Business Methods
+  addAssessment(assessment: Assessment): void
+}
+```
+
+#### **Instructor Aggregate**
+```typescript
+Instructor {
+  id: ModelId
+  name: InstructorName (Value Object)
+  bio: InstructorBio (Value Object)
+  courses: Course[]
+  
+  // Business Methods
+  addCourse(course: Course): void
+}
+```
+
+#### **Assessment Aggregate**
+```typescript
+Assessment {
+  id: ModelId
+  title: AssessmentTitle (Value Object)
+  description: AssessmentDescription (Value Object)
+  questions: Question[]
+  
+  // Business Methods
+  addQuestion(question: Question): void
+}
+```
+
+### 🔗 **Entity Relationships**
+
+```
+Instructor (1) ←→ (N) Course
+    ↓
+Course (1) ←→ (N) Chapter
+    ↓
+Chapter (1) ←→ (N) Lesson
+    ↓
+Course/Chapter/Lesson (1) ←→ (N) Assessment
+    ↓
+Assessment (1) ←→ (N) Question
+```
+
+### 🏷️ **Value Objects**
+
+The domain uses **Value Objects** to encapsulate business rules and ensure data integrity:
+
+- **CourseTitle**: Validates course naming conventions
+- **CourseDescription**: Ensures description meets requirements
+- **ItemOrder**: Manages ordering with business validation
+- **ModelId**: Unique identifier with validation
+- **InstructorName**: Instructor name validation
+- **InstructorBio**: Bio content validation
+
+### 📋 **Domain Events**
+
+The system publishes domain events for important business state changes:
+
+- **CoursePublishedEvent**: When a course moves from draft to published
+- **CourseArchivedEvent**: When a course is archived
+- **ChapterAddedEvent**: When a new chapter is added to a course
+- **LessonAddedEvent**: When a new lesson is added to a chapter
+
+### 🏛️ **Aggregate Design**
+
+- **Course** is the main aggregate root, managing chapters and lessons
+- **Chapter** manages its lessons and maintains order
+- **Lesson** is the smallest content unit
+- **Instructor** manages course associations
+- **Assessment** can be attached to any content level
+
+### 🔒 **Business Rules & Invariants**
+
+- Course status transitions: DRAFT → PUBLISHED → ARCHIVED
+- Chapter and lesson ordering must be unique within their parent
+- Instructor must exist before course creation
+- Course must exist before chapter creation
+- Chapter must exist before lesson creation
+
+
+<img width="1321" height="695" alt="d" src="https://github.com/user-attachments/assets/d9afc7c9-fd77-4a05-944c-eac53c4a6e98" />
+
 
 ## 📦 Project Modules
 
