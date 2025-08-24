@@ -1,3 +1,4 @@
+import { IEventBus } from "../../contracts";
 import { DomainEvent } from "../domain-event";
 import { Entity } from "../entity";
 import { ValueObject } from "../value-object";
@@ -20,7 +21,12 @@ export class AggregateRoot<T extends ValueObject> extends Entity<T> {
   public getEvents(): DomainEvent[] {
     const currentEvents = [...this.events];
     this.clearEvents();
-
+    
     return currentEvents;
+  }
+
+  public publishEvents<S extends DomainEvent, D extends Object>(eventMapper: (event: S) => D, eventBus: IEventBus) {
+    const events = this.getEvents();
+    events.map((event) => eventMapper(event as S)).forEach(eventBus.publish);
   }
 }

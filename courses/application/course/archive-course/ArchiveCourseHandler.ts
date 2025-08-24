@@ -5,19 +5,24 @@ import { courseRepoID, courseStatusUpdateServiceID } from "@l-p/courses/infrastr
 import { ICourseRepo } from "@l-p/courses/domain/contracts";
 import { ICourseStatusUpdateService } from "@l-p/courses/domain/services";
 import { IArchiveCourseHandler } from "./IArchiveCourseHandler";
+import { CourseEventsMapper } from "@l-p/courses/infrastructure/event-mappers/CourseEventsMapper";
+import { IEventBus } from "@l-p/shared/domain/contracts";
+import { eventBusID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 
 @injectable()
 export class ArchiveCourseHandler implements IArchiveCourseHandler {
   constructor(
     @inject(courseStatusUpdateServiceID) private readonly courseStatusUpdateService: ICourseStatusUpdateService,
-    @inject(courseRepoID) private readonly courseRepo: ICourseRepo
+    @inject(courseRepoID) private readonly courseRepo: ICourseRepo,
+    @inject(eventBusID) private readonly eventBus: IEventBus
   ) {}
 
   async handle(command: ArchiveCourseCommand): Promise<Course> {
     const course = await this.courseStatusUpdateService.archiveCourse(command.courseId);
 
     await this.courseRepo.update(course);
-    // TODO: raise event
+    
+    course.publishEvents(CourseEventsMapper.toDTO, this.eventBus);
 
     return course;
   }

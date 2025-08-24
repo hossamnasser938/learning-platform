@@ -7,6 +7,7 @@ import { CourseStatus } from "./CourseStatus";
 import { InvalidCourseStatusException } from "./exceptions/CourseException";
 import { InvalidExistingChapterOrderException } from "../chapter/exceptions/ChapterExceptions";
 import { AggregateRoot } from "@l-p/shared/domain/models/aggregate-root";
+import { CoursePublishedEvent, CourseArchivedEvent } from "../../events";
 
 export class Course extends AggregateRoot<ModelId> {
   private readonly chapters: Chapter[] = [];
@@ -89,7 +90,7 @@ export class Course extends AggregateRoot<ModelId> {
 
     this.status = CourseStatus.PUBLISHED;
 
-    // TODO: add event
+    this.addEvent(CoursePublishedEvent.fromDomain(this));
   }
 
   archive(): void {
@@ -99,7 +100,7 @@ export class Course extends AggregateRoot<ModelId> {
 
     this.status = CourseStatus.ARCHIVED;
 
-    // TODO: add event
+    this.addEvent(CourseArchivedEvent.fromDomain(this));
   }
 
   addChapter(chapter: Chapter): void {
