@@ -6,6 +6,6 @@ import { UUIDGenerator } from "../services/UUIDGenerator";
 
 export function bindDependencies(container: Container) {
   container.bind(loggerID).to(ConsoleLogger);
-  container.bind(eventBusID).to(InMemoryNativeEventBus);
+  container.bind(eventBusID).to(InMemoryNativeEventBus).inSingletonScope();
   container.bind(uniqueIDGeneratorID).to(UUIDGenerator);
 }

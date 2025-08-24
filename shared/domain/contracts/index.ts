@@ -4,3 +4,6 @@ export * from "./IEventBus";
 export * from "./ILogger";
 export * from "./IQueryHandler";
 export * from "./IUniqueIDGenerator";
+export * from "./EventHandler";
+export * from "./IEventBusConsumer";
+export * from "./EventDTO";

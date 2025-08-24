@@ -1,5 +1,7 @@
+import { EventDTO } from "./EventDTO";
+
 export interface IEventBus {
-  subscribe(eventType: string, handler: (event: any) => void): void;
-  unsubscribe(eventType: string, handler: (event: any) => void): void;
-  publish(event: any): void;
+  subscribe(eventClass: Function, handler: (event: EventDTO) => void): void;
+  unsubscribe(eventClass: Function, handler: (event: EventDTO) => void): void;
+  publish(event: EventDTO): void;
 }
