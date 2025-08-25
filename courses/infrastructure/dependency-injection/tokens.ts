@@ -1,15 +1,15 @@
 import { ServiceIdentifier } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
-import { ICreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/ICreateChapterHandler";
-import { ICreateCourseHandler } from "@l-p/courses/application/course/create-course/ICreateCourseHandler";
-import { ICreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor/ICreateInstructorHandler";
-import { ICreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson/ICreateLessonHandler";
-import { IGetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/IGetChapterLessonsHandler";
-import { IGetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/IGetCourseChaptersHandler";
-import { IGetCoursesHandler } from "@l-p/courses/application/course/get-courses/IGetCoursesHandler";
-import { IGetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/IGetInstructorsHandler";
-import { IPublishCourseHandler } from "@l-p/courses/application/course/publish-course/IPublishCourseHandler";
-import { IArchiveCourseHandler } from "@l-p/courses/application/course/archive-course/IArchiveCourseHandler";
+import { ICreateChapterHandler } from "@l-p/courses/application/commands/create-chapter/ICreateChapterHandler";
+import { ICreateCourseHandler } from "@l-p/courses/application/commands/create-course/ICreateCourseHandler";
+import { ICreateInstructorHandler } from "@l-p/courses/application/commands/create-instructor/ICreateInstructorHandler";
+import { ICreateLessonHandler } from "@l-p/courses/application/commands/create-lesson/ICreateLessonHandler";
+import { IGetChapterLessonsHandler } from "@l-p/courses/application/queries/get-chapter-lessons/IGetChapterLessonsHandler";
+import { IGetCourseChaptersHandler } from "@l-p/courses/application/queries/get-course-chapters/IGetCourseChaptersHandler";
+import { IGetCoursesHandler } from "@l-p/courses/application/queries/get-courses/IGetCoursesHandler";
+import { IGetInstructorsHandler } from "@l-p/courses/application/queries/get-instructors/IGetInstructorsHandler";
+import { IPublishCourseHandler } from "@l-p/courses/application/commands/publish-course/IPublishCourseHandler";
+import { IArchiveCourseHandler } from "@l-p/courses/application/commands/archive-course/IArchiveCourseHandler";
 import {
   IInstructorRepo,
   ICourseRepo,

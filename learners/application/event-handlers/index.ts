@@ -1,1 +1,1 @@
-export * from "./CoursePublishedEventHandler";
+export * from './course-published'

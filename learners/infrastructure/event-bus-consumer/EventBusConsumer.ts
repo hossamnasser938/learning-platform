@@ -1,6 +1,6 @@
 import { IEventBus, IEventBusConsumer } from "@l-p/shared/domain/contracts";
 import { CoursePublishedEventDTO } from "@l-p/courses/api/event-dtos";
-import { CoursePublishedEventHandler } from "@l-p/learners/application/event-handlers";
+import { CoursePublishedEventHandler } from "@l-p/learners/application/event-handlers/course-published";
 import { eventBusID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 import { inject } from "@l-p/shared/infrastructure/dependency-injection/utils";
 

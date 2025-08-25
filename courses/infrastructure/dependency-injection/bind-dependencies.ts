@@ -1,6 +1,6 @@
 import { Container } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { CoursesApi } from "@l-p/courses/api/CoursesApi";
-import { CreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor/CreateInstructorHandler";
+import { CreateInstructorHandler } from "@l-p/courses/application/commands/create-instructor/CreateInstructorHandler";
 import {
   coursesApiID,
   createInstructorHandlerID,
@@ -22,19 +22,19 @@ import {
 } from "./tokens";
 import { InstructorRepo } from "../repositories/in-memory/InstructorRepo";
 import { CourseRepo } from "../repositories/in-memory/CourseRepo";
-import { GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors/GetInstructorHandler";
-import { GetCoursesHandler } from "@l-p/courses/application/course/get-courses/GetCoursesHandler";
-import { CreateCourseHandler } from "@l-p/courses/application/course/create-course/CreateCourseHandler";
-import { CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter/CreateChapterHandler";
+import { GetInstructorsHandler } from "@l-p/courses/application/queries/get-instructors/GetInstructorHandler";
+import { GetCoursesHandler } from "@l-p/courses/application/queries/get-courses/GetCoursesHandler";
+import { CreateCourseHandler } from "@l-p/courses/application/commands/create-course/CreateCourseHandler";
+import { CreateChapterHandler } from "@l-p/courses/application/commands/create-chapter/CreateChapterHandler";
 import { ChapterRepo } from "../repositories/in-memory/ChapterRepo";
-import { GetCourseChaptersHandler } from "@l-p/courses/application/chapter/get-course-chapters/GetCourseChaptersHandler";
-import { CreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson/CreateLessonHandler";
-import { GetChapterLessonsHandler } from "@l-p/courses/application/lesson/get-chapter-lessons/GetChapterLessonsHandler";
+import { GetCourseChaptersHandler } from "@l-p/courses/application/queries/get-course-chapters/GetCourseChaptersHandler";
+import { CreateLessonHandler } from "@l-p/courses/application/commands/create-lesson/CreateLessonHandler";
+import { GetChapterLessonsHandler } from "@l-p/courses/application/queries/get-chapter-lessons/GetChapterLessonsHandler";
 import { LessonRepo } from "../repositories/in-memory/LessonRepo";
 import { CourseCreationService } from "@l-p/courses/domain/services/course-creation/CourseCreationService";
 import { CourseStatusUpdateService } from "@l-p/courses/domain/services/course-status-update/CourseStatusUpdateService";
-import { PublishCourseHandler } from "@l-p/courses/application/course/publish-course/PublishCourseHandler";
-import { ArchiveCourseHandler } from "@l-p/courses/application/course/archive-course/ArchiveCourseHandler";
+import { PublishCourseHandler } from "@l-p/courses/application/commands/publish-course/PublishCourseHandler";
+import { ArchiveCourseHandler } from "@l-p/courses/application/commands/archive-course/ArchiveCourseHandler";
 
 export function bindDependencies(container: Container) {
   // api

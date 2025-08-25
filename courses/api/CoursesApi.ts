@@ -5,16 +5,16 @@ import {
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
 
-import { CreateInstructorCommand, CreateInstructorHandler } from "@l-p/courses/application/instructor/create-instructor";
-import { GetInstructorsQuery, GetInstructorsHandler } from "@l-p/courses/application/instructor/get-instructors";
-import { GetCoursesHandler, GetCoursesQuery } from "@l-p/courses/application/course/get-courses";
-import { CreateCourseHandler, CreateCourseCommand } from "@l-p/courses/application/course/create-course";
-import { CreateChapterCommand, CreateChapterHandler } from "@l-p/courses/application/chapter/create-chapter";
-import { GetCourseChaptersHandler, GetCourseChaptersQuery } from "@l-p/courses/application/chapter/get-course-chapters";
-import { CreateLessonCommand, CreateLessonHandler } from "@l-p/courses/application/lesson/create-lesson";
-import { GetChapterLessonsHandler, GetChapterLessonsQuery } from "@l-p/courses/application/lesson/get-chapter-lessons";  
-import { PublishCourseCommand, PublishCourseHandler } from "@l-p/courses/application/course/publish-course";
-import { ArchiveCourseCommand, ArchiveCourseHandler } from "@l-p/courses/application/course/archive-course";
+import { CreateInstructorCommand, CreateInstructorHandler } from "@l-p/courses/application/commands/create-instructor";
+import { GetInstructorsQuery, GetInstructorsHandler } from "@l-p/courses/application/queries/get-instructors";
+import { GetCoursesHandler, GetCoursesQuery } from "@l-p/courses/application/queries/get-courses";
+import { CreateCourseHandler, CreateCourseCommand } from "@l-p/courses/application/commands/create-course";
+import { CreateChapterCommand, CreateChapterHandler } from "@l-p/courses/application/commands/create-chapter";
+import { GetCourseChaptersHandler, GetCourseChaptersQuery } from "@l-p/courses/application/queries/get-course-chapters";
+import { CreateLessonCommand, CreateLessonHandler } from "@l-p/courses/application/commands/create-lesson";
+import { GetChapterLessonsHandler, GetChapterLessonsQuery } from "@l-p/courses/application/queries/get-chapter-lessons";  
+import { PublishCourseCommand, PublishCourseHandler } from "@l-p/courses/application/commands/publish-course";
+import { ArchiveCourseCommand, ArchiveCourseHandler } from "@l-p/courses/application/commands/archive-course";
 
 import {
   createChapterHandlerID,
