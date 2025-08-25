@@ -1,14 +1,14 @@
 import { IUniqueIDGenerator } from "@l-p/shared/domain/contracts";
-import { CreateInstructorCommand } from "./CreateInstructorCommand";
+import { AddInstructorCommand } from "./AddInstructorCommand";
 import { IInstructorRepo } from "@l-p/courses/domain/contracts";
 import { Instructor } from "@l-p/courses/domain/models";
 import { inject, injectable } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { instructorRepoID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { uniqueIDGeneratorID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
-import { ICreateInstructorHandler } from "./ICreateInstructorHandler";
+import { IAddInstructorHandler } from "./IAddInstructorHandler";
 
 @injectable()
-export class CreateInstructorHandler implements ICreateInstructorHandler
+export class AddInstructorHandler implements IAddInstructorHandler
 {
   constructor(
     @inject(instructorRepoID) private readonly instructorRepo: IInstructorRepo,
@@ -16,7 +16,7 @@ export class CreateInstructorHandler implements ICreateInstructorHandler
     private readonly idGenerator: IUniqueIDGenerator
   ) {}
 
-  async handle(command: CreateInstructorCommand): Promise<Instructor> {
+  async handle(command: AddInstructorCommand): Promise<Instructor> {
     const instructorId = this.idGenerator.generate();
 
     const instructor = Instructor.newInstructor(

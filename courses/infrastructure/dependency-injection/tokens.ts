@@ -2,7 +2,7 @@ import { ServiceIdentifier } from "@l-p/shared/infrastructure/dependency-injecti
 import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
 import { ICreateChapterHandler } from "@l-p/courses/application/commands/create-chapter/ICreateChapterHandler";
 import { ICreateCourseHandler } from "@l-p/courses/application/commands/create-course/ICreateCourseHandler";
-import { ICreateInstructorHandler } from "@l-p/courses/application/commands/create-instructor/ICreateInstructorHandler";
+import { IAddInstructorHandler } from "@l-p/courses/application/commands/add-instructor/IAddInstructorHandler";
 import { ICreateLessonHandler } from "@l-p/courses/application/commands/create-lesson/ICreateLessonHandler";
 import { IGetChapterLessonsHandler } from "@l-p/courses/application/queries/get-chapter-lessons/IGetChapterLessonsHandler";
 import { IGetCourseChaptersHandler } from "@l-p/courses/application/queries/get-course-chapters/IGetCourseChaptersHandler";
@@ -26,8 +26,8 @@ export const coursesApiID: ServiceIdentifier<ICoursesApi> =
   Symbol.for("ICoursesApi");
 
 // instructor
-export const createInstructorHandlerID: ServiceIdentifier<ICreateInstructorHandler> =
-  Symbol.for("ICreateInstructorHandler");
+export const addInstructorHandlerID: ServiceIdentifier<IAddInstructorHandler> =
+  Symbol.for("IAddInstructorHandler");
 export const getInstructorsHandlerID: ServiceIdentifier<IGetInstructorsHandler> =
   Symbol.for("IGetInstructorsHandler");
 export const instructorRepoID: ServiceIdentifier<IInstructorRepo> = Symbol.for(

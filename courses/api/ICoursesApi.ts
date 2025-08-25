@@ -1,6 +1,6 @@
 import { 
   CreateCourseDTO, 
-  CreateInstructorDTO, 
+  AddInstructorDTO, 
   CreateLessonDTO,
   CreateChapterDTO,
   GetChapterLessonsDTO,
@@ -12,7 +12,7 @@ import {
 } from "./request-dtos";
 
 import { 
-  CreateInstructorResponse,
+  AddInstructorResponse,
   CreateCourseResponse,
   CreateChapterResponse,
   CreateLessonResponse,
@@ -27,7 +27,7 @@ import {
 export interface ICoursesApi {
   healthCheck(): Promise<boolean>;
 
-  createInstructor(createInstructorDTO: CreateInstructorDTO): Promise<CreateInstructorResponse>;
+  addInstructor(addInstructorDTO: AddInstructorDTO): Promise<AddInstructorResponse>;
 
   getInstructors(
     getInstructorsDTO: GetInstructorsDTO

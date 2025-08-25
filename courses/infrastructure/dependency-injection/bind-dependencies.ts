@@ -1,9 +1,9 @@
 import { Container } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { CoursesApi } from "@l-p/courses/api/CoursesApi";
-import { CreateInstructorHandler } from "@l-p/courses/application/commands/create-instructor/CreateInstructorHandler";
+import { AddInstructorHandler } from "@l-p/courses/application/commands/add-instructor/AddInstructorHandler";
 import {
   coursesApiID,
-  createInstructorHandlerID,
+  addInstructorHandlerID,
   instructorRepoID,
   courseRepoID,
   getInstructorsHandlerID,
@@ -41,7 +41,7 @@ export function bindDependencies(container: Container) {
   container.bind(coursesApiID).to(CoursesApi);
 
   // instructor
-  container.bind(createInstructorHandlerID).to(CreateInstructorHandler);
+  container.bind(addInstructorHandlerID).to(AddInstructorHandler);
   container.bind(getInstructorsHandlerID).to(GetInstructorsHandler);
   container.bind(instructorRepoID).to(InstructorRepo).inSingletonScope();
 

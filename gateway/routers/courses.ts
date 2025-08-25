@@ -29,8 +29,8 @@ coursesRouter.get("/instructors", async (req: Request, res: Response) => {
 });
 
 coursesRouter.post("/instructors", async (req: Request, res: Response) => {
-  const createInstructorDTO = req.body;
-  const result = await coursesApi.createInstructor(createInstructorDTO);
+  const addInstructorDTO = req.body;
+  const result = await coursesApi.addInstructor(addInstructorDTO);
 
   res.status(200).send(result);
 });

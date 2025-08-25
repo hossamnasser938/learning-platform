@@ -5,7 +5,7 @@ import {
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
 
-import { CreateInstructorCommand, CreateInstructorHandler } from "@l-p/courses/application/commands/create-instructor";
+import { AddInstructorCommand, AddInstructorHandler } from "@l-p/courses/application/commands/add-instructor";
 import { GetInstructorsQuery, GetInstructorsHandler } from "@l-p/courses/application/queries/get-instructors";
 import { GetCoursesHandler, GetCoursesQuery } from "@l-p/courses/application/queries/get-courses";
 import { CreateCourseHandler, CreateCourseCommand } from "@l-p/courses/application/commands/create-course";
@@ -19,7 +19,7 @@ import { ArchiveCourseCommand, ArchiveCourseHandler } from "@l-p/courses/applica
 import {
   createChapterHandlerID,
   createCourseHandlerID,
-  createInstructorHandlerID,
+  addInstructorHandlerID,
   createLessonHandlerID,
   getChapterLessonsHandlerID,
   getCourseChaptersHandlerID,
@@ -33,7 +33,7 @@ import {
   ArchiveCourseResponse,
   CreateChapterResponse,
   CreateCourseResponse,
-  CreateInstructorResponse,
+  AddInstructorResponse,
   CreateLessonResponse,
   PublishCourseResponse,
   GetChapterLessonsResponse,
@@ -46,7 +46,7 @@ import {
   ArchiveCourseDTO,
   CreateChapterDTO,
   CreateCourseDTO,
-  CreateInstructorDTO,
+  AddInstructorDTO,
   CreateLessonDTO,
   GetInstructorsDTO,
   GetCoursesDTO,
@@ -58,8 +58,8 @@ import {
 @injectable()
 export class CoursesApi implements ICoursesApi {
   constructor(
-    @inject(createInstructorHandlerID)
-    private readonly createInstructorHandler: CreateInstructorHandler,
+    @inject(addInstructorHandlerID)
+    private readonly addInstructorHandler: AddInstructorHandler,
     @inject(getInstructorsHandlerID)
     private readonly getInstructorsHandler: GetInstructorsHandler,
     @inject(createCourseHandlerID)
@@ -84,13 +84,13 @@ export class CoursesApi implements ICoursesApi {
     return true;
   }
 
-  async createInstructor(createInstructorDTO: CreateInstructorDTO): Promise<CreateInstructorResponse> {
-    const command = new CreateInstructorCommand(
-      createInstructorDTO.name,
-      createInstructorDTO.bio
+  async addInstructor(addInstructorDTO: AddInstructorDTO): Promise<AddInstructorResponse> {
+    const command = new AddInstructorCommand(
+      addInstructorDTO.name,
+      addInstructorDTO.bio
     );
-    const instructor = await this.createInstructorHandler.handle(command);
-    return CreateInstructorResponse.fromDomain(instructor);
+    const instructor = await this.addInstructorHandler.handle(command);
+    return AddInstructorResponse.fromDomain(instructor);
   }
 
   async getInstructors(getInstructorsDTO: GetInstructorsDTO) {
