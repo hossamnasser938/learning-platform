@@ -1,5 +1,6 @@
+import { GetLearnersQuery } from "../application/queries/get-learners";
 import { AddLearnerDTO } from "./request-dtos";
-import { AddLearnerResponse } from "./responses";
+import { AddLearnerResponse, GetLearnersResponse } from "./responses";
 
 export interface ILearnersApi {
   healthCheck(): Promise<boolean>;
@@ -7,4 +8,6 @@ export interface ILearnersApi {
   startService(): Promise<void>;
 
   addLearner(dto: AddLearnerDTO): Promise<AddLearnerResponse>;
+
+  getLearners(getLearnersQuery: GetLearnersQuery): Promise<GetLearnersResponse>;
 }
