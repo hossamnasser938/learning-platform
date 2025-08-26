@@ -11,7 +11,8 @@ export class Learner extends AggregateRoot<ModelId> {
     private readonly name: LearnerName,
     private readonly age: LearnerAge,
     private readonly country: Country,
-    private readonly preferredCourseCategories: CourseCategory[]
+    private readonly preferredCourseCategories: CourseCategory[],
+    private enrolledCourses: ModelId[] = []
   ) {
     super(id);
   }
@@ -65,8 +66,31 @@ export class Learner extends AggregateRoot<ModelId> {
     return this.preferredCourseCategories;
   }
 
+  getEnrolledCourses(): ModelId[] {
+    return this.enrolledCourses;
+  }
+
   hasPreferredCategory(category: CourseCategory): boolean {
     return this.preferredCourseCategories.includes(category);
+  }
+
+  isEnrolledInCourse(courseId: ModelId): boolean {
+    return this.enrolledCourses.some(course => course.equals(courseId));
+  }
+
+  enrollInCourse(courseId: ModelId): void {
+    if (!this.isEnrolledInCourse(courseId)) {
+      this.enrolledCourses.push(courseId);
+      // TODO: add domain event to the aggregate root
+    }
+  }
+
+  dropCourse(courseId: ModelId): void {
+    const index = this.enrolledCourses.findIndex(course => course.equals(courseId));
+    if (index > -1) {
+      this.enrolledCourses.splice(index, 1);
+      // TODO: add domain event to the aggregate root
+    }
   }
 
   addPreferredCategory(category: CourseCategory): void {

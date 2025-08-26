@@ -27,3 +27,11 @@ learnersRouter.get("/", async (req: Request, res: Response) => {
   
   res.status(200).json(response);
 });
+
+learnersRouter.post("/enrollments", async (req: Request, res: Response) => {
+    const { learnerId, courseId } = req.body;
+    
+    await learnersApi.enrollLearnerInCourse(learnerId, courseId);
+    
+    res.status(201).send();
+});

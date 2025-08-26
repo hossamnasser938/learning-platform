@@ -7,6 +7,14 @@ export class LearnerException extends DomainException {
   }
 }
 
+export class InvalidLearnerNameException extends LearnerException {
+  constructor(name: string, reason?: string) {
+    const message = reason ? `Invalid learner name: ${name}. ${reason}` : `Invalid learner name: ${name}`;
+    super(message, ExceptionType.INVALID_DATA);
+    this.name = 'InvalidLearnerNameException';
+  }
+}
+
 export class InvalidEmptyLearnerNameException extends LearnerException {
   constructor(name: string) {
     super(`Invalid empty learner name: ${name}`, ExceptionType.INVALID_DATA);

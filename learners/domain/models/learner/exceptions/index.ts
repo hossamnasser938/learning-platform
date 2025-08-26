@@ -1,1 +1,2 @@
-export * from './LearnerException';
+export * from "./LearnerException";
+export * from "./CourseEnrollmentException";
