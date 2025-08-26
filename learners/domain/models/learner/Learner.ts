@@ -4,6 +4,7 @@ import { LearnerAge } from "./LearnerAge";
 import { Country } from "./Country";
 import { CourseCategory } from "./CourseCategory";
 import { AggregateRoot } from "@l-p/shared/domain/models/aggregate-root";
+import { LearnerEnrolledInCourseEvent } from "../../events";
 
 export class Learner extends AggregateRoot<ModelId> {
   private constructor(
@@ -81,7 +82,13 @@ export class Learner extends AggregateRoot<ModelId> {
   enrollInCourse(courseId: ModelId): void {
     if (!this.isEnrolledInCourse(courseId)) {
       this.enrolledCourses.push(courseId);
-      // TODO: add domain event to the aggregate root
+      
+      this.addEvent(
+        new LearnerEnrolledInCourseEvent(
+          this.getId().getValue(),
+          courseId.getValue()
+        )
+      );
     }
   }
 

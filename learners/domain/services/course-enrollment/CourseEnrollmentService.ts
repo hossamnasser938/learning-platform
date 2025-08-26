@@ -5,11 +5,15 @@ import { ModelId } from "@l-p/shared/domain/models";
 import { LearnerNotFoundException, LearnerAlreadyEnrolledException } from "../../models/learner/exceptions";
 import { inject } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { learnerRepoID, courseEnrollmentRepoID } from "@l-p/learners/infrastructure/dependency-injection/tokens";
+import { IEventBus } from "@l-p/shared/domain/contracts";
+import { eventBusID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
+import { LearnerEventMapper } from "@l-p/learners/infrastructure/event-mappers";
 
 export class CourseEnrollmentService implements ICourseEnrollmentService {
   constructor(
     @inject(learnerRepoID) private readonly learnerRepo: ILearnerRepo,
-    @inject(courseEnrollmentRepoID) private readonly courseEnrollmentRepo: ICourseEnrollmentRepo
+    @inject(courseEnrollmentRepoID) private readonly courseEnrollmentRepo: ICourseEnrollmentRepo,
+    @inject(eventBusID) private readonly eventBus: IEventBus
   ) {}
 
   async enrollLearnerInCourse(learnerId: string, courseId: string): Promise<Learner> {
@@ -29,7 +33,7 @@ export class CourseEnrollmentService implements ICourseEnrollmentService {
 
     await this.courseEnrollmentRepo.addEnrollment(learnerId, courseId);
 
-    // TODO: publish integration events
+    learner.publishEvents(LearnerEventMapper.toDTO, this.eventBus);
 
     return learner;
   }

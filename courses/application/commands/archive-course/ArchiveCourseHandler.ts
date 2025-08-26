@@ -5,7 +5,7 @@ import { courseRepoID, courseStatusUpdateServiceID } from "@l-p/courses/infrastr
 import { ICourseRepo } from "@l-p/courses/domain/contracts";
 import { ICourseStatusUpdateService } from "@l-p/courses/domain/services";
 import { IArchiveCourseHandler } from "./IArchiveCourseHandler";
-import { CourseEventsMapper } from "@l-p/courses/infrastructure/event-mappers/CourseEventsMapper";
+import { CourseEventsMapper } from "@l-p/courses/infrastructure/event-mappers";
 import { IEventBus } from "@l-p/shared/domain/contracts";
 import { eventBusID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 

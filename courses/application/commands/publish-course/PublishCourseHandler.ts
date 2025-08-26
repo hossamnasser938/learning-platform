@@ -7,7 +7,7 @@ import { ICourseStatusUpdateService } from "@l-p/courses/domain/services";
 import { IPublishCourseHandler } from "./IPublishCourseHandler";
 import { eventBusID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 import { IEventBus } from "@l-p/shared/domain/contracts";
-import { CourseEventsMapper } from "@l-p/courses/infrastructure/event-mappers/CourseEventsMapper";
+import { CourseEventsMapper } from "@l-p/courses/infrastructure/event-mappers";
 
 @injectable()
 export class PublishCourseHandler implements IPublishCourseHandler {
