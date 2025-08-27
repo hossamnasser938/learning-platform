@@ -6,7 +6,9 @@ import { CourseEnrollmentRepo } from "../repositories/in-memory/CourseEnrollment
 import { AddLearnerHandler } from "../../application/commands/add-learner/AddLearnerHandler";
 import { GetLearnersHandler } from "../../application/queries/get-learners/GetLearnersHandler";
 import { EnrollLearnerInCourseHandler } from "../../application/commands/enroll-learner-in-course/EnrollLearnerInCourseHandler";
+import { GetLearnerCoursesHandler } from "../../application/queries/get-learner-courses/GetLearnerCoursesHandler";
 import { CourseEnrollmentService } from "../../domain/services/course-enrollment/CourseEnrollmentService";
+import { CoursesGateway } from "../gateway/CoursesGateway";
 import {
   learnerRepoID,
   addLearnerHandlerID,
@@ -15,7 +17,9 @@ import {
   getLearnersHandlerID,
   courseEnrollmentRepoID,
   enrollLearnerInCourseHandlerID,
-  courseEnrollmentServiceID
+  courseEnrollmentServiceID,
+  getLearnerCoursesHandlerID,
+  coursesGatewayID
 } from "./tokens";
 
 export function bindDependencies(container: Container) {
@@ -26,7 +30,9 @@ export function bindDependencies(container: Container) {
   container.bind(addLearnerHandlerID).to(AddLearnerHandler);
   container.bind(getLearnersHandlerID).to(GetLearnersHandler);
   container.bind(enrollLearnerInCourseHandlerID).to(EnrollLearnerInCourseHandler);
+  container.bind(getLearnerCoursesHandlerID).to(GetLearnerCoursesHandler);
   container.bind(courseEnrollmentServiceID).to(CourseEnrollmentService);
+  container.bind(coursesGatewayID).to(CoursesGateway);
   container.bind(learnerRepoID).to(LearnerRepo).inSingletonScope();
   container.bind(courseEnrollmentRepoID).to(CourseEnrollmentRepo).inSingletonScope();
 }

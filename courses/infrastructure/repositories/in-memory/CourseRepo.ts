@@ -12,6 +12,10 @@ export class CourseRepo implements ICourseRepo {
     );
   }
 
+  async getByIds(ids: string[]): Promise<Array<Course | null>> {
+    return Promise.all(ids.map((id) => this.getById(id)));
+  }
+
   async getAll(): Promise<Course[]> {
     return this.courses;
   }

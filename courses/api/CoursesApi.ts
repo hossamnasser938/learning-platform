@@ -8,6 +8,7 @@ import {
 import { AddInstructorCommand, AddInstructorHandler } from "@l-p/courses/application/commands/add-instructor";
 import { GetInstructorsQuery, GetInstructorsHandler } from "@l-p/courses/application/queries/get-instructors";
 import { GetCoursesHandler, GetCoursesQuery } from "@l-p/courses/application/queries/get-courses";
+import { GetCoursesByIdsHandler, GetCoursesByIdsQuery } from "@l-p/courses/application/queries/get-courses-by-ids";
 import { CreateCourseHandler, CreateCourseCommand } from "@l-p/courses/application/commands/create-course";
 import { CreateChapterCommand, CreateChapterHandler } from "@l-p/courses/application/commands/create-chapter";
 import { GetCourseChaptersHandler, GetCourseChaptersQuery } from "@l-p/courses/application/queries/get-course-chapters";
@@ -24,6 +25,7 @@ import {
   getChapterLessonsHandlerID,
   getCourseChaptersHandlerID,
   getCoursesHandlerID,
+  getCoursesByIdsHandlerID,
   getInstructorsHandlerID,
   publishCourseHandlerID,
   archiveCourseHandlerID,
@@ -50,6 +52,7 @@ import {
   CreateLessonDTO,
   GetInstructorsDTO,
   GetCoursesDTO,
+  GetCoursesByIdsDTO,
   GetCourseChaptersDTO,
   GetChapterLessonsDTO,
   PublishCourseDTO,
@@ -66,6 +69,8 @@ export class CoursesApi implements ICoursesApi {
     private readonly createCourseHandler: CreateCourseHandler,
     @inject(getCoursesHandlerID)
     private readonly getCoursesHandler: GetCoursesHandler,
+    @inject(getCoursesByIdsHandlerID)
+    private readonly getCoursesByIdsHandler: GetCoursesByIdsHandler,
     @inject(createChapterHandlerID)
     private readonly createChapterHandler: CreateChapterHandler,
     @inject(getCourseChaptersHandlerID)
@@ -112,6 +117,12 @@ export class CoursesApi implements ICoursesApi {
   async getCourses(getCoursesDTO: GetCoursesDTO): Promise<GetCoursesResponse> {
     const query = new GetCoursesQuery();
     const courses = await this.getCoursesHandler.handle(query);
+    return GetCoursesResponse.fromDomain(courses);
+  }
+
+  async getCoursesByIds(getCoursesByIdsDTO: GetCoursesByIdsDTO): Promise<GetCoursesResponse> {
+    const query = new GetCoursesByIdsQuery(getCoursesByIdsDTO.courseIds);
+    const courses = await this.getCoursesByIdsHandler.handle(query);
     return GetCoursesResponse.fromDomain(courses);
   }
 

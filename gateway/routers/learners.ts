@@ -3,6 +3,7 @@ import { container } from "@l-p/shared/infrastructure/dependency-injection";
 import { ILearnersApi } from "@l-p/learners/api/ILearnersApi";
 import { learnersApiID } from "@l-p/learners/infrastructure/dependency-injection/tokens";
 import { GetLearnersQuery } from "@l-p/learners/application/queries/get-learners";
+import { GetLearnerCoursesDTO, EnrollLearnerInCourseDTO } from "@l-p/learners/api/request-dtos";
 
 export const learnersRouter = Router();
 
@@ -28,10 +29,16 @@ learnersRouter.get("/", async (req: Request, res: Response) => {
   res.status(200).json(response);
 });
 
-learnersRouter.post("/enrollments", async (req: Request, res: Response) => {
-    const { learnerId, courseId } = req.body;
+learnersRouter.get("/enrollments", async (req: Request, res: Response) => {
+    const dto = new GetLearnerCoursesDTO(req.query.learnerId as string);
     
-    await learnersApi.enrollLearnerInCourse(learnerId, courseId);
+    const result = await learnersApi.getLearnerCourses(dto);
+    
+    res.status(200).json(result);
+});
+
+learnersRouter.post("/enrollments", async (req: Request, res: Response) => {
+    await learnersApi.enrollLearnerInCourse(req.body);
     
     res.status(201).send();
 });

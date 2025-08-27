@@ -6,6 +6,7 @@ import {
   GetChapterLessonsDTO,
   GetCourseChaptersDTO,
   GetCoursesDTO,
+  GetCoursesByIdsDTO,
   GetInstructorsDTO,
   PublishCourseDTO,
   ArchiveCourseDTO
@@ -36,6 +37,8 @@ export interface ICoursesApi {
   createCourse(createCourseDTO: CreateCourseDTO): Promise<CreateCourseResponse>;
 
   getCourses(getCoursesDTO: GetCoursesDTO): Promise<GetCoursesResponse>;
+
+  getCoursesByIds(getCoursesByIdsDTO: GetCoursesByIdsDTO): Promise<GetCoursesResponse>;
 
   createChapter(createChapterDTO: CreateChapterDTO): Promise<CreateChapterResponse>;
 

@@ -10,18 +10,20 @@ class CourseResponse {
 }
 
 export class GetCoursesResponse {
-  private constructor(public readonly courses: CourseResponse[]) {}
+  private constructor(public readonly courses: Array<CourseResponse | null>) {}
 
-  static fromDomain(courses: Course[]): GetCoursesResponse {
-    const courseResponses = courses.map(
-      (course) =>
-        new CourseResponse(
-          course.getId().getValue(),
-          course.getTitle().getValue(),
-          course.getDescription().getValue(),
-          course.getInstructorId().getValue()
-        )
-    );
+  static fromDomain(courses: Array<Course | null>): GetCoursesResponse {
+    const courseResponses = courses.map((course) => {
+      if (!course) {
+        return null;
+      }
+      return new CourseResponse(
+        course.getId().getValue(),
+        course.getTitle().getValue(),
+        course.getDescription().getValue(),
+        course.getInstructorId().getValue()
+      );
+    });
     return new GetCoursesResponse(courseResponses);
   }
 }

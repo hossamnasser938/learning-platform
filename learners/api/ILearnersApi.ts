@@ -1,6 +1,7 @@
-import { AddLearnerDTO } from "./request-dtos";
+import { AddLearnerDTO, EnrollLearnerInCourseDTO, GetLearnerCoursesDTO } from "./request-dtos";
 import { AddLearnerResponse, GetLearnersResponse, EnrollLearnerInCourseResponse } from "./responses";
 import { GetLearnersQuery } from "../application/queries/get-learners";
+import { GetCoursesResponse } from "@l-p/courses/api/responses";
 
 export interface ILearnersApi {
   healthCheck(): Promise<boolean>;
@@ -11,5 +12,7 @@ export interface ILearnersApi {
 
   getLearners(getLearnersQuery: GetLearnersQuery): Promise<GetLearnersResponse>;
 
-  enrollLearnerInCourse(learnerId: string, courseId: string): Promise<EnrollLearnerInCourseResponse>;
+  enrollLearnerInCourse(dto: EnrollLearnerInCourseDTO): Promise<EnrollLearnerInCourseResponse>;
+
+  getLearnerCourses(dto: GetLearnerCoursesDTO): Promise<GetCoursesResponse>;
 }
