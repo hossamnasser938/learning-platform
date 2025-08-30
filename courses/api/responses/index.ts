@@ -8,3 +8,4 @@ export * from "./GetCourseChaptersResponse";
 export * from "./GetCoursesResponse";
 export * from "./GetInstructorsResponse";
 export * from "./PublishCourseResponse";
+export * from "./GetCourseLearnersResponse";

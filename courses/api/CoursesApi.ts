@@ -5,17 +5,50 @@ import {
   injectable,
 } from "@l-p/shared/infrastructure/dependency-injection/utils";
 
-import { AddInstructorCommand, AddInstructorHandler } from "@l-p/courses/application/commands/add-instructor";
-import { GetInstructorsQuery, GetInstructorsHandler } from "@l-p/courses/application/queries/get-instructors";
-import { GetCoursesHandler, GetCoursesQuery } from "@l-p/courses/application/queries/get-courses";
-import { GetCoursesByIdsHandler, GetCoursesByIdsQuery } from "@l-p/courses/application/queries/get-courses-by-ids";
-import { CreateCourseHandler, CreateCourseCommand } from "@l-p/courses/application/commands/create-course";
-import { CreateChapterCommand, CreateChapterHandler } from "@l-p/courses/application/commands/create-chapter";
-import { GetCourseChaptersHandler, GetCourseChaptersQuery } from "@l-p/courses/application/queries/get-course-chapters";
-import { CreateLessonCommand, CreateLessonHandler } from "@l-p/courses/application/commands/create-lesson";
-import { GetChapterLessonsHandler, GetChapterLessonsQuery } from "@l-p/courses/application/queries/get-chapter-lessons";  
-import { PublishCourseCommand, PublishCourseHandler } from "@l-p/courses/application/commands/publish-course";
-import { ArchiveCourseCommand, ArchiveCourseHandler } from "@l-p/courses/application/commands/archive-course";
+import {
+  AddInstructorCommand,
+  AddInstructorHandler,
+} from "@l-p/courses/application/commands/add-instructor";
+import {
+  GetInstructorsQuery,
+  GetInstructorsHandler,
+} from "@l-p/courses/application/queries/get-instructors";
+import {
+  GetCoursesHandler,
+  GetCoursesQuery,
+} from "@l-p/courses/application/queries/get-courses";
+import {
+  GetCoursesByIdsHandler,
+  GetCoursesByIdsQuery,
+} from "@l-p/courses/application/queries/get-courses-by-ids";
+import {
+  CreateCourseHandler,
+  CreateCourseCommand,
+} from "@l-p/courses/application/commands/create-course";
+import {
+  CreateChapterCommand,
+  CreateChapterHandler,
+} from "@l-p/courses/application/commands/create-chapter";
+import {
+  GetCourseChaptersHandler,
+  GetCourseChaptersQuery,
+} from "@l-p/courses/application/queries/get-course-chapters";
+import {
+  CreateLessonCommand,
+  CreateLessonHandler,
+} from "@l-p/courses/application/commands/create-lesson";
+import {
+  GetChapterLessonsHandler,
+  GetChapterLessonsQuery,
+} from "@l-p/courses/application/queries/get-chapter-lessons";
+import {
+  PublishCourseCommand,
+  PublishCourseHandler,
+} from "@l-p/courses/application/commands/publish-course";
+import {
+  ArchiveCourseCommand,
+  ArchiveCourseHandler,
+} from "@l-p/courses/application/commands/archive-course";
 
 import {
   createChapterHandlerID,
@@ -29,6 +62,7 @@ import {
   getInstructorsHandlerID,
   publishCourseHandlerID,
   archiveCourseHandlerID,
+  learnersGatewayID,
 } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 
 import {
@@ -41,7 +75,9 @@ import {
   GetChapterLessonsResponse,
   GetCourseChaptersResponse,
   GetCoursesResponse,
-  GetInstructorsResponse
+  GetInstructorsResponse,
+  GetCourseLearnersResponse,
+  LearnerResponse,
 } from "./responses";
 
 import {
@@ -56,7 +92,10 @@ import {
   GetCourseChaptersDTO,
   GetChapterLessonsDTO,
   PublishCourseDTO,
+  GetCourseLearnersDTO,
 } from "./request-dtos";
+
+import { ILearnersGateway } from "@l-p/courses/infrastructure/gateway";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {
@@ -82,14 +121,18 @@ export class CoursesApi implements ICoursesApi {
     @inject(publishCourseHandlerID)
     private readonly publishCourseHandler: PublishCourseHandler,
     @inject(archiveCourseHandlerID)
-    private readonly archiveCourseHandler: ArchiveCourseHandler
+    private readonly archiveCourseHandler: ArchiveCourseHandler,
+    @inject(learnersGatewayID)
+    private readonly learnersGateway: ILearnersGateway
   ) {}
 
   async healthCheck(): Promise<boolean> {
     return true;
   }
 
-  async addInstructor(addInstructorDTO: AddInstructorDTO): Promise<AddInstructorResponse> {
+  async addInstructor(
+    addInstructorDTO: AddInstructorDTO
+  ): Promise<AddInstructorResponse> {
     const command = new AddInstructorCommand(
       addInstructorDTO.name,
       addInstructorDTO.bio
@@ -104,7 +147,9 @@ export class CoursesApi implements ICoursesApi {
     return GetInstructorsResponse.fromDomain(instructors);
   }
 
-  async createCourse(createCourseDTO: CreateCourseDTO): Promise<CreateCourseResponse> {
+  async createCourse(
+    createCourseDTO: CreateCourseDTO
+  ): Promise<CreateCourseResponse> {
     const command = new CreateCourseCommand(
       createCourseDTO.title,
       createCourseDTO.description,
@@ -120,13 +165,17 @@ export class CoursesApi implements ICoursesApi {
     return GetCoursesResponse.fromDomain(courses);
   }
 
-  async getCoursesByIds(getCoursesByIdsDTO: GetCoursesByIdsDTO): Promise<GetCoursesResponse> {
+  async getCoursesByIds(
+    getCoursesByIdsDTO: GetCoursesByIdsDTO
+  ): Promise<GetCoursesResponse> {
     const query = new GetCoursesByIdsQuery(getCoursesByIdsDTO.courseIds);
     const courses = await this.getCoursesByIdsHandler.handle(query);
     return GetCoursesResponse.fromDomain(courses);
   }
 
-  async createChapter(createChapterDTO: CreateChapterDTO): Promise<CreateChapterResponse> {
+  async createChapter(
+    createChapterDTO: CreateChapterDTO
+  ): Promise<CreateChapterResponse> {
     const command = new CreateChapterCommand(
       createChapterDTO.courseId,
       createChapterDTO.title,
@@ -145,7 +194,9 @@ export class CoursesApi implements ICoursesApi {
     return GetCourseChaptersResponse.fromDomain(chapters);
   }
 
-  async createLesson(createLessonDTO: CreateLessonDTO): Promise<CreateLessonResponse> {
+  async createLesson(
+    createLessonDTO: CreateLessonDTO
+  ): Promise<CreateLessonResponse> {
     const command = new CreateLessonCommand(
       createLessonDTO.title,
       createLessonDTO.content,
@@ -164,15 +215,37 @@ export class CoursesApi implements ICoursesApi {
     return GetChapterLessonsResponse.fromDomain(lessons);
   }
 
-  async publishCourse(publishCourseDTO: PublishCourseDTO): Promise<PublishCourseResponse> {
+  async publishCourse(
+    publishCourseDTO: PublishCourseDTO
+  ): Promise<PublishCourseResponse> {
     const command = new PublishCourseCommand(publishCourseDTO.courseId);
     const course = await this.publishCourseHandler.handle(command);
     return PublishCourseResponse.fromDomain(course);
   }
 
-  async archiveCourse(archiveCourseDTO: ArchiveCourseDTO): Promise<ArchiveCourseResponse> {
+  async archiveCourse(
+    archiveCourseDTO: ArchiveCourseDTO
+  ): Promise<ArchiveCourseResponse> {
     const command = new ArchiveCourseCommand(archiveCourseDTO.courseId);
     const course = await this.archiveCourseHandler.handle(command);
     return ArchiveCourseResponse.fromDomain(course);
+  }
+
+  async getCourseLearners(
+    getCourseLearnersDTO: GetCourseLearnersDTO
+  ): Promise<GetCourseLearnersResponse> {
+    const learnersResponse = await this.learnersGateway.getCourseLearners(getCourseLearnersDTO.courseId);
+    return new GetCourseLearnersResponse(
+      learnersResponse.learners.map(
+        (learner) =>
+          new LearnerResponse(
+            learner.id,
+            learner.name,
+            learner.age,
+            learner.country,
+            learner.preferredCourseCategories
+          )
+      )
+    );
   }
 }

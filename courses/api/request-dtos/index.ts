@@ -9,3 +9,4 @@ export * from "./GetCourseChaptersDTO";
 export * from "./GetChapterLessonsDTO";
 export * from "./PublishCourseDTO";
 export * from "./ArchiveCourseDTO";
+export * from "./GetCourseLearnersDTO";

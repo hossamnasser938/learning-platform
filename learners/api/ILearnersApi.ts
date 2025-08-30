@@ -12,6 +12,8 @@ export interface ILearnersApi {
 
   getLearners(getLearnersQuery: GetLearnersQuery): Promise<GetLearnersResponse>;
 
+  getCourseLearners(courseId: string): Promise<GetLearnersResponse>;
+
   enrollLearnerInCourse(dto: EnrollLearnerInCourseDTO): Promise<EnrollLearnerInCourseResponse>;
 
   getLearnerCourses(dto: GetLearnerCoursesDTO): Promise<GetCoursesResponse>;

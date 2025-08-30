@@ -15,6 +15,7 @@ import { IArchiveCourseHandler } from "../../application/commands/archive-course
 import { IPublishCourseHandler } from "../../application/commands/publish-course";
 import { ICourseCreationService } from "../../domain/services";
 import { ICourseStatusUpdateService } from "../../domain/services";
+import { ILearnersGateway } from "../gateway";
 
 export const coursesApiID: ServiceIdentifier<ICoursesApi> =
   Symbol.for("CoursesApi");
@@ -59,4 +60,7 @@ export const lessonRepoID: ServiceIdentifier<ILessonRepo> = Symbol.for(
 );
 export const instructorRepoID: ServiceIdentifier<IInstructorRepo> = Symbol.for(
   "InstructorRepository"
+);
+export const learnersGatewayID: ServiceIdentifier<ILearnersGateway> = Symbol.for(
+  "LearnersGateway"
 );

@@ -13,6 +13,10 @@ export class LearnerRepo implements ILearnerRepo {
     );
   }
 
+  async getByIds(ids: string[]): Promise<Array<Learner | null>> {
+    return ids.map(id => this.learners.find((learner) => learner.getId().equals(id)) || null);
+  }
+
   async getAll(): Promise<Learner[]> {
     return this.learners;
   }

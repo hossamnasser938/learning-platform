@@ -2,13 +2,14 @@ import { Request, Response, Router } from "express";
 import { container } from "@l-p/shared/infrastructure/dependency-injection";
 import { coursesApiID } from "@l-p/courses/infrastructure/dependency-injection/tokens";
 import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
-import { 
+import {
   GetInstructorsDTO,
   GetCoursesDTO,
   GetCourseChaptersDTO,
   GetChapterLessonsDTO,
   PublishCourseDTO,
-  ArchiveCourseDTO
+  ArchiveCourseDTO,
+  GetCourseLearnersDTO,
 } from "@l-p/courses/api/request-dtos";
 
 export const coursesRouter = Router();
@@ -97,3 +98,15 @@ coursesRouter.post("/lessons", async (req: Request, res: Response) => {
 
   res.status(200).send(result);
 });
+
+coursesRouter.get(
+  "/enrollments",
+  async (req: Request, res: Response) => {
+    const { courseId } = req.query;
+
+    const dto = new GetCourseLearnersDTO(courseId as string);
+    const result = await coursesApi.getCourseLearners(dto);
+
+    res.status(200).json(result);
+  }
+);

@@ -9,7 +9,8 @@ import {
   GetCoursesByIdsDTO,
   GetInstructorsDTO,
   PublishCourseDTO,
-  ArchiveCourseDTO
+  ArchiveCourseDTO,
+  GetCourseLearnersDTO
 } from "./request-dtos";
 
 import { 
@@ -22,7 +23,8 @@ import {
   GetCoursesResponse,
   GetInstructorsResponse,
   PublishCourseResponse,
-  ArchiveCourseResponse
+  ArchiveCourseResponse,
+  GetCourseLearnersResponse
 } from "./responses";
 
 export interface ICoursesApi {
@@ -55,4 +57,6 @@ export interface ICoursesApi {
   publishCourse(publishCourseDTO: PublishCourseDTO): Promise<PublishCourseResponse>;
 
   archiveCourse(archiveCourseDTO: ArchiveCourseDTO): Promise<ArchiveCourseResponse>;
+
+  getCourseLearners(getCourseLearnersDTO: GetCourseLearnersDTO): Promise<GetCourseLearnersResponse>;
 }

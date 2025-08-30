@@ -17,6 +17,7 @@ import { ArchiveCourseHandler } from "../../application/commands/archive-course/
 import { PublishCourseHandler } from "../../application/commands/publish-course/PublishCourseHandler";
 import { CourseCreationService } from "../../domain/services/course-creation/CourseCreationService";
 import { CourseStatusUpdateService } from "../../domain/services/course-status-update/CourseStatusUpdateService";
+import { LearnersGateway } from "../gateway/LearnersGateway";
 import {
   courseRepoID,
   chapterRepoID,
@@ -35,6 +36,7 @@ import {
   publishCourseHandlerID,
   courseCreationServiceID,
   courseStatusUpdateServiceID,
+  learnersGatewayID,
   coursesApiID
 } from "./tokens";
 
@@ -58,4 +60,5 @@ export function bindDependencies(container: Container) {
   container.bind(chapterRepoID).to(ChapterRepo).inSingletonScope();
   container.bind(lessonRepoID).to(LessonRepo).inSingletonScope();
   container.bind(instructorRepoID).to(InstructorRepo).inSingletonScope();
+  container.bind(learnersGatewayID).to(LearnersGateway).inSingletonScope();
 }
