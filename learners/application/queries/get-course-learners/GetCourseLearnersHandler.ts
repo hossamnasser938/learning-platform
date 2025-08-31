@@ -6,7 +6,6 @@ import { GetLearnersResponse } from "../../../api/responses";
 import { IGetCourseLearnersHandler } from "./IGetCourseLearnersHandler";
 import { Learner } from "../../../domain/models";
 import { container } from "@l-p/shared/infrastructure/dependency-injection";
-import { CourseNotFoundException } from "@l-p/courses/domain/models/course/exceptions";
 
 @injectable()
 export class GetCourseLearnersHandler implements IGetCourseLearnersHandler {
@@ -15,13 +14,13 @@ export class GetCourseLearnersHandler implements IGetCourseLearnersHandler {
     @inject(learnerRepoID) private readonly learnerRepo: ILearnerRepo
   ) {}
 
-  async handle(query: GetCourseLearnersQuery): Promise<GetLearnersResponse> {
+  private async assertCourseExists(courseId: string) {
     const coursesGateway = container.get(coursesGatewayID)
+    await coursesGateway.getCourseById(courseId);
+  }
 
-    const course = await coursesGateway.getCourseById(query.courseId);
-    if (!course) {
-      throw new CourseNotFoundException(query.courseId);
-    }
+  async handle(query: GetCourseLearnersQuery): Promise<GetLearnersResponse> {
+    await this.assertCourseExists(query.courseId);
 
     const learnerIds = await this.courseEnrollmentRepo.getCourseEnrollments(query.courseId);
     

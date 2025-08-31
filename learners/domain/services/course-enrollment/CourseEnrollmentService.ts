@@ -4,10 +4,12 @@ import { Learner } from "../../models";
 import { ModelId } from "@l-p/shared/domain/models";
 import { LearnerNotFoundException, LearnerAlreadyEnrolledException } from "../../models/learner/exceptions";
 import { inject } from "@l-p/shared/infrastructure/dependency-injection/utils";
-import { learnerRepoID, courseEnrollmentRepoID } from "@l-p/learners/infrastructure/dependency-injection/tokens";
+import { learnerRepoID, courseEnrollmentRepoID, coursesGatewayID } from "@l-p/learners/infrastructure/dependency-injection/tokens";
 import { IEventBus } from "@l-p/shared/domain/contracts";
 import { eventBusID } from "@l-p/shared/infrastructure/dependency-injection/tokens";
 import { LearnerEventMapper } from "@l-p/learners/infrastructure/event-mappers";
+import { container } from "@l-p/shared/infrastructure/dependency-injection";
+import { CourseNotFoundException } from "@l-p/courses/domain/models/course/exceptions";
 
 export class CourseEnrollmentService implements ICourseEnrollmentService {
   constructor(
@@ -16,11 +18,24 @@ export class CourseEnrollmentService implements ICourseEnrollmentService {
     @inject(eventBusID) private readonly eventBus: IEventBus
   ) {}
 
-  async enrollLearnerInCourse(learnerId: string, courseId: string): Promise<Learner> {
+  private async assertCourseExists(courseId: string) {
+    const coursesGateway = container.get(coursesGatewayID)
+    await coursesGateway.getCourseById(courseId);
+  }
+
+  private async assertLearnerExists(learnerId: string) {
     const learner = await this.learnerRepo.getById(learnerId);
     if (!learner) {
       throw new LearnerNotFoundException(learnerId);
     }
+
+    return learner;
+  }
+
+  async enrollLearnerInCourse(learnerId: string, courseId: string): Promise<Learner> {
+    await this.assertCourseExists(courseId);
+
+    const learner = await this.assertLearnerExists(learnerId);
 
     const isEnrolled = await this.courseEnrollmentRepo.isEnrolled(learnerId, courseId);
     if (isEnrolled) {
