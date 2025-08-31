@@ -5,6 +5,7 @@ import { LearnerRepo } from "../repositories/in-memory/LearnerRepo";
 import { CourseEnrollmentRepo } from "../repositories/in-memory/CourseEnrollmentRepo";
 import { AddLearnerHandler } from "../../application/commands/add-learner/AddLearnerHandler";
 import { GetLearnersHandler } from "../../application/queries/get-learners/GetLearnersHandler";
+import { GetCourseLearnersHandler } from "../../application/queries/get-course-learners/GetCourseLearnersHandler";
 import { EnrollLearnerInCourseHandler } from "../../application/commands/enroll-learner-in-course/EnrollLearnerInCourseHandler";
 import { GetLearnerCoursesHandler } from "../../application/queries/get-learner-courses/GetLearnerCoursesHandler";
 import { CourseEnrollmentService } from "../../domain/services/course-enrollment/CourseEnrollmentService";
@@ -15,6 +16,7 @@ import {
   learnersApiID, 
   eventBusConsumerID,
   getLearnersHandlerID,
+  getCourseLearnersHandlerID,
   courseEnrollmentRepoID,
   enrollLearnerInCourseHandlerID,
   courseEnrollmentServiceID,
@@ -29,6 +31,7 @@ export function bindDependencies(container: Container) {
 
   container.bind(addLearnerHandlerID).to(AddLearnerHandler);
   container.bind(getLearnersHandlerID).to(GetLearnersHandler);
+  container.bind(getCourseLearnersHandlerID).to(GetCourseLearnersHandler);
   container.bind(enrollLearnerInCourseHandlerID).to(EnrollLearnerInCourseHandler);
   container.bind(getLearnerCoursesHandlerID).to(GetLearnerCoursesHandler);
   container.bind(courseEnrollmentServiceID).to(CourseEnrollmentService);

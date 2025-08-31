@@ -5,6 +5,7 @@ import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
 import {
   GetInstructorsDTO,
   GetCoursesDTO,
+  GetCourseByIdDTO,
   GetCourseChaptersDTO,
   GetChapterLessonsDTO,
   PublishCourseDTO,
@@ -63,6 +64,15 @@ coursesRouter.post("/courses/archive", async (req: Request, res: Response) => {
   const result = await coursesApi.archiveCourse(archiveCourseDTO);
 
   res.status(200).send(result);
+});
+
+coursesRouter.get("/courses/:courseId", async (req: Request, res: Response) => {
+  const { courseId } = req.params;
+
+  const dto = new GetCourseByIdDTO(courseId);
+  const result = await coursesApi.getCourseById(dto);
+
+  res.status(200).json(result);
 });
 
 coursesRouter.get("/chapters", async (req: Request, res: Response) => {

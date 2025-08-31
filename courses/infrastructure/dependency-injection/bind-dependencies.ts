@@ -10,6 +10,7 @@ import { CreateLessonHandler } from "../../application/commands/create-lesson/Cr
 import { AddInstructorHandler } from "../../application/commands/add-instructor/AddInstructorHandler";
 import { GetCoursesHandler } from "../../application/queries/get-courses/GetCoursesHandler";
 import { GetCoursesByIdsHandler } from "../../application/queries/get-courses-by-ids/GetCoursesByIdsHandler";
+import { GetCourseByIdHandler } from "../../application/queries/get-course-by-id/GetCourseByIdHandler";
 import { GetInstructorsHandler } from "../../application/queries/get-instructors/GetInstructorHandler";
 import { GetCourseChaptersHandler } from "../../application/queries/get-course-chapters/GetCourseChaptersHandler";
 import { GetChapterLessonsHandler } from "../../application/queries/get-chapter-lessons/GetChapterLessonsHandler";
@@ -29,6 +30,7 @@ import {
   addInstructorHandlerID,
   getCoursesHandlerID,
   getCoursesByIdsHandlerID,
+  getCourseByIdHandlerID,
   getInstructorsHandlerID,
   getCourseChaptersHandlerID,
   getChapterLessonsHandlerID,
@@ -49,6 +51,7 @@ export function bindDependencies(container: Container) {
   container.bind(addInstructorHandlerID).to(AddInstructorHandler);
   container.bind(getCoursesHandlerID).to(GetCoursesHandler);
   container.bind(getCoursesByIdsHandlerID).to(GetCoursesByIdsHandler);
+  container.bind(getCourseByIdHandlerID).to(GetCourseByIdHandler);
   container.bind(getInstructorsHandlerID).to(GetInstructorsHandler);
   container.bind(getCourseChaptersHandlerID).to(GetCourseChaptersHandler);
   container.bind(getChapterLessonsHandlerID).to(GetChapterLessonsHandler);

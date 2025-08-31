@@ -22,6 +22,10 @@ import {
   GetCoursesByIdsQuery,
 } from "@l-p/courses/application/queries/get-courses-by-ids";
 import {
+  GetCourseByIdHandler,
+  GetCourseByIdQuery,
+} from "@l-p/courses/application/queries/get-course-by-id";
+import {
   CreateCourseHandler,
   CreateCourseCommand,
 } from "@l-p/courses/application/commands/create-course";
@@ -59,6 +63,7 @@ import {
   getCourseChaptersHandlerID,
   getCoursesHandlerID,
   getCoursesByIdsHandlerID,
+  getCourseByIdHandlerID,
   getInstructorsHandlerID,
   publishCourseHandlerID,
   archiveCourseHandlerID,
@@ -75,6 +80,7 @@ import {
   GetChapterLessonsResponse,
   GetCourseChaptersResponse,
   GetCoursesResponse,
+  GetCourseByIdResponse,
   GetInstructorsResponse,
   GetCourseLearnersResponse,
   LearnerResponse,
@@ -89,13 +95,14 @@ import {
   GetInstructorsDTO,
   GetCoursesDTO,
   GetCoursesByIdsDTO,
+  GetCourseByIdDTO,
   GetCourseChaptersDTO,
   GetChapterLessonsDTO,
   PublishCourseDTO,
   GetCourseLearnersDTO,
 } from "./request-dtos";
 
-import { ILearnersGateway } from "@l-p/courses/infrastructure/gateway";
+import { container } from "@l-p/shared/infrastructure/dependency-injection";
 
 @injectable()
 export class CoursesApi implements ICoursesApi {
@@ -110,6 +117,8 @@ export class CoursesApi implements ICoursesApi {
     private readonly getCoursesHandler: GetCoursesHandler,
     @inject(getCoursesByIdsHandlerID)
     private readonly getCoursesByIdsHandler: GetCoursesByIdsHandler,
+    @inject(getCourseByIdHandlerID)
+    private readonly getCourseByIdHandler: GetCourseByIdHandler,
     @inject(createChapterHandlerID)
     private readonly createChapterHandler: CreateChapterHandler,
     @inject(getCourseChaptersHandlerID)
@@ -122,8 +131,6 @@ export class CoursesApi implements ICoursesApi {
     private readonly publishCourseHandler: PublishCourseHandler,
     @inject(archiveCourseHandlerID)
     private readonly archiveCourseHandler: ArchiveCourseHandler,
-    @inject(learnersGatewayID)
-    private readonly learnersGateway: ILearnersGateway
   ) {}
 
   async healthCheck(): Promise<boolean> {
@@ -231,10 +238,20 @@ export class CoursesApi implements ICoursesApi {
     return ArchiveCourseResponse.fromDomain(course);
   }
 
+  async getCourseById(
+    getCourseByIdDTO: GetCourseByIdDTO
+  ): Promise<GetCourseByIdResponse> {
+    const query = new GetCourseByIdQuery(getCourseByIdDTO.courseId);
+    const course = await this.getCourseByIdHandler.handle(query);
+    return GetCourseByIdResponse.fromDomain(course);
+  }
+
   async getCourseLearners(
     getCourseLearnersDTO: GetCourseLearnersDTO
   ): Promise<GetCourseLearnersResponse> {
-    const learnersResponse = await this.learnersGateway.getCourseLearners(getCourseLearnersDTO.courseId);
+    const learnersGateway = container.get(learnersGatewayID)
+
+    const learnersResponse = await learnersGateway.getCourseLearners(getCourseLearnersDTO.courseId);
     return new GetCourseLearnersResponse(
       learnersResponse.learners.map(
         (learner) =>

@@ -4,6 +4,7 @@ export * from "./CreateLessonDTO";
 export * from "./AddInstructorDTO";
 export * from "./GetCoursesDTO";
 export * from "./GetCoursesByIdsDTO";
+export * from "./GetCourseByIdDTO";
 export * from "./GetInstructorsDTO";
 export * from "./GetCourseChaptersDTO";
 export * from "./GetChapterLessonsDTO";

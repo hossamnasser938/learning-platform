@@ -3,7 +3,7 @@ import { container } from "@l-p/shared/infrastructure/dependency-injection";
 import { ILearnersApi } from "@l-p/learners/api/ILearnersApi";
 import { learnersApiID } from "@l-p/learners/infrastructure/dependency-injection/tokens";
 import { GetLearnersQuery } from "@l-p/learners/application/queries/get-learners";
-import { GetLearnerCoursesDTO, EnrollLearnerInCourseDTO } from "@l-p/learners/api/request-dtos";
+import { GetLearnerCoursesDTO } from "@l-p/learners/api/request-dtos";
 
 export const learnersRouter = Router();
 

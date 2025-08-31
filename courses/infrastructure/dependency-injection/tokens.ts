@@ -8,6 +8,7 @@ import { ICreateLessonHandler } from "../../application/commands/create-lesson";
 import { IAddInstructorHandler } from "../../application/commands/add-instructor";
 import { IGetCoursesHandler } from "../../application/queries/get-courses";
 import { IGetCoursesByIdsHandler } from "../../application/queries/get-courses-by-ids";
+import { IGetCourseByIdHandler } from "../../application/queries/get-course-by-id";
 import { IGetInstructorsHandler } from "../../application/queries/get-instructors";
 import { IGetCourseChaptersHandler } from "../../application/queries/get-course-chapters";
 import { IGetChapterLessonsHandler } from "../../application/queries/get-chapter-lessons";
@@ -34,6 +35,8 @@ export const getCoursesHandlerID: ServiceIdentifier<IGetCoursesHandler> =
   Symbol.for("IGetCoursesHandler");
 export const getCoursesByIdsHandlerID: ServiceIdentifier<IGetCoursesByIdsHandler> =
   Symbol.for("IGetCoursesByIdsHandler");
+export const getCourseByIdHandlerID: ServiceIdentifier<IGetCourseByIdHandler> =
+  Symbol.for("IGetCourseByIdHandler");
 export const getInstructorsHandlerID: ServiceIdentifier<IGetInstructorsHandler> =
   Symbol.for("IGetInstructorsHandler");
 export const getCourseChaptersHandlerID: ServiceIdentifier<IGetCourseChaptersHandler> =

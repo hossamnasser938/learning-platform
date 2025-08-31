@@ -6,6 +6,7 @@ export * from "./CreateLessonResponse";
 export * from "./GetChapterLessonsResponse";
 export * from "./GetCourseChaptersResponse";
 export * from "./GetCoursesResponse";
+export * from "./GetCourseByIdResponse";
 export * from "./GetInstructorsResponse";
 export * from "./PublishCourseResponse";
 export * from "./GetCourseLearnersResponse";
