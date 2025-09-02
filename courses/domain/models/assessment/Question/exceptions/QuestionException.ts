@@ -50,3 +50,45 @@ export class InvalidQuestionBodyMaxLengthException extends QuestionException {
     this.name = 'InvalidQuestionBodyMaxLengthException';
   }
 }
+
+export class InsufficientQuestionOptionsException extends QuestionException {
+  constructor(optionCount: number) {
+    super(`Question must have at least 2 options, got ${optionCount}`, ExceptionType.INVALID_DATA);
+    this.name = 'InsufficientQuestionOptionsException';
+  }
+}
+
+export class InvalidSingleChoiceCorrectOptionsException extends QuestionException {
+  constructor(correctOptionCount: number) {
+    super(`Single choice question must have exactly one correct option, got ${correctOptionCount}`, ExceptionType.INVALID_DATA);
+    this.name = 'InvalidSingleChoiceCorrectOptionsException';
+  }
+}
+
+export class InvalidMultiChoiceCorrectOptionsException extends QuestionException {
+  constructor(correctOptionCount: number) {
+    super(`Multi choice question must have at least one correct option, got ${correctOptionCount}`, ExceptionType.INVALID_DATA);
+    this.name = 'InvalidMultiChoiceCorrectOptionsException';
+  }
+}
+
+export class QuestionCorrectOptionIndexOutOfBoundsException extends QuestionException {
+  constructor(index: number, optionCount: number) {
+    super(`Correct option index ${index} is out of bounds for ${optionCount} options`, ExceptionType.INVALID_DATA);
+    this.name = 'QuestionCorrectOptionIndexOutOfBoundsException';
+  }
+}
+
+export class MissingQuestionOptionsException extends QuestionException {
+  constructor() {
+    super('Question options are required but not provided', ExceptionType.INVALID_DATA);
+    this.name = 'MissingQuestionOptionsException';
+  }
+}
+
+export class MissingCorrectOptionIndicesException extends QuestionException {
+  constructor() {
+    super('Correct option indices are required but not provided', ExceptionType.INVALID_DATA);
+    this.name = 'MissingCorrectOptionIndicesException';
+  }
+}

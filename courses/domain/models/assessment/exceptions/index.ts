@@ -1,1 +1,1 @@
-export * from './AssessmentException'
+export * from './AssessmentExceptions';

@@ -3,6 +3,7 @@ import {
   AddInstructorDTO, 
   CreateLessonDTO,
   CreateChapterDTO,
+  CreateAssessmentDTO,
   GetChapterLessonsDTO,
   GetCourseChaptersDTO,
   GetCoursesDTO,
@@ -19,6 +20,7 @@ import {
   CreateCourseResponse,
   CreateChapterResponse,
   CreateLessonResponse,
+  CreateAssessmentResponse,
   GetChapterLessonsResponse,
   GetCourseChaptersResponse,
   GetCoursesResponse,
@@ -53,6 +55,8 @@ export interface ICoursesApi {
   ): Promise<GetCourseChaptersResponse>;
 
   createLesson(createLessonDTO: CreateLessonDTO): Promise<CreateLessonResponse>;
+
+  createAssessment(createAssessmentDTO: CreateAssessmentDTO): Promise<CreateAssessmentResponse>;
 
   getChapterLessons(
     getChapterLessonsDTO: GetChapterLessonsDTO

@@ -31,3 +31,17 @@ export class AssessmentDescriptionTooLongException extends AssessmentException {
     super(`Assessment description cannot exceed ${maxLength} characters`, ExceptionType.INVALID_DATA);
   }
 }
+
+export class MissingQuestionTypeException extends AssessmentException {
+  constructor() {
+    super('Question type is required', ExceptionType.INVALID_DATA);
+    this.name = 'MissingQuestionTypeException';
+  }
+}
+
+export class InvalidQuestionTypeException extends AssessmentException {
+  constructor(questionType: string) {
+    super(`Invalid question type: ${questionType}`, ExceptionType.INVALID_DATA);
+    this.name = 'InvalidQuestionTypeException';
+  }
+}

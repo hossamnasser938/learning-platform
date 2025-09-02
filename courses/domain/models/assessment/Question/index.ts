@@ -1,1 +1,2 @@
-export * from './Question'
+export * from './Question';
+export * from './QuestionType';

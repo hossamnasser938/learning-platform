@@ -109,6 +109,13 @@ coursesRouter.post("/lessons", async (req: Request, res: Response) => {
   res.status(200).send(result);
 });
 
+coursesRouter.post("/assessments", async (req: Request, res: Response) => {
+  const createAssessmentDTO = req.body;
+  const result = await coursesApi.createAssessment(createAssessmentDTO);
+
+  res.status(200).send(result);
+});
+
 coursesRouter.get(
   "/enrollments",
   async (req: Request, res: Response) => {

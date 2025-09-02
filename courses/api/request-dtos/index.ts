@@ -1,6 +1,7 @@
 export * from "./CreateCourseDTO";
 export * from "./CreateChapterDTO";
 export * from "./CreateLessonDTO";
+export * from "./CreateAssessmentDTO";
 export * from "./AddInstructorDTO";
 export * from "./GetCoursesDTO";
 export * from "./GetCoursesByIdsDTO";

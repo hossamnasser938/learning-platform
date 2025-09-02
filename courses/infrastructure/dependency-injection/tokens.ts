@@ -1,10 +1,11 @@
 import { ServiceIdentifier } from "@l-p/shared/infrastructure/dependency-injection/utils";
 import { ICoursesApi } from "@l-p/courses/api/ICoursesApi";
 import { IEventBusConsumer } from "@l-p/shared/domain/contracts";
-import { ICourseRepo, IChapterRepo, ILessonRepo, IInstructorRepo } from "../../domain/contracts";
+import { ICourseRepo, IChapterRepo, ILessonRepo, IInstructorRepo, IAssessmentRepo, IQuestionRepo } from "../../domain/contracts";
 import { ICreateCourseHandler } from "../../application/commands/create-course";
 import { ICreateChapterHandler } from "../../application/commands/create-chapter";
 import { ICreateLessonHandler } from "../../application/commands/create-lesson";
+import { ICreateAssessmentHandler } from "../../application/commands/create-assessment";
 import { IAddInstructorHandler } from "../../application/commands/add-instructor";
 import { IGetCoursesHandler } from "../../application/queries/get-courses";
 import { IGetCoursesByIdsHandler } from "../../application/queries/get-courses-by-ids";
@@ -16,6 +17,7 @@ import { IArchiveCourseHandler } from "../../application/commands/archive-course
 import { IPublishCourseHandler } from "../../application/commands/publish-course";
 import { ICourseCreationService } from "../../domain/services";
 import { ICourseStatusUpdateService } from "../../domain/services";
+import { IAssessmentCreationService } from "../../domain/services/assessment-creation";
 import { ILearnersGateway } from "../gateway";
 
 export const coursesApiID: ServiceIdentifier<ICoursesApi> =
@@ -29,6 +31,8 @@ export const createChapterHandlerID: ServiceIdentifier<ICreateChapterHandler> =
   Symbol.for("ICreateChapterHandler");
 export const createLessonHandlerID: ServiceIdentifier<ICreateLessonHandler> =
   Symbol.for("ICreateLessonHandler");
+export const createAssessmentHandlerID: ServiceIdentifier<ICreateAssessmentHandler> =
+  Symbol.for("ICreateAssessmentHandler");
 export const addInstructorHandlerID: ServiceIdentifier<IAddInstructorHandler> =
   Symbol.for("IAddInstructorHandler");
 export const getCoursesHandlerID: ServiceIdentifier<IGetCoursesHandler> =
@@ -51,6 +55,8 @@ export const courseCreationServiceID: ServiceIdentifier<ICourseCreationService> 
   Symbol.for("ICourseCreationService");
 export const courseStatusUpdateServiceID: ServiceIdentifier<ICourseStatusUpdateService> =
   Symbol.for("ICourseStatusUpdateService");
+export const assessmentCreationServiceID: ServiceIdentifier<IAssessmentCreationService> =
+  Symbol.for("IAssessmentCreationService");
 
 export const courseRepoID: ServiceIdentifier<ICourseRepo> = Symbol.for(
   "CourseRepository"
@@ -63,6 +69,12 @@ export const lessonRepoID: ServiceIdentifier<ILessonRepo> = Symbol.for(
 );
 export const instructorRepoID: ServiceIdentifier<IInstructorRepo> = Symbol.for(
   "InstructorRepository"
+);
+export const assessmentRepoID: ServiceIdentifier<IAssessmentRepo> = Symbol.for(
+  "AssessmentRepository"
+);
+export const questionRepoID: ServiceIdentifier<IQuestionRepo> = Symbol.for(
+  "QuestionRepository"
 );
 export const learnersGatewayID: ServiceIdentifier<ILearnersGateway> = Symbol.for(
   "LearnersGateway"

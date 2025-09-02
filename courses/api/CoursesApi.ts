@@ -42,6 +42,10 @@ import {
   CreateLessonHandler,
 } from "@l-p/courses/application/commands/create-lesson";
 import {
+  CreateAssessmentCommand,
+  CreateAssessmentHandler,
+} from "@l-p/courses/application/commands/create-assessment";
+import {
   GetChapterLessonsHandler,
   GetChapterLessonsQuery,
 } from "@l-p/courses/application/queries/get-chapter-lessons";
@@ -59,6 +63,7 @@ import {
   createCourseHandlerID,
   addInstructorHandlerID,
   createLessonHandlerID,
+  createAssessmentHandlerID,
   getChapterLessonsHandlerID,
   getCourseChaptersHandlerID,
   getCoursesHandlerID,
@@ -76,6 +81,7 @@ import {
   CreateCourseResponse,
   AddInstructorResponse,
   CreateLessonResponse,
+  CreateAssessmentResponse,
   PublishCourseResponse,
   GetChapterLessonsResponse,
   GetCourseChaptersResponse,
@@ -92,6 +98,7 @@ import {
   CreateCourseDTO,
   AddInstructorDTO,
   CreateLessonDTO,
+  CreateAssessmentDTO,
   GetInstructorsDTO,
   GetCoursesDTO,
   GetCoursesByIdsDTO,
@@ -125,6 +132,8 @@ export class CoursesApi implements ICoursesApi {
     private readonly getCourseChaptersHandler: GetCourseChaptersHandler,
     @inject(createLessonHandlerID)
     private readonly createLessonHandler: CreateLessonHandler,
+    @inject(createAssessmentHandlerID)
+    private readonly createAssessmentHandler: CreateAssessmentHandler,
     @inject(getChapterLessonsHandlerID)
     private readonly getChapterLessonsHandler: GetChapterLessonsHandler,
     @inject(publishCourseHandlerID)
@@ -212,6 +221,14 @@ export class CoursesApi implements ICoursesApi {
     );
     const lesson = await this.createLessonHandler.handle(command);
     return CreateLessonResponse.fromDomain(lesson);
+  }
+
+  async createAssessment(
+    createAssessmentDTO: CreateAssessmentDTO
+  ): Promise<CreateAssessmentResponse> {
+    const command = new CreateAssessmentCommand(createAssessmentDTO);
+    const assessment = await this.createAssessmentHandler.handle(command);
+    return CreateAssessmentResponse.fromDomain(assessment);
   }
 
   async getChapterLessons(

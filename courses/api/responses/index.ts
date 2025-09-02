@@ -3,6 +3,7 @@ export * from "./CreateChapterResponse";
 export * from "./CreateCourseResponse";
 export * from "./AddInstructorResponse";
 export * from "./CreateLessonResponse";
+export * from "./CreateAssessmentResponse";
 export * from "./GetChapterLessonsResponse";
 export * from "./GetCourseChaptersResponse";
 export * from "./GetCoursesResponse";

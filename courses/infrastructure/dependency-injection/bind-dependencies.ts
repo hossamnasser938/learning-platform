@@ -4,9 +4,12 @@ import { CourseRepo } from "../repositories/in-memory/CourseRepo";
 import { ChapterRepo } from "../repositories/in-memory/ChapterRepo";
 import { LessonRepo } from "../repositories/in-memory/LessonRepo";
 import { InstructorRepo } from "../repositories/in-memory/InstructorRepo";
+import { AssessmentRepo } from "../repositories/in-memory/AssessmentRepo";
+import { QuestionRepo } from "../repositories/in-memory/QuestionRepo";
 import { CreateCourseHandler } from "../../application/commands/create-course/CreateCourseHandler";
 import { CreateChapterHandler } from "../../application/commands/create-chapter/CreateChapterHandler";
 import { CreateLessonHandler } from "../../application/commands/create-lesson/CreateLessonHandler";
+import { CreateAssessmentHandler } from "../../application/commands/create-assessment/CreateAssessmentHandler";
 import { AddInstructorHandler } from "../../application/commands/add-instructor/AddInstructorHandler";
 import { GetCoursesHandler } from "../../application/queries/get-courses/GetCoursesHandler";
 import { GetCoursesByIdsHandler } from "../../application/queries/get-courses-by-ids/GetCoursesByIdsHandler";
@@ -18,15 +21,19 @@ import { ArchiveCourseHandler } from "../../application/commands/archive-course/
 import { PublishCourseHandler } from "../../application/commands/publish-course/PublishCourseHandler";
 import { CourseCreationService } from "../../domain/services/course-creation/CourseCreationService";
 import { CourseStatusUpdateService } from "../../domain/services/course-status-update/CourseStatusUpdateService";
+import { AssessmentCreationService } from "../../domain/services/assessment-creation/AssessmentCreationService";
 import { LearnersGateway } from "../gateway/LearnersGateway";
 import {
   courseRepoID,
   chapterRepoID,
   lessonRepoID,
   instructorRepoID,
+  assessmentRepoID,
+  questionRepoID,
   createCourseHandlerID,
   createChapterHandlerID,
   createLessonHandlerID,
+  createAssessmentHandlerID,
   addInstructorHandlerID,
   getCoursesHandlerID,
   getCoursesByIdsHandlerID,
@@ -38,6 +45,7 @@ import {
   publishCourseHandlerID,
   courseCreationServiceID,
   courseStatusUpdateServiceID,
+  assessmentCreationServiceID,
   learnersGatewayID,
   coursesApiID
 } from "./tokens";
@@ -48,6 +56,7 @@ export function bindDependencies(container: Container) {
   container.bind(createCourseHandlerID).to(CreateCourseHandler);
   container.bind(createChapterHandlerID).to(CreateChapterHandler);
   container.bind(createLessonHandlerID).to(CreateLessonHandler);
+  container.bind(createAssessmentHandlerID).to(CreateAssessmentHandler);
   container.bind(addInstructorHandlerID).to(AddInstructorHandler);
   container.bind(getCoursesHandlerID).to(GetCoursesHandler);
   container.bind(getCoursesByIdsHandlerID).to(GetCoursesByIdsHandler);
@@ -59,9 +68,12 @@ export function bindDependencies(container: Container) {
   container.bind(publishCourseHandlerID).to(PublishCourseHandler);
   container.bind(courseCreationServiceID).to(CourseCreationService);
   container.bind(courseStatusUpdateServiceID).to(CourseStatusUpdateService);
+  container.bind(assessmentCreationServiceID).to(AssessmentCreationService);
   container.bind(courseRepoID).to(CourseRepo).inSingletonScope();
   container.bind(chapterRepoID).to(ChapterRepo).inSingletonScope();
   container.bind(lessonRepoID).to(LessonRepo).inSingletonScope();
   container.bind(instructorRepoID).to(InstructorRepo).inSingletonScope();
+  container.bind(assessmentRepoID).to(AssessmentRepo).inSingletonScope();
+  container.bind(questionRepoID).to(QuestionRepo).inSingletonScope();
   container.bind(learnersGatewayID).to(LearnersGateway).inSingletonScope();
 }
